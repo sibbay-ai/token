@@ -3,7 +3,7 @@
 import logging
 from logging.handlers import TimedRotatingFileHandler
 
-import infoSHT
+import settings
 
 # log level
 LOGGER_LEVEL = logging.INFO
@@ -23,9 +23,10 @@ class LoggerSHT:
         self.logger.setLevel(LOGGER_LEVEL)
 
     def log_info(self, *args):
-        self.logger.info(args[0])
+        #self.logger.info(args[0])
+        print(args[0])
 
 # instance
 # logger
-logger = LoggerSHT(infoSHT.logPath, "SHT")
+logger = LoggerSHT(settings.SIBBAY_SHT_LOG_PATH, "SHT")
 
