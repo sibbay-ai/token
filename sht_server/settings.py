@@ -1,5 +1,4 @@
 
-# -*- coding: utf-8 -*-
 import dotenv
 dotenv.read_dotenv()
 
@@ -10,9 +9,6 @@ SIBBAY_SHT_ETHER_PRICE = env("SIBBAY_ETHER_PRICE", 0.0)
 SIBBAY_SHT_ETHER_DECIMALS = env("SIBBAY_DECIMALS", 18)
 SIBBAY_SHT_SHT_PRICE = env("SIBBAY_SHT_PRICE", 0.01)
 SIBBAY_SHT_SHT_DECIMALS = env("SIBBAY_DECIMALS", 0)
-
-# logger path
-SIBBAY_SHT_LOG_PATH = env("SIBBAY_LOG_PATH", "./sht.log")
 
 # ethereum node's ipc
 #SIBBAY_SHT_NODE_IPC  = env("SIBBAY_NODE_IPC", "/home/eth/ethereumTest/chain/geth.ipc")
