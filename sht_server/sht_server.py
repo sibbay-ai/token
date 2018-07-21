@@ -30,13 +30,17 @@ class SHTClass:
         #self.sht_queue = Queue(10000)
         self.sht_queue = Queue()
         # creat connection to mongodb
-        conn = MongoClient(mongo_host)
-        self.col_token_transfer = conn.sht.col_token_transfer
-        self.col_token_sell = conn.sht.col_token_sell
-        self.col_token_price = conn.sht.col_token_price
+        self.conn = MongoClient(mongo_host)
+        self.col_token_transfer = self.conn.sht.col_token_transfer
+        self.col_token_sell = self.conn.sht.col_token_sell
+        self.col_token_price = self.conn.sht.col_token_price
+
+    def __del__(self):
+        # close connection
+        MongoClient.close(self.conn)
 
     # connect to ethereum's node
-    def connectToNode(self, node_path, timeout):
+    def connect_to_node(self, node_path, timeout):
         # connect to node
         while True:
             w3 = Web3(Web3.IPCProvider(node_path))
@@ -55,7 +59,7 @@ class SHTClass:
                 sleep(timeout)
 
             # wait price thread
-            w3 = self.connectToNode(node_path, timeout)
+            w3 = self.connect_to_node(node_path, timeout)
             # get contract
             sht = w3.eth.contract(address=Web3.toChecksumAddress(self.contract_addr), abi=self.contract_abi)
             tef = sht.events.Transfer.createFilter(fromBlock='latest')
@@ -79,12 +83,12 @@ class SHTClass:
         msg = {"type": "TOKEN_TRANSFER",
                "from": logs['args']['from'],
                "to": logs['args']['to'],
-               "value": float(logs['args']['value']),
+               "value": int(logs['args']['value']),
                "transaction_hash": str(Web3.toHex(logs['transactionHash'])),
                "block_hash": str(Web3.toHex(logs['blockHash'])),
                "block_number": int(logs['blockNumber'])
               }
-        self.col_token_transfer.insert(msg);
+        self.col_token_transfer.insert_one(msg);
         # handle token sell
         if logs['args']['to'] == self.owner:
             # calcute ether value
@@ -93,12 +97,12 @@ class SHTClass:
             msg = {"type": "TOKEN_SELL",
                    "from": logs['args']['from'],
                    "to": logs['args']['to'],
-                   "value": float(logs['args']['value']),
+                   "value": int(logs['args']['value']),
                    "transaction_hash": str(Web3.toHex(logs['transactionHash'])),
                    "sht_price": float(self.sht_data.sht_price),
                    "ether_price": float(self.sht_data.ether_price),
                    "ether_hash": "",
-                   "ether_value":int(evalue),
+                   "ether_value":str(evalue),
                    "success": 0
                   }
             self.sht_queue.put(msg)
@@ -112,9 +116,11 @@ class SHTClass:
             while self.sht_queue.qsize() > 0:
                 msg = self.sht_queue.get();
                 print("get messge from SHT queue: " + str(msg))
-                ret = self.col_token_sell.find({"type": "TOKEN_SELL", "transaction_hash": msg['transaction_hash']})
-                if ret.count() == 0:
-                    self.col_token_sell.insert(msg);
+                filter_option = {"type": "TOKEN_SELL", "transaction_hash": msg['transaction_hash']}
+                ret = self.col_token_sell.find(filter_option)
+                ret_count = ret.collection.count_documents(filter_option)
+                if ret_count == 0:
+                    self.col_token_sell.insert_one(msg);
             print("SHT queue is empty, wait " + str(timeout) + " seconds")
             sleep(timeout)
 
@@ -142,16 +148,18 @@ class SHTClass:
             self.sht_data.ether_price = data['ETH']['CNY']
 
             # update ehter Price
-            ret = self.col_token_price.find({"type": "TOKEN_PRICE"}).sort('time')
-            latest_id = ret[ret.count()-1]["_id"]
-            self.col_token_price.update({"_id": latest_id}, {'$set': {"ether_price": float(self.sht_data.ether_price)}})
+            filter_option = {"type": "TOKEN_PRICE"}
+            ret = self.col_token_price.find(filter_option).sort('time')
+            ret_count = ret.collection.count_documents(filter_option)
+            latest_id = ret[ret_count-1]["_id"]
+            self.col_token_price.update_one({"_id": latest_id}, {'$set': {"ether_price": float(self.sht_data.ether_price)}})
 
             # get latest price
             ret = self.col_token_price.find({"type": "TOKEN_PRICE"}).sort('time')
-            self.sht_data.ether_price = ret[ret.count()-1]["ether_price"]
-            self.sht_data.ether_decimals = ret[ret.count()-1]["ether_decimals"]
-            self.sht_data.sht_price = ret[ret.count()-1]["sht_price"]
-            self.sht_data.sht_decimals = ret[ret.count()-1]["sht_decimals"]
+            self.sht_data.ether_price = ret[ret_count-1]["ether_price"]
+            self.sht_data.ether_decimals = ret[ret_count-1]["ether_decimals"]
+            self.sht_data.sht_price = ret[ret_count-1]["sht_price"]
+            self.sht_data.sht_decimals = ret[ret_count-1]["sht_decimals"]
 
             print("get ether price: " + str(self.sht_data.ether_price) + "￥ Decimals: " + str(self.sht_data.ether_decimals) \
                   + " sht price: " + str(self.sht_data.sht_price) + "￥ Decimals: " + str(self.sht_data.sht_decimals))
@@ -166,28 +174,28 @@ class SHTClass:
     # pay back ether thread
     def start_pay_ether(self, node_path, timeout):
         def handle_pay_ether(node_path, timeout):
-            w3 = self.connectToNode(node_path, timeout)
+            w3 = self.connect_to_node(node_path, timeout)
             while True:
                 # find transaction
                 ret = self.col_token_sell.find({"type": "TOKEN_SELL", "success": 0}).sort('time')
                 for msg in ret:
                     if msg["ether_hash"] == "":
                         print("find transaction " + msg['transaction_hash'] + " needs send " + str(Web3.fromWei(int(msg['ether_value']), 'ether')) + " ether to " + msg['from'])
-                        if msg["ether_value"] > 0:
+                        if int(msg["ether_value"]) > 0:
                             w3.personal.unlockAccount(self.owner, self.password)
                             ehash = w3.eth.sendTransaction({'from': self.owner, 'to': msg['from'], 'value': int(msg['ether_value']), 'gasPrice': 40000000000})
                             print("send ether from owner " + self.owner + ", txhash: " + str(Web3.toHex(ehash)))
                             msgid = msg["_id"]
-                            self.col_token_sell.update({"_id": msgid}, {'$set': {"ether_hash": str(Web3.toHex(ehash))}})
+                            self.col_token_sell.update_one({"_id": msgid}, {'$set': {"ether_hash": str(Web3.toHex(ehash))}})
                         else :
                             msgid = msg["_id"]
-                            self.col_token_sell.update({"_id": msgid}, {'$set': {"success": int(1)}})
+                            self.col_token_sell.update_one({"_id": msgid}, {'$set': {"success": int(1)}})
                     else:
                         msgid = msg["_id"]
                         ret = w3.eth.getTransaction(msg["ether_hash"])
                         if ret['blockNumber'] != None:
                             print("pay ether tx " + msg["ether_hash"] + " success")
-                            self.col_token_sell.update({"_id": msgid}, {'$set': {"success": int(1)}})
+                            self.col_token_sell.update_one({"_id": msgid}, {'$set': {"success": int(1)}})
                 sleep(timeout)
 
         t = ThreadSHT(handle_pay_ether, (node_path, timeout), self.start_pay_ether.__name__)

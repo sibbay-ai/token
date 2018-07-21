@@ -9,9 +9,11 @@ def init_sht_price(creat=False):
     col_token_price = conn.sht.col_token_price
 
     # get price from database
-    ret = col_token_price.find({"type": "TOKEN_PRICE"}).sort('time')
-    if ret.count() > 0:
-        ether_price = ret[ret.count()-1]["ether_price"]
+    filter_option = {"type": "TOKEN_PRICE"}
+    ret_count = col_token_price.collection.count_documents(filter_option)
+    ret = col_token_price.find(filter_option).sort('time')
+    if ret_count > 0:
+        ether_price = ret[ret_count-1]["ether_price"]
     else:
         creat = True
         ether_price = settings.SIBBAY_SHT_ETHER_PRICE
@@ -27,13 +29,13 @@ def init_sht_price(creat=False):
                 }
     
         # insert price config
-        col_token_price.insert(price_config)
+        col_token_price.insert_one(price_config)
         print("init price ehter price: " + str(ether_price) + " decimals: " + str(settings.SIBBAY_SHT_ETHER_DECIMALS) \
               + " sht price: " + str(settings.SIBBAY_SHT_SHT_PRICE) + " decimals: " + str(settings.SIBBAY_SHT_SHT_DECIMALS))
     else:
         # update ether price
-        latest_id = ret[ret.count()-1]["_id"]
-        col_token_price.update({"_id": latest_id}, {'$set': {"sht_price": float(settings.SIBBAY_SHT_SHT_PRICE)}})  
+        latest_id = ret[ret_count-1]["_id"]
+        col_token_price.update_one({"_id": latest_id}, {'$set': {"sht_price": float(settings.SIBBAY_SHT_SHT_PRICE)}})  
         print("update price ehter price: " + str(ether_price) + " decimals: " + str(settings.SIBBAY_SHT_ETHER_DECIMALS) \
               + " sht price: " + str(settings.SIBBAY_SHT_SHT_PRICE) + " decimals: " + str(settings.SIBBAY_SHT_SHT_DECIMALS))
 
