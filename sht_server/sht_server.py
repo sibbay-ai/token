@@ -83,7 +83,7 @@ class SHTClass:
         msg = {"type": "TOKEN_TRANSFER",
                "from": logs['args']['from'],
                "to": logs['args']['to'],
-               "value": int(logs['args']['value']),
+               "value": str(logs['args']['value']),
                "transaction_hash": str(Web3.toHex(logs['transactionHash'])),
                "block_hash": str(Web3.toHex(logs['blockHash'])),
                "block_number": int(logs['blockNumber'])
@@ -97,12 +97,12 @@ class SHTClass:
             msg = {"type": "TOKEN_SELL",
                    "from": logs['args']['from'],
                    "to": logs['args']['to'],
-                   "value": int(logs['args']['value']),
+                   "value": str(logs['args']['value']),
                    "transaction_hash": str(Web3.toHex(logs['transactionHash'])),
                    "sht_price": float(self.sht_data.sht_price),
                    "ether_price": float(self.sht_data.ether_price),
                    "ether_hash": "",
-                   "ether_value":str(evalue),
+                   "ether_value":str(int(evalue)),
                    "success": 0
                   }
             self.sht_queue.put(msg)
