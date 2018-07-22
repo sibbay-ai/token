@@ -1,5 +1,3 @@
-
-from sys import exit
 from time import sleep
 
 from web3 import Web3
@@ -7,7 +5,6 @@ from thread_sht import ThreadSHT
 from queue import Queue
 from pymongo import MongoClient
 from json import loads
-import settings
 
 import requests
 
