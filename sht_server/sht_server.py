@@ -26,6 +26,7 @@ class SHTClass:
         self.contract_addr = Web3.toChecksumAddress(contract_addr)
         self.contract_abi = contract_abi
         self.sht_data = sht_data
+        self.running = True
 
     def __del__(self):
         pass
@@ -65,6 +66,9 @@ class SHTClass:
             for logs in ef.get_new_entries():
                 hef(logs)
             print("wait event " + str(timeout) + " seconds")
+            if self.running == False:
+                print("stopping watch sht transfer thread....")
+                exit(0)
             sleep(timeout)
 
     def handle_transfer(self, logs):
@@ -139,6 +143,9 @@ class SHTClass:
             print("get ether price: " + str(self.sht_data.ether_price) + "￥ Decimals: " + str(self.sht_data.ether_decimals) \
                   + " sht price: " + str(self.sht_data.sht_price) + "￥ Decimals: " + str(self.sht_data.sht_decimals))
 
+            if self.running == False:
+                print("stopping ether price thread....")
+                exit(0)
             sleep(timeout)
 
         t = ThreadSHT(handle_ether_price, (timeout,), self.start_price_thread.__name__)
@@ -158,9 +165,25 @@ class SHTClass:
                     print("from: " + ret.from_address + " to: " + ret.to_address + " value: " + ret.value)
                     ret.update(status = TokenSell.STATUS__PROCESSING)
                     # check transaction
+                    # check basic info
                     if ret.block_hash == "" or ret.block_number == 0:
+                        ret.update(status = TokenSell.STATUS__FAILED)
                         continue
+                    # check receipt
+                    logs = w3.eth.getTransactionReceipt(ret.transaction_hash)
+                    if logs is None:
+                        # not find tx info, reset it's status
+                        ret.update(status = TokenSell.STATUS__INIT)
+                        continue
+                    if logs['status'] != 1:
+                        ret.update(status = TokenSell.STATUS__FAILED)
+                        continue
+                    # check transaction content
                     logs = w3.eth.getTransaction(ret.transaction_hash)
+                    if logs is None:
+                        # not find tx info, reset it's status
+                        ret.update(status = TokenSell.STATUS__INIT)
+                        continue
                     to_addr = '0x' + logs['input'][34:74]
                     to_addr = Web3.toChecksumAddress(to_addr)
                     to_value = '0x' + logs['input'][74:]
@@ -174,6 +197,7 @@ class SHTClass:
                            continue
 
                     if int(ret.ether_value) > 0:
+                        ret.update(status = TokenSell.STATUS__PROCESSED)
                         w3.personal.unlockAccount(self.owner, self.password)
                         ehash = w3.eth.sendTransaction({'from': self.owner, 'to': ret.from_address, 'value': int(ret.ether_value), 'gasPrice': int(self.gas_price)})
                         print("send ether from owner " + self.owner + ", txhash: " + str(Web3.toHex(ehash)))
@@ -182,13 +206,21 @@ class SHTClass:
                         ret.update(status = TokenSell.STATUS__SUCCESS)
 
                 # check status
-                rets = TokenSell.query(status = TokenSell.STATUS__PROCESSING)
+                rets = TokenSell.query(status = TokenSell.STATUS__PROCESSED)
                 for ret in rets:
                     if ret.ether_hash != "":
-                        logs = w3.eth.getTransaction(ret.ether_hash)
-                        if logs['blockNumber'] != None:
+                        logs = w3.eth.getTransactionReceipt(ret.ether_hash)
+                        if logs is None:
+                            continue
+                        if logs['status'] == 1:
                             print("pay ether tx " + ret.ether_hash + " success")
                             ret.update(status = TokenSell.STATUS__SUCCESS)
+                        else:
+                            print("pay ether tx " + ret.ether_hash + " failed, set as manual")
+                            ret.update(status = TokenSell.STATUS__MANUAL)
+                if self.running == False:
+                    print("stopping pay ether thread....")
+                    exit(0)
                 sleep(timeout)
 
         t = ThreadSHT(handle_pay_ether, (node_path, timeout), self.start_pay_ether.__name__)

@@ -3,6 +3,7 @@ from init_data import init_sht_price
 from sht_server import SHTData
 from sht_server import SHTClass
 import settings
+import signal
 
 from mongoengine import connect
 
@@ -31,6 +32,12 @@ if __name__ == '__main__':
     te = sc.start_price_thread(30)
     tw = sc.start_watch_sht_transfer(settings.SIBBAY_SHT_NODE_IPC, 5)
     tp = sc.start_pay_ether(settings.SIBBAY_SHT_NODE_IPC, 5)
+
+    # add signal
+    def signal_handler(signum, frame):
+        if signum == signal.SIGUSR1:
+            sc.running = False
+    signal.signal(signal.SIGUSR1, signal_handler)
 
     te.join()
     tw.join()

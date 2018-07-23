@@ -15,11 +15,10 @@ SIBBAY_PRICE_UNIT = env("SIBBAY_PRICE_UNIT", "CNY")
 
 # ethereum node's ipc
 #SIBBAY_SHT_NODE_IPC  = env("SIBBAY_NODE_IPC", "/home/eth/ethereumTest/chain/geth.ipc")
-SIBBAY_SHT_NODE_IPC  = env("SIBBAY_SHT_NODE_IPC", "/home/henry/etest/chain/geth.ipc")
+SIBBAY_SHT_NODE_IPC  = env("SIBBAY_NODE_IPC", "/home/henry/etest/chain/geth.ipc")
 
 # mongo db
 SIBBAY_MONGODB_SHT_HOST = env("SIBBAY_MONGODB_SHT_HOST", "mongodb://127.0.0.1:27017/sht")
-SIBBAY_MONGODB_SHT_DB = env("SIBBAY_MONGODB_SHT_DB", "sht")
 
 # SHT owner, password
 SIBBAY_SHT_OWNER = env("SIBBAY_SHT_OWNER", "0x6d31f4bedce01850e4268778d1596798c5075f71")

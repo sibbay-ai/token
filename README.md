@@ -38,7 +38,12 @@ collection col_token_price stores token price and ether prices information
 1. modify token price SIBBAY_SHT_SHT_PRICE
 2. execute: python update_sht_price.py
 
+### How to exit
+> kill -10 <process-id>
+
 ### unittest
 unit test needs correct ethereum node info and mongodb info, so please configure all info in settings.py
 > cd test
 > python event_test.py
+
+
