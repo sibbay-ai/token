@@ -29,3 +29,16 @@ class TokenPrice(Base):
     price_unit = StringField(required=True)
 
     created_at = IntField(required=True, default=time.time)
+
+    @classmethod
+    def query_latest_price(cls, *args, **kwargs):
+        """
+        query the latest price document
+        return success and record
+        """
+        query = cls.objects(*args, **kwargs).order_by("-created_at")
+        count = query.count()
+        if count > 0:
+            return (1, query.first())
+        else:
+            return (0, None)

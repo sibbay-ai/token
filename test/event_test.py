@@ -158,4 +158,11 @@ class TestEventWatch(unittest.TestCase):
 
 
 if __name__ == '__main__':
+    connect(
+            settings.SIBBAY_MONGODB_SHT_DB,
+            alias=settings.SIBBAY_MONGODB_SHT_DB,
+            host=settings.SIBBAY_MONGODB_SHT_HOST
+    )
+
     unittest.main()
+

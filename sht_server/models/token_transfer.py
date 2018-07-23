@@ -25,7 +25,7 @@ class TokenTransfer(Base):
     # 所以需要转换成字符串保存
     value = StringField(required=True)
 
-    transaction_hash = StringField(required=True)
+    transaction_hash = StringField(required=True, unique=True)
     block_hash = StringField(required=True)
     block_number = IntField(required=True)
 
