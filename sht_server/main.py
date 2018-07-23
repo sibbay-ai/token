@@ -7,11 +7,7 @@ import settings
 from mongoengine import connect
 
 if __name__ == '__main__':
-    connect(
-            settings.SIBBAY_MONGODB_SHT_DB,
-            alias=settings.SIBBAY_MONGODB_SHT_DB,
-            host=settings.SIBBAY_MONGODB_SHT_HOST
-    )
+    connect(alias="sht", host=settings.SIBBAY_MONGODB_SHT_HOST)
 
     init_sht_price()
 

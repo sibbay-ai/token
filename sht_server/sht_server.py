@@ -2,7 +2,6 @@ from time import sleep
 
 from web3 import Web3
 from thread_sht import ThreadSHT
-from queue import Queue
 from pymongo import MongoClient
 from json import loads
 
@@ -24,11 +23,9 @@ class SHTClass:
         self.owner = Web3.toChecksumAddress(owner)
         self.password = password
         self.gas_price = gas_price
-        self.contract_addr = contract_addr
+        self.contract_addr = Web3.toChecksumAddress(contract_addr)
         self.contract_abi = contract_abi
         self.sht_data = sht_data
-        #self.sht_queue = Queue(10000)
-        self.sht_queue = Queue()
 
     def __del__(self):
         pass
@@ -107,9 +104,8 @@ class SHTClass:
                        status = TokenSell.STATUS__INIT
                 )
 
-                print("find token sell:")
+                print("find token sell tx into MongoDB:", str(Web3.toHex(logs['transactionHash'])))
                 print("from: " + logs['args']['from'] + " to: " + logs['args']['to'] + " value: " + str(logs['args']['value']))
-                print("transaction hash: " + str(Web3.toHex(logs['transactionHash'])))
 
     def start_price_thread(self, timeout):
         def handle_ether_price(timeout):
@@ -158,7 +154,40 @@ class SHTClass:
                 # find transaction
                 rets = TokenSell.query(status = TokenSell.STATUS__INIT)
                 for ret in rets:
+                    print("find token sell tx from MongoDB:" + ret.transaction_hash)
+                    print("from: " + ret.from_address + " to: " + ret.to_address + " value: " + ret.value)
                     ret.update(status = TokenSell.STATUS__PROCESSING)
+                    # check transaction
+                    if ret.block_hash == "" or ret.block_number == 0:
+                        continue
+                    logs = w3.eth.getTransaction(ret.transaction_hash)
+                    to_addr = '0x' + logs['input'][34:74]
+                    to_addr = Web3.toChecksumAddress(to_addr)
+                    to_value = '0x' + logs['input'][74:]
+                    to_value = int(to_value, 16)
+                    print(logs['blockNumber'], ret.block_number)
+                    print(logs['from'], ret.from_address)
+                    print(to_addr, ret.to_address)
+                    print(to_value, ret.value)
+                    print(logs['to'], self.contract_addr)
+                    if logs['blockNumber'] != ret.block_number:
+                        print("be here 1")
+                    if logs['from'] != ret.from_address:
+                        print("be here 2")
+                    if to_addr != ret.to_address:
+                        print("be here 3")
+                    if to_value != int(ret.value):
+                        print("be here 4")
+                    if logs['to'] != self.contract_addr:
+                        print("be here 5")
+                    if logs['blockNumber'] != ret.block_number or \
+                       logs['from'] != ret.from_address or \
+                       to_addr != ret.to_address or \
+                       to_value != int(ret.value) or \
+                       logs['to'] != self.contract_addr:
+                           print("find invalid token sell tx " + ret.transaction_hash)
+                           continue
+
                     if int(ret.ether_value) > 0:
                         w3.personal.unlockAccount(self.owner, self.password)
                         ehash = w3.eth.sendTransaction({'from': self.owner, 'to': ret.from_address, 'value': int(ret.ether_value), 'gasPrice': int(self.gas_price)})

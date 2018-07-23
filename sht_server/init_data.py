@@ -7,11 +7,7 @@ from models import TokenPrice
 
 def init_sht_price(creat=False):
     # creat connection, database, collection
-    connect(
-            settings.SIBBAY_MONGODB_SHT_DB,
-            alias=settings.SIBBAY_MONGODB_SHT_DB,
-            host=settings.SIBBAY_MONGODB_SHT_HOST
-     )
+    connect(alias="sht", host=settings.SIBBAY_MONGODB_SHT_HOST)
 
     # get the latest price
     ret_count, ret = TokenPrice.query_latest_price()

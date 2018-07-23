@@ -18,7 +18,7 @@ SIBBAY_PRICE_UNIT = env("SIBBAY_PRICE_UNIT", "CNY")
 SIBBAY_SHT_NODE_IPC  = env("SIBBAY_SHT_NODE_IPC", "/home/henry/etest/chain/geth.ipc")
 
 # mongo db
-SIBBAY_MONGODB_SHT_HOST = env("SIBBAY_MONGODB_SHT_HOST", "mongodb://127.0.0.1:27017")
+SIBBAY_MONGODB_SHT_HOST = env("SIBBAY_MONGODB_SHT_HOST", "mongodb://127.0.0.1:27017/sht")
 SIBBAY_MONGODB_SHT_DB = env("SIBBAY_MONGODB_SHT_DB", "sht")
 
 # SHT owner, password
