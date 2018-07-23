@@ -165,21 +165,6 @@ class SHTClass:
                     to_addr = Web3.toChecksumAddress(to_addr)
                     to_value = '0x' + logs['input'][74:]
                     to_value = int(to_value, 16)
-                    print(logs['blockNumber'], ret.block_number)
-                    print(logs['from'], ret.from_address)
-                    print(to_addr, ret.to_address)
-                    print(to_value, ret.value)
-                    print(logs['to'], self.contract_addr)
-                    if logs['blockNumber'] != ret.block_number:
-                        print("be here 1")
-                    if logs['from'] != ret.from_address:
-                        print("be here 2")
-                    if to_addr != ret.to_address:
-                        print("be here 3")
-                    if to_value != int(ret.value):
-                        print("be here 4")
-                    if logs['to'] != self.contract_addr:
-                        print("be here 5")
                     if logs['blockNumber'] != ret.block_number or \
                        logs['from'] != ret.from_address or \
                        to_addr != ret.to_address or \
