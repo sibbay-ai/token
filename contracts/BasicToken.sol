@@ -6,28 +6,33 @@ import "./SafeMath.sol";
 
 
 /**
- * @title Basic token
- * @dev Basic version of StandardToken, with no allowances.
+ * ERC20 基类实现
  */
 contract BasicToken is ERC20Basic {
   using SafeMath for uint256;
 
+  /**
+   * 账户总余额
+   * */
   mapping(address => uint256) balances;
 
+  /**
+   * 总供应量
+   * */
   uint256 totalSupply_;
 
   /**
-  * @dev total number of tokens in existence
-  */
+   * 获取总供应量
+   * */
   function totalSupply() public view returns (uint256) {
     return totalSupply_;
   }
 
   /**
-  * @dev transfer token for a specified address
-  * @param _to The address to transfer to.
-  * @param _value The amount to be transferred.
-  */
+   * 转账
+   * _to token接收账户
+   * _value token转账数量
+   * */
   function transfer(address _to, uint256 _value) public returns (bool) {
     require(_to != address(0));
     require(_value <= balances[msg.sender]);
@@ -39,10 +44,8 @@ contract BasicToken is ERC20Basic {
   }
 
   /**
-  * @dev Gets the balance of the specified address.
-  * @param _owner The address to query the the balance of.
-  * @return An uint256 representing the amount owned by the passed address.
-  */
+   * 查询账户总余额
+   * */
   function balanceOf(address _owner) public view returns (uint256) {
     return balances[_owner];
   }
