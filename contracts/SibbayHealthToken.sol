@@ -50,7 +50,7 @@ contract SibbayHealthToken is StandardToken, Management {
   /**
    * 所有账户
    * */
-  mapping(address => Account) accounts;
+  mapping(address => Account) public accounts;
 
   /**
    * token 赎回价格
@@ -58,10 +58,10 @@ contract SibbayHealthToken is StandardToken, Management {
    * 特殊资金账户，赎回token，接收购买token资金
    * 赎回购买标记
    * */
-  uint256 sellPrice;
-  uint256 buyPrice;
-  address fundAccount;
-  bool buySellFlag;
+  uint256 public sellPrice;
+  uint256 public buyPrice;
+  address public fundAccount;
+  bool public buySellFlag;
 
   /**
    * 常量
@@ -90,6 +90,13 @@ contract SibbayHealthToken is StandardToken, Management {
     buyPrice = 0;
     fundAccount = address(0);
     buySellFlag = false;
+  }
+
+  /**
+   * fallback函数
+   * 不做任何操作，可以加上buy操作，待定
+   * */
+  function () external payable {
   }
 
   /**
