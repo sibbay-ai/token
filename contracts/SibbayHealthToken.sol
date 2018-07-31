@@ -76,6 +76,7 @@ contract SibbayHealthToken is StandardToken, Management {
   constructor() public {
     totalSupply_ = INITIAL_SUPPLY;
     balances[msg.sender] = INITIAL_SUPPLY;
+    accounts[msg.sender].availableBalances = INITIAL_SUPPLY;
     emit Transfer(0x0, msg.sender, INITIAL_SUPPLY);
 
     /**
@@ -147,7 +148,7 @@ contract SibbayHealthToken is StandardToken, Management {
 
     // 修改可用余额
     accounts[_from].availableBalances = accounts[_from].availableBalances.sub(_value);
-    accounts[_to].availableBalances = accounts[_to].availableBalances.sub(_value);
+    accounts[_to].availableBalances = accounts[_to].availableBalances.add(_value);
   }
 
   /**
