@@ -4,7 +4,9 @@ import "./ERC20Basic.sol";
 
 
 /**
- * @title ERC20 interface
+ * ERC20 基类
+ * 代理额度，代理转账，设置代理
+ * 设置代理事件
  */
 contract ERC20 is ERC20Basic {
   function allowance(address owner, address spender)

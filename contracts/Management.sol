@@ -69,6 +69,7 @@ contract Management is Ownable {
    * */
   modifier whenNotFrozen(address who) {
     require(!frozenList[who]);
+    _;
   }
 
   /**
@@ -76,6 +77,7 @@ contract Management is Ownable {
    * */
   modifier whenFrozen(address who) {
     require(frozenList[who]);
+    _;
   }
 
   /**
@@ -83,6 +85,7 @@ contract Management is Ownable {
    * */
   modifier whenAdministrator(address who) {
     require(adminList[who]);
+    _;
   }
 
   /**
@@ -90,6 +93,7 @@ contract Management is Ownable {
    * */
   modifier whenNotAdministrator(address who) {
     require(!adminList[who]);
+    _;
   }
 
   /**

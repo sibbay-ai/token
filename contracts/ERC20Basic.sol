@@ -2,8 +2,9 @@ pragma solidity ^0.4.24;
 
 
 /**
- * @title ERC20Basic
- * @dev Simpler version of ERC20 interface
+ * ERC20 基类
+ * 总量, 账户余额， 转账操作
+ * 转账事件
  */
 contract ERC20Basic {
   function totalSupply() public view returns (uint256);
