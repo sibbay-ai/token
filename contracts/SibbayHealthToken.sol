@@ -16,12 +16,20 @@ contract SibbayHealthToken is StandardToken, Management {
 
   uint256 public constant INITIAL_SUPPLY = 1000000000 * (10 ** uint256(decimals));
 
-  // 事件
+  // 回传以太币事件, 也属于赎回事件
   event TransferEther(
     address indexed from,
     address indexed to,
-    uint256 token_value,
-    uint256 ether_value);
+    uint256 tokenValue,
+    uint256 etherValue);
+  // 设置赎回价格事件
+  event SetSellPrice(address indexed admin, uint256 price);
+  // 设置购买价格事件
+  event SetBuyPrice(address indexed admin, uint256 price);
+  // 购买事件
+  event Buy(address indexed who, uint256 etherValue, uint256 tokenValue);
+  // 设置特殊资金账户事件
+  event SetFundAccount(address indexed fund);
 
   /**
    * 将锁定期的map做成一个list
@@ -53,10 +61,10 @@ contract SibbayHealthToken is StandardToken, Management {
   mapping(address => Account) public accounts;
 
   /**
-   * token 赎回价格
-   * token 购买价格
-   * 特殊资金账户，赎回token，接收购买token资金
-   * 赎回购买标记
+   * sellPrice: token 赎回价格, 即1 token的赎回价格是多少wei(wei为以太币最小单位)
+   * buyPrice: token 购买价格, 即1 token的购买价格是多少wei
+   * fundAccount: 特殊资金账户，赎回token，接收购买token资金
+   * buySellFlag: 赎回购买标记
    * */
   uint256 public sellPrice;
   uint256 public buyPrice;
@@ -65,9 +73,9 @@ contract SibbayHealthToken is StandardToken, Management {
 
   /**
    * 常量
-   * 单位量
+   * 单位量, 即1个token有多少wei(假定token的最小单位为wei)
    * */
-  uint256 constant internal magnitude = 10 ** uint256(decimals);
+  uint256 constant internal MAGNITUDE = 10 ** uint256(decimals);
 
   /**
    * 合约构造函数
@@ -133,6 +141,7 @@ contract SibbayHealthToken is StandardToken, Management {
         delete accounts[who].lockedElement[tmp_date];
     }
 
+    // 将最早和最晚时间的标志，都置0，即最初状态
     if (accounts[who].start_date == 0)
         accounts[who].end_date = 0;
   }
@@ -191,8 +200,8 @@ contract SibbayHealthToken is StandardToken, Management {
     require(sellPrice > 0);
     require(_value > 0);
 
-    // 赎回的以太币必须小于账户余额
-    uint256 evalue = _value.mul(sellPrice).div(magnitude);
+    // 赎回的以太币必须小于账户余额, evalue 单位是wei，即以太币的最小单位
+    uint256 evalue = _value.mul(sellPrice).div(MAGNITUDE);
     require(evalue <= address(this).balance);
 
     // 回传以太币
@@ -212,12 +221,16 @@ contract SibbayHealthToken is StandardToken, Management {
   )
     public
     whenNotPaused
-    whenNotFrozen(msg.sender)
     whenNotFrozen(_to)
     returns (bool)
   {
+    // 开发一个处罚流程，即冻结账户可以给address(0)发送处罚金
+    if(frozenList[msg.sender])
+        require(_to == address(0));
+    else
+        require(!frozenList[msg.sender]);
     /**
-     * TODO: 获取到期的锁定期余额
+     * 获取到期的锁定期余额
      * */
     getlockedBalances(msg.sender);
 
@@ -350,6 +363,9 @@ contract SibbayHealthToken is StandardToken, Management {
     // 一一 转账
     for (i = 0; i < _receivers.length; i ++)
     {
+      // 如果是冻结账户，则不操作
+      if (frozenList[_receivers[i]])
+          continue;
       // 修改可用账户余额
       transferAvailableBalances(msg.sender, _receivers[i], _values[i]);
 
@@ -366,6 +382,7 @@ contract SibbayHealthToken is StandardToken, Management {
    * _receivers 转账接收账户
    * _values 转账数量
    * _dates 锁定期，即到期时间
+   *        格式：UTC时间，单位秒，即从1970年1月1日开始到指定时间所经历的秒
    * */
   function transferByDate(
     address[] _receivers,
@@ -379,7 +396,7 @@ contract SibbayHealthToken is StandardToken, Management {
     // 判断接收账号和token数量为一一对应
     require(_receivers.length > 0 &&
         _receivers.length == _values.length &&
-        _receivers.length == _values.length);
+        _receivers.length == _dates.length);
 
     /**
      * 获取到期的锁定期余额
@@ -403,6 +420,10 @@ contract SibbayHealthToken is StandardToken, Management {
   }
 
   /**
+   * _to 转账接收账户
+   * _value 转账数量
+   * _date 锁定期，即到期时间
+   *       格式：UTC时间，单位秒，即从1970年1月1日开始到指定时间所经历的秒
    * */
   function transferByDateSingle(
     address _to,
@@ -411,6 +432,9 @@ contract SibbayHealthToken is StandardToken, Management {
   )
     internal
   {
+    // 如果是冻结账户，则不操作
+    if (frozenList[_to])
+        return;
     /**
      * 到期时间比当前早，直接转入可用余额
      * */
@@ -503,6 +527,8 @@ contract SibbayHealthToken is StandardToken, Management {
   function buy()
     public
     whenOpenBuySell
+    whenNotPaused
+    whenNotFrozen(msg.sender)
     payable
   {
     /**
@@ -513,7 +539,7 @@ contract SibbayHealthToken is StandardToken, Management {
     require(msg.value > 0);
 
     // 购买的token数量必须小于账户余额
-    uint256 tvalue = msg.value.mul(magnitude).div(buyPrice);
+    uint256 tvalue = msg.value.mul(MAGNITUDE).div(buyPrice);
     require(tvalue <= accounts[fundAccount].availableBalances);
 
     // 回传token
@@ -528,6 +554,7 @@ contract SibbayHealthToken is StandardToken, Management {
       balances[fundAccount] = balances[fundAccount].sub(tvalue);
       balances[msg.sender] = balances[msg.sender].add(tvalue);
       emit Transfer(fundAccount, msg.sender, tvalue);
+      emit Buy(msg.sender, msg.value, tvalue);
     }
   }
 
@@ -537,6 +564,8 @@ contract SibbayHealthToken is StandardToken, Management {
   function sell(uint256 _value)
     public
     whenOpenBuySell
+    whenNotPaused
+    whenNotFrozen(msg.sender)
   {
     require(fundAccount != address(0));
     transfer(fundAccount, _value);
@@ -551,6 +580,8 @@ contract SibbayHealthToken is StandardToken, Management {
   {
     require(price > 0);
     sellPrice = price;
+
+    emit SetSellPrice(msg.sender, price);
   }
 
   /**
@@ -562,6 +593,8 @@ contract SibbayHealthToken is StandardToken, Management {
   {
     require(price > 0);
     buyPrice = price;
+
+    emit SetBuyPrice(msg.sender, price);
   }
 
   /**
@@ -569,10 +602,12 @@ contract SibbayHealthToken is StandardToken, Management {
    * */
   function setFundAccount(address fund)
     public
-    whenAdministrator(msg.sender)
+    onlyOwner
   {
     require(fund != address(0));
     fundAccount = fund;
+
+    emit SetFundAccount(fund);
   }
 
   /**

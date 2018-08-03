@@ -100,7 +100,7 @@ token转账，转账被代理人账户
 7. function addAdministrator(address admin) public;  
 增加管理账户 -- owner 权限  
 参数 admin: 指定的管理者  
-8. function delAdminnistrator(address admin) public;  
+8. function delAdministrator(address admin) public;  
 取消管理账户 -- owner 权限  
 参数 admin: 取消的管理者  
 9. function batchTransfer(address[] receivers, uint256[] value) pubic;  
@@ -114,20 +114,18 @@ token转账，转账被代理人账户
 暂停事件  
 2. event Unpause();  
 取消暂停事件  
-3. event Froze(address indexed owner, address indexed who);  
+3. event Froze(address indexed admin, address indexed who);  
 冻结事件  
 参数 who: 指定的冻结账户  
-4. event Unfroze(address indexed owner, address indexed who);  
+4. event Unfroze(address indexed admin, address indexed who);  
 取消冻结事件  
 参数 who: 指定的取消冻结账户  
 5. event AddAdministrator(address indexed admin);  
 增加管理账户  
-参数 owner: 增加管理账户的操作者  
-     admin: 增加的管理账户  
+参数 admin: 增加的管理账户  
 6. event DelAdministrator(address indexed admin);  
 取消管理账户  
-参数 owner: 取消管理账户的操作者  
-     admin: 取消的管理账户  
+参数 admin: 取消的管理账户  
   
 ### buy/sell token  
 #### interface  

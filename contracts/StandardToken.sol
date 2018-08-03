@@ -10,7 +10,19 @@ import "./ERC20.sol";
 contract StandardToken is ERC20, BasicToken {
 
   // 记录代理账户
+  // 第一个address是token的所有者，即被代理账户
+  // 第二个address是token的使用者，即代理账户
   mapping (address => mapping (address => uint256)) internal allowed;
+
+  // 代理转账事件
+  // spender: 代理
+  // from: token所有者
+  // to: token接收账户
+  // value: token的转账数量
+  event TransferFrom(address indexed spender,
+                     address indexed from,
+                     address indexed to,
+                     uint256 value);
 
 
   /**
@@ -34,7 +46,7 @@ contract StandardToken is ERC20, BasicToken {
     balances[_from] = balances[_from].sub(_value);
     balances[_to] = balances[_to].add(_value);
     allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_value);
-    emit Transfer(_from, _to, _value);
+    emit TransferFrom(msg.sender, _from, _to, _value);
     return true;
   }
 
