@@ -4,7 +4,7 @@ import settings
 
 from mongoengine import connect
 from models import TokenPrice
-from .logger import logger
+from logger import logger
 
 
 def init_sht_price(creat=False):

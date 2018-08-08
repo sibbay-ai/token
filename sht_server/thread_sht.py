@@ -2,7 +2,7 @@
 import threading
 from sys import exit
 from time import sleep
-from .logger import logger
+from logger import logger
 
 
 class ThreadSHT(threading.Thread):
