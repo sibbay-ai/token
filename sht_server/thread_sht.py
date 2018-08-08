@@ -2,6 +2,8 @@
 import threading
 from sys import exit
 from time import sleep
+from .logger import logger
+
 
 class ThreadSHT(threading.Thread):
 
@@ -17,9 +19,9 @@ class ThreadSHT(threading.Thread):
                 self.func(*self.args)
                 continue
             except Exception as err:
-                print("Exeception happends: " + str(err) + " at " + self.name + ",  rerunning...")
+                logger.info("Exeception happends: " + str(err) + " at " + self.name + ",  rerunning...")
                 sleep(1)
                 continue
             except KeyboardInterrupt:
-                print("exit from KeyboardInterrupt")
+                logger.info("exit from KeyboardInterrupt")
                 exit(1)
