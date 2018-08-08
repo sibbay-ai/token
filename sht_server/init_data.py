@@ -4,6 +4,8 @@ import settings
 
 from mongoengine import connect
 from models import TokenPrice
+from .logger import logger
+
 
 def init_sht_price(creat=False):
     # creat connection, database, collection
@@ -25,12 +27,12 @@ def init_sht_price(creat=False):
                 sht_decimals = int(settings.SIBBAY_SHT_DECIMALS),
                 price_unit = "CNY"
         )
-    
-        print("init price ehter price: " + str(ether_price) + " decimals: " + str(settings.SIBBAY_ETHER_DECIMALS) \
+
+        logger.info("init price ehter price: " + str(ether_price) + " decimals: " + str(settings.SIBBAY_ETHER_DECIMALS) \
               + " sht price: " + str(settings.SIBBAY_SHT_PRICE) + " decimals: " + str(settings.SIBBAY_SHT_DECIMALS))
     else:
         # update sht price
         ret.update(sht_price = float(settings.SIBBAY_SHT_PRICE))
-        print("update price ehter price: " + str(ether_price) + " decimals: " + str(settings.SIBBAY_ETHER_DECIMALS) \
+        logger.info("update price ehter price: " + str(ether_price) + " decimals: " + str(settings.SIBBAY_ETHER_DECIMALS) \
               + " sht price: " + str(settings.SIBBAY_SHT_PRICE) + " decimals: " + str(settings.SIBBAY_SHT_DECIMALS))
 

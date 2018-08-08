@@ -8,6 +8,7 @@ from json import loads
 import requests
 
 from models import *
+from .logger import logger
 
 
 class SHTData:
@@ -37,17 +38,17 @@ class SHTClass:
         while True:
             w3 = Web3(Web3.IPCProvider(node_path))
             if w3.isConnected() == False:
-                print("node is not connected, wait " + str(timeout) + " second")
+                logger.info("node is not connected, wait " + str(timeout) + " second")
                 sleep(timeout)
             else:
-                print("connect to node by ipc: " + node_path)
+                logger.info("connect to node by ipc: " + node_path)
                 break
         return w3
 
     def start_watch_sht_transfer(self, node_path, timeout):
         def handle_watch_sht_transfer(node_path, timeout):
             while self.sht_data.ether_price == 0:
-                print("ether price: " + str(self.sht_data.ether_price) + "￥, wait price thread for " + str(timeout) + " seconds")
+                logger.info("ether price: " + str(self.sht_data.ether_price) + "￥, wait price thread for " + str(timeout) + " seconds")
                 sleep(timeout)
 
             # wait price thread
@@ -65,9 +66,9 @@ class SHTClass:
         while True:
             for logs in ef.get_new_entries():
                 hef(logs)
-            print("wait event " + str(timeout) + " seconds")
+            logger.info("wait event " + str(timeout) + " seconds")
             if self.running == False:
-                print("stopping watch sht transfer thread....")
+                logger.info("stopping watch sht transfer thread....")
                 exit(0)
             sleep(timeout)
 
@@ -108,8 +109,8 @@ class SHTClass:
                        status = TokenSell.STATUS__INIT
                 )
 
-                print("find token sell tx into MongoDB:", str(Web3.toHex(logs['transactionHash'])))
-                print("from: " + logs['args']['from'] + " to: " + logs['args']['to'] + " value: " + str(logs['args']['value']))
+                logger.info("find token sell tx into MongoDB:", str(Web3.toHex(logs['transactionHash'])))
+                logger.info("from: " + logs['args']['from'] + " to: " + logs['args']['to'] + " value: " + str(logs['args']['value']))
 
     def start_price_thread(self, timeout):
         def handle_ether_price(timeout):
@@ -140,11 +141,14 @@ class SHTClass:
             self.sht_data.sht_price = float(ret.sht_price)
             self.sht_data.sht_decimals = int(ret.sht_decimals)
 
-            print("get ether price: " + str(self.sht_data.ether_price) + "￥ Decimals: " + str(self.sht_data.ether_decimals) \
-                  + " sht price: " + str(self.sht_data.sht_price) + "￥ Decimals: " + str(self.sht_data.sht_decimals))
+            logger.info(
+                "get ether price: " + str(self.sht_data.ether_price) + "￥ Decimals: " + str(
+                    self.sht_data.ether_decimals) \
+                + " sht price: " + str(self.sht_data.sht_price) + "￥ Decimals: " + str(self.sht_data.sht_decimals)
+            )
 
             if self.running == False:
-                print("stopping ether price thread....")
+                logger.info("stopping ether price thread....")
                 exit(0)
             sleep(timeout)
 
@@ -161,8 +165,8 @@ class SHTClass:
                 # find transaction
                 rets = TokenSell.query(status = TokenSell.STATUS__INIT)
                 for ret in rets:
-                    print("find token sell tx from MongoDB:" + ret.transaction_hash)
-                    print("from: " + ret.from_address + " to: " + ret.to_address + " value: " + ret.value)
+                    logger.info("find token sell tx from MongoDB:" + ret.transaction_hash)
+                    logger.info("from: " + ret.from_address + " to: " + ret.to_address + " value: " + ret.value)
                     ret.update(status = TokenSell.STATUS__PROCESSING)
                     # check transaction
                     # check basic info
@@ -189,18 +193,18 @@ class SHTClass:
                     to_value = '0x' + logs['input'][74:]
                     to_value = int(to_value, 16)
                     if logs['blockNumber'] != ret.block_number or \
-                       logs['from'] != ret.from_address or \
-                       to_addr != ret.to_address or \
-                       to_value != int(ret.value) or \
-                       logs['to'] != self.contract_addr:
-                           print("find invalid token sell tx " + ret.transaction_hash)
-                           continue
+                        logs['from'] != ret.from_address or \
+                        to_addr != ret.to_address or \
+                        to_value != int(ret.value) or \
+                        logs['to'] != self.contract_addr:
+                            logger.info("find invalid token sell tx " + ret.transaction_hash)
+                            continue
 
                     if int(ret.ether_value) > 0:
                         ret.update(status = TokenSell.STATUS__PROCESSED)
                         w3.personal.unlockAccount(self.owner, self.password)
                         ehash = w3.eth.sendTransaction({'from': self.owner, 'to': ret.from_address, 'value': int(ret.ether_value), 'gasPrice': int(self.gas_price)})
-                        print("send ether from owner " + self.owner + ", txhash: " + str(Web3.toHex(ehash)))
+                        logger.info("send ether from owner " + self.owner + ", txhash: " + str(Web3.toHex(ehash)))
                         ret.update(ether_hash = str(Web3.toHex(ehash)))
                     else :
                         ret.update(status = TokenSell.STATUS__SUCCESS)
@@ -213,13 +217,13 @@ class SHTClass:
                         if logs is None:
                             continue
                         if logs['status'] == 1:
-                            print("pay ether tx " + ret.ether_hash + " success")
+                            logger.info("pay ether tx " + ret.ether_hash + " success")
                             ret.update(status = TokenSell.STATUS__SUCCESS)
                         else:
-                            print("pay ether tx " + ret.ether_hash + " failed, set as manual")
+                            logger.info("pay ether tx " + ret.ether_hash + " failed, set as manual")
                             ret.update(status = TokenSell.STATUS__MANUAL)
                 if self.running == False:
-                    print("stopping pay ether thread....")
+                    logger.info("stopping pay ether thread....")
                     exit(0)
                 sleep(timeout)
 
