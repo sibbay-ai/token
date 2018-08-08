@@ -8,7 +8,7 @@ from json import loads
 import requests
 
 from models import *
-from .logger import logger
+from logger import logger
 
 
 class SHTData:
