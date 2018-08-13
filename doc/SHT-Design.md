@@ -15,6 +15,8 @@
     该操作对sender进行类型判断，如果其带有锁定期的token，且锁定期到期，则将锁定期token放入可用余额  
 6. 实现简单的buy功能，即可以通过buy接口购买token,  
    购买token的价格应该高于自动赎回的价格  
+
+7. 增加新接口：可以取回合约的所有以太币给Owner
   
 ## contract  
 ### ERC20 standard  
