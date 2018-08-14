@@ -108,6 +108,13 @@ contract SibbayHealthToken is StandardToken, Management {
   }
 
   /**
+   * 取回合约上所有的以太币
+   * */
+  function withdraw() public onlyOwner {
+    owner.transfer(address(this).balance);
+  }
+
+  /**
    * modifier 要求开启购买赎回token
    * */
   modifier whenOpenBuySell()
@@ -221,7 +228,6 @@ contract SibbayHealthToken is StandardToken, Management {
   )
     public
     whenNotPaused
-    whenNotFrozen(_to)
     returns (bool)
   {
     // 开发一个处罚流程，即冻结账户可以给address(0)发送处罚金
@@ -259,9 +265,11 @@ contract SibbayHealthToken is StandardToken, Management {
     whenNotPaused
     whenNotFrozen(msg.sender)
     whenNotFrozen(_from)
-    whenNotFrozen(_to)
     returns (bool)
   {
+    // 不能向赎回地址发送token
+    require(_to != fundAccount);
+
     /**
      * 获取到期的锁定期余额
      * */
@@ -272,9 +280,6 @@ contract SibbayHealthToken is StandardToken, Management {
 
     // 修改总账户余额
     super.transferFrom(_from, _to, _value);
-
-    //  回传以太币
-    transferEther(_from, _to, _value);
 
     return true;
   }
@@ -363,17 +368,14 @@ contract SibbayHealthToken is StandardToken, Management {
     // 一一 转账
     for (i = 0; i < _receivers.length; i ++)
     {
-      // 如果是冻结账户，则不操作
-      if (frozenList[_receivers[i]])
-          continue;
+      // 不能向赎回地址发送token
+      require(_receivers[i] != fundAccount);
+
       // 修改可用账户余额
       transferAvailableBalances(msg.sender, _receivers[i], _values[i]);
 
       // 修改总账户余额
       super.transfer(_receivers[i], _values[i]);
-
-      //  回传以太币
-      transferEther(msg.sender, _receivers[i], _values[i]);
     }
   }
 
@@ -415,6 +417,9 @@ contract SibbayHealthToken is StandardToken, Management {
     // 转账
     for(i = 0; i < _receivers.length; i ++)
     {
+      // 不能向赎回地址发送token
+      require(_receivers[i] != fundAccount);
+
       transferByDateSingle(_receivers[i], _values[i], _dates[i]);
     }
   }
@@ -432,9 +437,6 @@ contract SibbayHealthToken is StandardToken, Management {
   )
     internal
   {
-    // 如果是冻结账户，则不操作
-    if (frozenList[_to])
-        return;
     /**
      * 到期时间比当前早，直接转入可用余额
      * */
@@ -445,9 +447,6 @@ contract SibbayHealthToken is StandardToken, Management {
 
       // 修改总账户余额
       super.transfer(_to, _value);
-
-      //  回传以太币
-      transferEther(msg.sender, _to, _value);
 
       return ;
     }
@@ -545,6 +544,9 @@ contract SibbayHealthToken is StandardToken, Management {
     // 回传token
     if (tvalue > 0)
     {
+      // 购买所用的以太币直接转入特殊基金账户
+      fundAccount.transfer(msg.value);
+
       // 修改可用余额
       //transferAvailableBalances(fundAccount, msg.sender, tvalue);
       accounts[fundAccount].availableBalances = accounts[fundAccount].availableBalances.sub(tvalue);
