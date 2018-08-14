@@ -106,7 +106,7 @@ token转账，转账被代理人账户
 取消管理账户 -- owner 权限  
 参数 admin: 取消的管理者  
 9. function batchTransfer(address[] receivers, uint256[] value) pubic;  
-批量转发 -- administrator权限  
+批量转发
 参数 receivers: token的接收账户  
      value[]: token的转账数量, 与receivers 一一对应  
   

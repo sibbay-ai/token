@@ -14,7 +14,13 @@ contract SibbayHealthToken is StandardToken, Management {
   string public constant symbol = "SHT"; // solium-disable-line uppercase
   uint8 public constant decimals = 18; // solium-disable-line uppercase
 
-  uint256 public constant INITIAL_SUPPLY = 1000000000 * (10 ** uint256(decimals));
+  /**
+   * 常量
+   * 单位量, 即1个token有多少wei(假定token的最小单位为wei)
+   * */
+  uint256 constant internal MAGNITUDE = 10 ** uint256(decimals);
+
+  uint256 public constant INITIAL_SUPPLY = 1000000000 * MAGNITUDE;
 
   // 回传以太币事件, 也属于赎回事件
   event TransferEther(
@@ -70,12 +76,6 @@ contract SibbayHealthToken is StandardToken, Management {
   uint256 public buyPrice;
   address public fundAccount;
   bool public buySellFlag;
-
-  /**
-   * 常量
-   * 单位量, 即1个token有多少wei(假定token的最小单位为wei)
-   * */
-  uint256 constant internal MAGNITUDE = 10 ** uint256(decimals);
 
   /**
    * 合约构造函数
