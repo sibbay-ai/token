@@ -31,6 +31,7 @@ contract StandardToken is ERC20, BasicToken {
    * _to 转账地址
    * _value token转账数量
    */
+  /* 注释掉这个接口，不在这里实现 
   function transferFrom(
     address _from,
     address _to,
@@ -49,6 +50,7 @@ contract StandardToken is ERC20, BasicToken {
     emit TransferFrom(msg.sender, _from, _to, _value);
     return true;
   }
+  */
 
   /**
    * 设置代理
