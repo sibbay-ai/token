@@ -223,7 +223,7 @@ contract SibbayHealthToken is StandardToken, Management {
         return;
 
     /**
-     * 没有开发赎回功能，不能向fundAccount转账
+     * 没有打开发赎回功能，不能向fundAccount转账
      * */
     require(buySellFlag);
 
@@ -262,9 +262,8 @@ contract SibbayHealthToken is StandardToken, Management {
       require(_to == address(0));
     else
     {
-      // 普通转账，不能给地址0转账，冻结账户不能转账
+      // 普通用户转账，不能给地址0转账，冻结账户不能转账
       require(_to != address(0));
-      require(!frozenList[msg.sender]);
     }
     /**
      * 获取到期的锁定期余额

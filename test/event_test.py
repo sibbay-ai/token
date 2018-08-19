@@ -27,33 +27,17 @@ class TestEventWatch(unittest.TestCase):
     def test_sht_class(self):
         sht_data = SHTData(300000, 18, 1, 1)
         sc = SHTClass(
-            settings.SIBBAY_SHT_OWNER,
-            settings.SIBBAY_SHT_PASSWORD,
-            settings.SIBBAY_SHT_GAS_PRICE,
             settings.SIBBAY_SHT_ADDRESS,
             settings.SIBBAY_SHT_ABI,
-            sht_data,
-            settings.SIBBAY_MONGODB_SHT_HOST
         )
-        self.assertEqual(sc.owner, Web3.toChecksumAddress(settings.SIBBAY_SHT_OWNER))
-        self.assertEqual(sc.password, settings.SIBBAY_SHT_PASSWORD)
         self.assertEqual(sc.contract_addr, settings.SIBBAY_SHT_ADDRESS)
         self.assertEqual(sc.contract_abi, settings.SIBBAY_SHT_ABI)
-        self.assertEqual(sc.sht_data.ether_price, 300000)
-        self.assertEqual(sc.sht_data.ether_decimals, 18)
-        self.assertEqual(sc.sht_data.sht_price, 1)
-        self.assertEqual(sc.sht_data.sht_decimals, 1)
 
     def test_connect_to_node(self):
         sht_data = SHTData(300000, 18, 1, 1)
         sc = SHTClass(
-            settings.SIBBAY_SHT_OWNER,
-            settings.SIBBAY_SHT_PASSWORD,
-            settings.SIBBAY_SHT_GAS_PRICE,
             settings.SIBBAY_SHT_ADDRESS,
             settings.SIBBAY_SHT_ABI,
-            sht_data,
-            settings.SIBBAY_MONGODB_SHT_HOST
         )
         w3 = sc.connect_to_node(settings.SIBBAY_SHT_NODE_IPC, 5)
         self.assertEqual(w3.isConnected(), True)
@@ -62,13 +46,8 @@ class TestEventWatch(unittest.TestCase):
     def test_start_watch_sht_transfer(self):
         sht_data = SHTData(1000000, 18, 1, 1)
         sc = SHTClass(
-            settings.SIBBAY_SHT_OWNER,
-            settings.SIBBAY_SHT_PASSWORD,
-            settings.SIBBAY_SHT_GAS_PRICE,
             settings.SIBBAY_SHT_ADDRESS,
             settings.SIBBAY_SHT_ABI,
-            sht_data,
-            settings.SIBBAY_MONGODB_SHT_HOST
         )
         sc.start_watch_sht_transfer(settings.SIBBAY_SHT_NODE_IPC, 5)
 
@@ -93,15 +72,10 @@ class TestEventWatch(unittest.TestCase):
         init_sht_price()
         sht_data = SHTData(1000000, 18, 1, 1)
         sc = SHTClass(
-            settings.SIBBAY_SHT_OWNER,
-            settings.SIBBAY_SHT_PASSWORD,
-            settings.SIBBAY_SHT_GAS_PRICE,
             settings.SIBBAY_SHT_ADDRESS,
             settings.SIBBAY_SHT_ABI,
-            sht_data,
-            settings.SIBBAY_MONGODB_SHT_HOST
         )
-        sc.start_price_thread(30)
+        sc.start_price_thread(sht_data, 30)
 
         # get price from database
         ret_count, ret = TokenPrice.query_latest_price()
@@ -115,47 +89,6 @@ class TestEventWatch(unittest.TestCase):
         ether_price_2 = ret.ether_price
 
         self.assertNotEqual(ether_price_1, ether_price_2)
-
-    def test_start_pay_ether(self):
-        sht_data = SHTData(1000000, 18, 1, 1)
-        sc = SHTClass(
-            settings.SIBBAY_SHT_OWNER,
-            settings.SIBBAY_SHT_PASSWORD,
-            settings.SIBBAY_SHT_GAS_PRICE,
-            settings.SIBBAY_SHT_ADDRESS,
-            settings.SIBBAY_SHT_ABI,
-            sht_data,
-            settings.SIBBAY_MONGODB_SHT_HOST
-        )
-        sc.start_pay_ether(settings.SIBBAY_SHT_NODE_IPC, 5)
-
-        tx_hash = "0x7986ab003950b4f4cfeb955a4ebe90b46df8ec15cf2f0e49939e9448a2ed0f82"
-
-        TokenSell.query(transaction_hash = tx_hash).delete()
-
-        TokenSell.create(
-               from_address = "0x2B8edC6f7f3042893d9E93cCA6a37faB41979C16",
-               to_address = "0x6D31f4bEDcE01850E4268778d1596798c5075f71",
-               value = '100',
-               transaction_hash = tx_hash,
-               block_hash = "0x3fd8d7a7af19ba3eb2229f058e2c02059859e4b27e4211c6948a504a6c733662",
-               block_number = 3669302,
-               sht_price = 0.01,
-               ether_price = 3211.92,
-               price_unit = 'CNY',
-               ether_hash = "",
-               ether_value = str(311340257540661),
-               status = TokenSell.STATUS__INIT
-        )
-
-
-        sleep(70)
-
-        ret = TokenSell.query(transaction_hash = tx_hash)
-        self.assertEqual(ret.count(), 1)
-        self.assertNotEqual(ret[0].ether_hash, "")
-        self.assertEqual(ret[0].status, TokenSell.STATUS__SUCCESS)
-
 
 if __name__ == '__main__':
     connect(alias="sht", host=settings.SIBBAY_MONGODB_SHT_HOST)
