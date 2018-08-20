@@ -223,7 +223,7 @@ contract SibbayHealthToken is StandardToken, Management {
         return;
 
     /**
-     * 没有打开发赎回功能，不能向fundAccount转账
+     * 没有打开赎回功能，不能向fundAccount转账
      * */
     require(buySellFlag);
 
@@ -231,7 +231,6 @@ contract SibbayHealthToken is StandardToken, Management {
      * 赎回价格必须大于0
      * 赎回的token必须大于0
      * */
-    require(sellPrice > 0);
     require(_value > 0);
 
     // 赎回的以太币必须小于账户余额, evalue 单位是wei，即以太币的最小单位
@@ -689,10 +688,8 @@ contract SibbayHealthToken is StandardToken, Management {
     payable
   {
     /**
-     * 购买价格必须大于0
      * 购买的value必须大于0
      * */
-    require(buyPrice > 0);
     require(msg.value > 0);
 
     // 计算回传token的数量
@@ -776,6 +773,8 @@ contract SibbayHealthToken is StandardToken, Management {
     onlyOwner
   {
     require(fundAccount != address(0));
+    require(sellPrice > 0);
+    require(buyPrice > 0);
     buySellFlag = true;
   }
 
