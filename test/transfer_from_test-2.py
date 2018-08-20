@@ -29,7 +29,7 @@ class TestTransferFrom(SHToken):
         # 设置代理
         self.approve(accounts[2], accounts[1], 100*magnitude, password, 100*magnitude)
         # 向accounts[1]发送 0.1 ether
-        self.send_ether(settings.SIBBAY_SHT_OWNER, accounts[1], Web3.toWei(0.1, "ether"), settings.SIBBAY_SHT_PASSWORD)
+        self.send_ether(settings.SIBBAY_SHT_OWNER, accounts[1], Web3.toWei(1, "ether"), settings.SIBBAY_SHT_PASSWORD)
         # 2.2-1.1
         print("start token_test 2.2-1.1")
         # 由owner向账户accounts[2]发送100个token
@@ -96,7 +96,7 @@ class TestTransferFrom(SHToken):
         # 冻结账户accounts[3], 并向其转账0个token，100个token
         self.froze(settings.SIBBAY_SHT_OWNER, accounts[3], settings.SIBBAY_SHT_PASSWORD)
         self.transfer_from(accounts[1], accounts[2], accounts[3], 0, settings.SIBBAY_SHT_PASSWORD, 0)
-        self.transfer_from(accounts[1], accounts[2], account[3], 100*magnitude, settings.SIBBAY_SHT_PASSWORD, 100*magnitude)
+        self.transfer_from(accounts[1], accounts[2], accounts[3], 100*magnitude, settings.SIBBAY_SHT_PASSWORD, 100*magnitude)
 
 if __name__ == '__main__':
     connect(alias="sht", host=settings.SIBBAY_MONGODB_SHT_HOST)

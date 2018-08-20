@@ -86,7 +86,7 @@ class TestTransferFrom(SHToken):
         # 冻结账户accounts[3], 并向其转账0个token，100个token
         self.froze(settings.SIBBAY_SHT_OWNER, accounts[3], settings.SIBBAY_SHT_PASSWORD)
         self.transfer_from(accounts[1], accounts[2], accounts[3], 0, settings.SIBBAY_SHT_PASSWORD, 0)
-        self.transfer_from(accounts[1], accounts[2], account[3], 100*magnitude, settings.SIBBAY_SHT_PASSWORD, 0)
+        self.transfer_from(accounts[1], accounts[2], accounts[3], 100*magnitude, settings.SIBBAY_SHT_PASSWORD, 0)
 
 if __name__ == '__main__':
     connect(alias="sht", host=settings.SIBBAY_MONGODB_SHT_HOST)

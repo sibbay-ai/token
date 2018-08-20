@@ -775,6 +775,7 @@ contract SibbayHealthToken is StandardToken, Management {
     whenCloseBuySell
     onlyOwner
   {
+    require(fundAccount != address(0));
     buySellFlag = true;
   }
 
