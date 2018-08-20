@@ -18,11 +18,11 @@ module.exports = {
   networks: {
       roptest: {
           host: "localhost",
-          port: 7454,
+          port: 8545,
           network_id: "3",
           gas: 6000000,
           gasPrice: 4000000000,
-          from: "0x6d31f4bedce01850e4268778d1596798c5075f71"
+          from: "0x8f106d3e03ccb8042772261661789445fd9d930a"
       }
   }
 };

@@ -8,6 +8,7 @@ from json import loads
 import requests
 
 from models import *
+from logger import logger
 
 
 class SHTData:
@@ -33,15 +34,16 @@ class SHTClass:
         while True:
             w3 = Web3(Web3.IPCProvider(node_path))
             if w3.isConnected() == False:
-                print("node is not connected, wait " + str(timeout) + " second")
+                logger.info("node is not connected, wait " + str(timeout) + " second")
                 sleep(timeout)
             else:
-                print("connect to node by ipc: " + node_path)
+                logger.info("connect to node by ipc: " + node_path)
                 break
         return w3
 
     def start_watch_sht_transfer(self, node_path, timeout):
         def handle_watch_sht_transfer(node_path, timeout):
+
             # wait price thread
             w3 = self.connect_to_node(node_path, timeout)
             # get contract
@@ -57,9 +59,9 @@ class SHTClass:
         while True:
             for logs in ef.get_new_entries():
                 hef(logs)
-            print("wait event " + str(timeout) + " seconds")
+            logger.info("wait event " + str(timeout) + " seconds")
             if self.running == False:
-                print("stopping watch sht transfer thread....")
+                logger.info("stopping watch sht transfer thread....")
                 exit(0)
             sleep(timeout)
 
@@ -109,7 +111,7 @@ class SHTClass:
                   + " sht price: " + str(sht_data.sht_price) + "￥ Decimals: " + str(sht_data.sht_decimals))
     
             if self.running == False:
-                print("stopping ether price thread....")
+                logger.info("stopping ether price thread....")
                 exit(0)
             sleep(timeout)
     
