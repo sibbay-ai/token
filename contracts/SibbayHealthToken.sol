@@ -109,9 +109,11 @@ contract SibbayHealthToken is StandardToken, Management {
 
   /**
    * 取回合约上所有的以太币
+   * 只有owner才能取回
    * */
   function withdraw() public onlyOwner {
-    owner.transfer(address(this).balance);
+    uint256 value = address(this).balance;
+    owner.transfer(value);
   }
 
   /**
@@ -175,6 +177,33 @@ contract SibbayHealthToken is StandardToken, Management {
   }
 
   /**
+   * 总余额转账，内部接口
+   * _from token的拥有者
+   * _to token的接收者
+   * _value token的数量
+   * */
+  function transferTotalBalances(
+    address _from,
+    address _to,
+    uint256 _value
+  )
+    internal
+  {
+    // 检查总余额
+    require(_value <= balances[_from]);
+
+    // 修改总余额
+    balances[_from] = balances[_from].sub(_value);
+    balances[_to] = balances[_to].add(_value);
+
+    // 触发转账事件
+    if(_from == msg.sender)
+        emit Transfer(_from, _to, _value);
+    else
+        emit TransferFrom(msg.sender, _from, _to, _value);
+  }
+
+  /**
    * 回传以太币, 内部接口
    * _from token来源账户
    * _to token目标账户
@@ -194,11 +223,9 @@ contract SibbayHealthToken is StandardToken, Management {
         return;
 
     /**
-     * 没有开放赎回功能，直接返回
-     * 这里不能用require，因为require会导致调用该函数的正常交易失败
+     * 没有打开发赎回功能，不能向fundAccount转账
      * */
-    if (!buySellFlag)
-      return;
+    require(buySellFlag);
 
     /**
      * 赎回价格必须大于0
@@ -232,9 +259,12 @@ contract SibbayHealthToken is StandardToken, Management {
   {
     // 开发一个处罚流程，即冻结账户可以给address(0)发送处罚金
     if(frozenList[msg.sender])
-        require(_to == address(0));
+      require(_to == address(0));
     else
-        require(!frozenList[msg.sender]);
+    {
+      // 普通用户转账，不能给地址0转账，冻结账户不能转账
+      require(_to != address(0));
+    }
     /**
      * 获取到期的锁定期余额
      * */
@@ -244,7 +274,7 @@ contract SibbayHealthToken is StandardToken, Management {
     transferAvailableBalances(msg.sender, _to, _value);
 
     // 修改总账户余额
-    super.transfer(_to, _value);
+    transferTotalBalances(msg.sender, _to,  _value);
 
     // 回传以太币
     transferEther(msg.sender, _to, _value);
@@ -270,16 +300,25 @@ contract SibbayHealthToken is StandardToken, Management {
     // 不能向赎回地址发送token
     require(_to != fundAccount);
 
+    // 不能向0地址转账
+    require(_to != address(0));
+
     /**
      * 获取到期的锁定期余额
      * */
     getlockedBalances(_from);
 
+    // 检查代理额度
+    require(_value <= allowed[_from][msg.sender]);
+
     // 修改可用账户余额
     transferAvailableBalances(_from, _to, _value);
 
     // 修改总账户余额
-    super.transferFrom(_from, _to, _value);
+    transferTotalBalances(_from, _to,  _value);
+
+    // 修改代理额度
+    allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_value);
 
     return true;
   }
@@ -371,23 +410,82 @@ contract SibbayHealthToken is StandardToken, Management {
       // 不能向赎回地址发送token
       require(_receivers[i] != fundAccount);
 
+      // 不能向0地址转账
+      require(_receivers[i] != address(0));
+
       // 修改可用账户余额
       transferAvailableBalances(msg.sender, _receivers[i], _values[i]);
 
       // 修改总账户余额
-      super.transfer(_receivers[i], _values[i]);
+      transferTotalBalances(msg.sender, _receivers[i], _values[i]);
     }
   }
 
   /**
+   * 代理批量转账 token
+   * 被代理人 _from
+   * 批量用户 _receivers
+   * 对应的转账数量 _values
+   * */
+  function batchTransferFrom(
+    address _from,
+    address[] _receivers,
+    uint256[] _values
+  )
+    public
+    whenNotPaused
+    whenNotFrozen(msg.sender)
+    whenNotFrozen(_from)
+  {
+    // 判断接收账号和token数量为一一对应
+    require(_receivers.length > 0 && _receivers.length == _values.length);
+
+    /**
+     * 获取到期的锁定期余额
+     * */
+    getlockedBalances(_from);
+
+    // 判断可用余额足够
+    uint32 i = 0;
+    uint256 total = 0;
+    for (i = 0; i < _values.length; i ++)
+    {
+      total = total.add(_values[i]);
+    }
+    require(total <= accounts[_from].availableBalances);
+
+    // 判断代理额度足够
+    require(total <= allowed[_from][msg.sender]);
+
+    // 一一 转账
+    for (i = 0; i < _receivers.length; i ++)
+    {
+      // 不能向赎回地址发送token
+      require(_receivers[i] != fundAccount);
+
+      // 不能向0地址转账
+      require(_receivers[i] != address(0));
+
+      // 修改可用账户余额
+      transferAvailableBalances(_from, _receivers[i], _values[i]);
+
+      // 修改总账户余额
+      transferTotalBalances(_from, _receivers[i], _values[i]);
+    }
+
+    // 修改代理额度
+    allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(total);
+  }
+
+  /**
    * 带有锁定期的转账, 当锁定期到期之后，锁定token数量将转入可用余额
-   * _receivers 转账接收账户
+   * _receiver 转账接收账户
    * _values 转账数量
    * _dates 锁定期，即到期时间
    *        格式：UTC时间，单位秒，即从1970年1月1日开始到指定时间所经历的秒
    * */
   function transferByDate(
-    address[] _receivers,
+    address _receiver,
     uint256[] _values,
     uint32[] _dates
   )
@@ -396,9 +494,14 @@ contract SibbayHealthToken is StandardToken, Management {
     whenNotFrozen(msg.sender)
   {
     // 判断接收账号和token数量为一一对应
-    require(_receivers.length > 0 &&
-        _receivers.length == _values.length &&
-        _receivers.length == _dates.length);
+    require(_values.length > 0 &&
+        _values.length == _dates.length);
+
+    // 不能向赎回地址发送token
+    require(_receiver != fundAccount);
+
+    // 不能向0地址转账
+    require(_receiver != address(0));
 
     /**
      * 获取到期的锁定期余额
@@ -415,22 +518,77 @@ contract SibbayHealthToken is StandardToken, Management {
     require(total <= accounts[msg.sender].availableBalances);
 
     // 转账
-    for(i = 0; i < _receivers.length; i ++)
+    for(i = 0; i < _values.length; i ++)
     {
-      // 不能向赎回地址发送token
-      require(_receivers[i] != fundAccount);
-
-      transferByDateSingle(_receivers[i], _values[i], _dates[i]);
+      transferByDateSingle(msg.sender, _receiver, _values[i], _dates[i]);
     }
   }
 
   /**
+   * 代理带有锁定期的转账, 当锁定期到期之后，锁定token数量将转入可用余额
+   * _from 被代理账户
+   * _receiver 转账接收账户
+   * _values 转账数量
+   * _dates 锁定期，即到期时间
+   *        格式：UTC时间，单位秒，即从1970年1月1日开始到指定时间所经历的秒
+   * */
+  function transferFromByDate(
+    address _from,
+    address _receiver,
+    uint256[] _values,
+    uint32[] _dates
+  )
+    public
+    whenNotPaused
+    whenNotFrozen(msg.sender)
+    whenNotFrozen(_from)
+  {
+    // 判断接收账号和token数量为一一对应
+    require(_values.length > 0 &&
+        _values.length == _dates.length);
+
+    // 不能向赎回地址发送token
+    require(_receiver != fundAccount);
+
+    // 不能向0地址转账
+    require(_receiver != address(0));
+
+    /**
+     * 获取到期的锁定期余额
+     * */
+    getlockedBalances(_from);
+
+    // 判断可用余额足够
+    uint32 i = 0;
+    uint256 total = 0;
+    for (i = 0; i < _values.length; i ++)
+    {
+      total = total.add(_values[i]);
+    }
+    require(total <= accounts[_from].availableBalances);
+
+    // 判断代理额度足够
+    require(total <= allowed[_from][msg.sender]);
+
+    // 转账
+    for(i = 0; i < _values.length; i ++)
+    {
+      transferByDateSingle(_from, _receiver, _values[i], _dates[i]);
+    }
+
+    // 修改代理额度
+    allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(total);
+  }
+
+  /**
+   * _from token拥有者
    * _to 转账接收账户
    * _value 转账数量
    * _date 锁定期，即到期时间
    *       格式：UTC时间，单位秒，即从1970年1月1日开始到指定时间所经历的秒
    * */
   function transferByDateSingle(
+    address _from,
     address _to,
     uint256 _value,
     uint32 _date
@@ -443,10 +601,10 @@ contract SibbayHealthToken is StandardToken, Management {
     if (_date <= now)
     {
       // 修改可用账户余额
-      transferAvailableBalances(msg.sender, _to, _value);
+      transferAvailableBalances(_from, _to, _value);
 
       // 修改总账户余额
-      super.transfer(_to, _value);
+      transferTotalBalances(_from, _to, _value);
 
       return ;
     }
@@ -460,7 +618,7 @@ contract SibbayHealthToken is StandardToken, Management {
       accounts[_to].lockedElement[_date].value = _value;
 
       // 修改总账户余额
-      super.transfer(_to, _value);
+      transferTotalBalances(_from, _to, _value);
 
       return ;
     }
@@ -474,7 +632,7 @@ contract SibbayHealthToken is StandardToken, Management {
       accounts[_to].start_date = _date;
 
       // 修改总账户余额
-      super.transfer(_to, _value);
+      transferTotalBalances(_from, _to, _value);
 
       return ;
     }
@@ -487,7 +645,7 @@ contract SibbayHealthToken is StandardToken, Management {
         accounts[_to].end_date = _date;
 
       // 修改总账户余额
-      super.transfer(_to, _value);
+      transferTotalBalances(_from, _to, _value);
 
       return ;
     }
@@ -515,7 +673,7 @@ contract SibbayHealthToken is StandardToken, Management {
     }
 
     // 修改总账户余额
-    super.transfer(_to, _value);
+    transferTotalBalances(_from, _to, _value);
 
     return ;
   }
@@ -537,9 +695,8 @@ contract SibbayHealthToken is StandardToken, Management {
     require(buyPrice > 0);
     require(msg.value > 0);
 
-    // 购买的token数量必须小于账户余额
+    // 计算回传token的数量
     uint256 tvalue = msg.value.mul(MAGNITUDE).div(buyPrice);
-    require(tvalue <= accounts[fundAccount].availableBalances);
 
     // 回传token
     if (tvalue > 0)
@@ -548,14 +705,12 @@ contract SibbayHealthToken is StandardToken, Management {
       fundAccount.transfer(msg.value);
 
       // 修改可用余额
-      //transferAvailableBalances(fundAccount, msg.sender, tvalue);
-      accounts[fundAccount].availableBalances = accounts[fundAccount].availableBalances.sub(tvalue);
-      accounts[msg.sender].availableBalances = accounts[msg.sender].availableBalances.add(tvalue);
+      transferAvailableBalances(fundAccount, msg.sender, tvalue);
 
       // 修改总余额
-      balances[fundAccount] = balances[fundAccount].sub(tvalue);
-      balances[msg.sender] = balances[msg.sender].add(tvalue);
-      emit Transfer(fundAccount, msg.sender, tvalue);
+      transferTotalBalances(fundAccount, msg.sender, tvalue);
+
+      // 触发Buy事件
       emit Buy(msg.sender, msg.value, tvalue);
     }
   }
@@ -620,6 +775,7 @@ contract SibbayHealthToken is StandardToken, Management {
     whenCloseBuySell
     onlyOwner
   {
+    require(fundAccount != address(0));
     buySellFlag = true;
   }
 
