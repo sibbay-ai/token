@@ -331,3 +331,127 @@ class SHToken(unittest.TestCase):
         ret = self.sht.functions.buySellFlag().call()
         self.assertEqual(ret, False)
 
+    # _value: ether value
+    def buy(self, _who, _value, _pwd, _expect):
+        _who = Web3.toChecksumAddress(_who)
+        # 记录账户_who的余额
+        balance_old = self.sht.functions.balanceOf(_who).call()
+
+        # 解锁_who账户，并购买_value 以太币的token
+        self.w3.personal.unlockAccount(_who, _pwd)
+        tx_hash = self.sht.functions.buy().transact({"from": _who, "value": _value, "gas": gas, "gasPrice": gas_price})
+
+        # 等待确认
+        self.wait_tx_confirm(tx_hash)
+
+        # 记录账户_to的余额
+        balance_new = self.sht.functions.balanceOf(_who).call()
+        self.assertEqual(balance_new - balance_old, _expect)
+
+    def sell(self, _who, _value, _pwd, expect):
+        _who = Web3.toChecksumAddress(_who)
+        # 记录账户_who的余额
+        balance_old = self.sht.functions.balanceOf(_who).call()
+
+        # 解锁_who账户，并购买_value 以太币的token
+        self.w3.personal.unlockAccount(_who, _pwd)
+        tx_hash = self.sht.functions.sell(_value).transact({"from": _who, "gas": gas, "gasPrice": gas_price})
+
+        # 等待确认
+        self.wait_tx_confirm(tx_hash)
+
+        # 记录账户_to的余额
+        balance_new = self.sht.functions.balanceOf(_who).call()
+        self.assertEqual(balance_old - balance_new, _expect)
+
+    def pause(self, _owner, _pwd):
+        _owner = Web3.toChecksumAddress(_owner)
+        # 查看合约状态
+        ret = self.sht.functions.paused().call()
+        if ret == True:
+            return
+
+        # 解锁_owner账户，暂停合约
+        self.w3.personal.unlockAccount(_owner, _pwd)
+        tx_hash = self.sht.functions.pause().transact({"from": _owner, "gas": gas, "gasPrice": gas_price})
+
+        # 等待确认
+        self.wait_tx_confirm(tx_hash)
+
+        # 查看合约状态
+        ret = self.sht.functions.paused().call()
+        self.assertEqual(ret, True)
+
+    def unpause(self, _owner, _pwd):
+        _owner = Web3.toChecksumAddress(_owner)
+        # 查看合约状态
+        ret = self.sht.functions.paused().call()
+        if ret == False:
+            return
+
+        # 解锁_owner账户，取消暂停合约
+        self.w3.personal.unlockAccount(_owner, _pwd)
+        tx_hash = self.sht.functions.unpause().transact({"from": _owner, "gas": gas, "gasPrice": gas_price})
+
+        # 等待确认
+        self.wait_tx_confirm(tx_hash)
+
+        # 查看合约状态
+        ret = self.sht.functions.paused().call()
+        self.assertEqual(ret, False)
+
+    def add_administrator(self, _owner, _who, _pwd):
+        _owner = Web3.toChecksumAddress(_owner)
+        _who = Web3.toChecksumAddress(_who)
+        # 查看管理员状态
+        ret = self.sht.functions.adminList(_who).call()
+        if ret == True:
+            return
+
+        # 解锁_owner账户，添加_who为管理员
+        self.w3.personal.unlockAccount(_owner, _pwd)
+        tx_hash = self.sht.functions.addAdministrator(_who).transact({"from": _owner, "gas": gas, "gasPrice": gas_price})
+
+        # 等待确认
+        self.wait_tx_confirm(tx_hash)
+
+        # 查看管理员状态
+        ret = self.sht.functions.adminList(_who).call()
+        self.assertEqual(ret, True)
+
+    def del_administrator(self, _owner, _who, _pwd):
+        _owner = Web3.toChecksumAddress(_owner)
+        _who = Web3.toChecksumAddress(_who)
+        # 查看管理员状态
+        ret = self.sht.functions.adminList(_who).call()
+        if ret == False:
+            return
+
+        # 解锁_owner账户，添加_who为管理员
+        self.w3.personal.unlockAccount(_owner, _pwd)
+        tx_hash = self.sht.functions.delAdministrator(_who).transact({"from": _owner, "gas": gas, "gasPrice": gas_price})
+
+        # 等待确认
+        self.wait_tx_confirm(tx_hash)
+
+        # 查看管理员状态
+        ret = self.sht.functions.adminList(_who).call()
+        self.assertEqual(ret, False)
+
+    def withdraw(self, _owner, _pwd):
+        _owner = Web3.toChecksumAddress(_owner)
+        # 查看合约余额
+        ret = w3.eth.getBalance(settings.SIBBAY_SHT_ADDRESS)
+        if ret == 0:
+            return
+
+        # 解锁_owner账户，取回合约余额
+        self.w3.personal.unlockAccount(_owner, _pwd)
+        tx_hash = self.sht.functions.withdraw().transact({"from": _owner, "gas": gas, "gasPrice": gas_price})
+
+        # 等待确认
+        self.wait_tx_confirm(tx_hash)
+
+        # 查看合约余额
+        ret = w3.eth.getBalance(settings.SIBBAY_SHT_ADDRESS)
+        self.assertEqual(ret, 0)
