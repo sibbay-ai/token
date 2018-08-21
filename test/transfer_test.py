@@ -16,13 +16,10 @@ import settings
 from config import *
 from shtoken import SHToken
 
-def close_w3_connection(w3):
-    w3.providers[0]._socket.sock.close()
-
 class TestTransfer(SHToken):
     def test_transfer(self):
         # 设置fund account
-        self.set_fund_account()
+        self.set_fund_account(settings.SIBBAY_SHT_OWNER, fund_account, settings.SIBBAY_SHT_PASSWORD)
         # 向accounts[1]发送 0.1 ether
         self.send_ether(settings.SIBBAY_SHT_OWNER, accounts[1], Web3.toWei(0.1, "ether"), settings.SIBBAY_SHT_PASSWORD)
         # 1.1
@@ -72,9 +69,11 @@ class TestTransfer(SHToken):
         # 1.6
         print("start token_test 1.6")
         # 关闭赎回开关
-        self.close_buy_sell()
+        self.close_buy_sell(settings.SIBBAY_SHT_OWNER, settings.SIBBAY_SHT_PASSWORD)
         #设置赎回价格
         self.set_sell_price(settings.SIBBAY_SHT_OWNER, Web3.toWei(0.001, "ether"), settings.SIBBAY_SHT_PASSWORD)
+        # 取回合约所有ether
+        self.withdraw(settings.SIBBAY_SHT_OWNER, settings.SIBBAY_SHT_ADDRESS)
         # 向合约发送 0.1 ether
         self.send_ether(settings.SIBBAY_SHT_OWNER, settings.SIBBAY_SHT_ADDRESS, Web3.toWei(0.1, "ether"), settings.SIBBAY_SHT_PASSWORD)
         # 由账户owner向账户accounts[1]发送110个token
@@ -82,7 +81,7 @@ class TestTransfer(SHToken):
         # 赎回10个token
         self.transfer(accounts[1], fund_account, 10*magnitude, password, 0)
         # 打开赎回开关，并分别赎回0个，10个，100个token
-        self.open_buy_sell()
+        self.open_buy_sell(settings.SIBBAY_SHT_OWNER, settings.SIBBAY_SHT_PASSWORD)
         self.transfer(accounts[1], fund_account, 0, password, 0)
         self.transfer(accounts[1], fund_account, 10*magnitude, password, 10*magnitude)
         self.transfer(accounts[1], fund_account, 100*magnitude, password, 0)
