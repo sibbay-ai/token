@@ -32,7 +32,7 @@ class SHTClass:
     def connect_to_node(self, node_path, timeout):
         # connect to node
         while True:
-            w3 = Web3(Web3.IPCProvider(node_path))
+            w3 = Web3(Web3.IPCProvider(node_path, False, 30))
             if w3.isConnected() == False:
                 logger.info("node is not connected, wait " + str(timeout) + " second")
                 sleep(timeout)

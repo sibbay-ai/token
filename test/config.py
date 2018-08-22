@@ -13,7 +13,7 @@ fund_account = accounts[len(accounts) - 1]
 collect_account = accounts[len(accounts) - 2]
 
 # gas, gas price
-gas = 6000000
+gas = 3700000
 gas_price = 4000000000
 
 # 1 token的最小单位
