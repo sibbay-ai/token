@@ -11,7 +11,7 @@ from mongoengine import connect
 from init_data import init_sht_price
 from sht_server import SHTData, SHTClass
 from models import *
-import settings
+import settings_test as sts
 
 from config import *
 
@@ -20,15 +20,15 @@ class SHToken(unittest.TestCase):
     def setUpClass(cls):
         # 初始化数据 sht-class, w3, sht
         sc = SHTClass(
-            settings.SIBBAY_SHT_ADDRESS,
-            settings.SIBBAY_SHT_ABI,
+            sts.SIBBAY_SHT_ADDRESS,
+            sts.SIBBAY_SHT_ABI,
         )
-        cls.w3 = sc.connect_to_node(settings.SIBBAY_SHT_NODE_IPC, 5)
-        cls.sht = cls.w3.eth.contract(address=Web3.toChecksumAddress(settings.SIBBAY_SHT_ADDRESS), abi=settings.SIBBAY_SHT_ABI)
+        cls.w3 = sc.connect_to_node_http(sts.SIBBAY_SHT_NODE_HTTP, 5)
+        cls.sht = cls.w3.eth.contract(address=Web3.toChecksumAddress(sts.SIBBAY_SHT_ADDRESS), abi=sts.SIBBAY_SHT_ABI)
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.w3.providers[0]._socket.sock.close()
+#    @classmethod
+#    def tearDownClass(cls):
+#        cls.w3.providers[0]._socket.sock.close()
 
     # 等待确认
     def wait_tx_confirm(self, tx_hash):
@@ -39,6 +39,11 @@ class SHToken(unittest.TestCase):
                 continue
             break
         return logs
+
+    def create_account(self, _pwd):
+        # 创建账户
+        ret = self.w3.personal.newAccount(_pwd)
+        return ret
 
     # 发送ether
     def send_ether(self, _from, _to, _value, _pwd):
@@ -119,7 +124,7 @@ class SHToken(unittest.TestCase):
 
         # 查询代理余额
         ret = self.sht.functions.allowance(_owner, _spender).call()
-        self.assertEqual(ret, _value)
+        self.assertEqual(ret, _expect)
 
     def increase_approval(self, _owner, _spender, _value, _pwd, _expect):
         _owner = Web3.toChecksumAddress(_owner)
@@ -136,7 +141,7 @@ class SHToken(unittest.TestCase):
 
         # 查询代理余额
         balance_new = self.sht.functions.allowance(_owner, _spender).call()
-        self.assertEqual(balance_new - balance_old, _value)
+        self.assertEqual(balance_new - balance_old, _expect)
 
     def decrease_approval(self, _owner, _spender, _value, _pwd, _expect):
         _owner = Web3.toChecksumAddress(_owner)
@@ -153,7 +158,7 @@ class SHToken(unittest.TestCase):
 
         # 查询代理余额
         balance_new = self.sht.functions.allowance(_owner, _spender).call()
-        self.assertEqual(balance_old - balance_new, _value)
+        self.assertEqual(balance_old - balance_new, _expect)
 
     def batch_transfer(self, _from, _receivers, _values, _expects):
         _from = Web3.toChecksumAddress(_from)
@@ -238,14 +243,15 @@ class SHToken(unittest.TestCase):
 
     # 清空账户余额
     # _who 将要清空的账户
-    def clear_all_sht(self, _who):
+    # _pwd 账户_who的解锁密码
+    def clear_all_sht(self, _who, _collect, _pwd):
         _who = Web3.toChecksumAddress(_who)
         # 获取账户余额
         balance = self.sht.functions.balanceOf(_who).call()
 
         # 将所有余额转账到回收账户
         if balance > 0:
-            self.transfer(_who, collect_account, balance, password, balance)
+            self.transfer(_who, _collect, balance, _pwd, balance)
 
     # 冻结账户
     # _admin 管理员
@@ -468,7 +474,7 @@ class SHToken(unittest.TestCase):
     def withdraw(self, _owner, _pwd):
         _owner = Web3.toChecksumAddress(_owner)
         # 查看合约余额
-        ret = self.w3.eth.getBalance(Web3.toChecksumAddress(settings.SIBBAY_SHT_ADDRESS))
+        ret = self.w3.eth.getBalance(Web3.toChecksumAddress(sts.SIBBAY_SHT_ADDRESS))
         if ret == 0:
             return
 
@@ -480,5 +486,5 @@ class SHToken(unittest.TestCase):
         self.wait_tx_confirm(tx_hash)
 
         # 查看合约余额
-        ret = self.w3.eth.getBalance(Web3.toChecksumAddress(settings.SIBBAY_SHT_ADDRESS))
+        ret = self.w3.eth.getBalance(Web3.toChecksumAddress(sts.SIBBAY_SHT_ADDRESS))
         self.assertEqual(ret, 0)

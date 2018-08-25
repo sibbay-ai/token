@@ -40,6 +40,18 @@ class SHTClass:
                 break
         return w3
 
+    def connect_to_node_http(self, http_txt, timeout):
+        # connect to node
+        while True:
+            w3 = Web3(Web3.HTTPProvider(http_txt, {"timeout": 30}))
+            if w3.isConnected() == False:
+                print("node is not connected, wait " + str(timeout) + " second")
+                sleep(timeout)
+            else:
+                print("connect to node by http: " + http_txt)
+                break
+        return w3
+
     def start_watch_sht_transfer(self, node_path, timeout):
         def handle_watch_sht_transfer(node_path, timeout):
             # wait price thread
