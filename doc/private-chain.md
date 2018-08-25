@@ -43,7 +43,7 @@ geth --datadir /data/ethereum/private_chain/chain init genesis.json
   
 4. 启动私链  
 ```
-geth --targetgaslimit 7000000 --gasprice 0 --rpc --rpcaddr "0.0.0.0" --rpcport "8090" --rpcapi "db,eth,net,web3" --rpccorsdomain "*" --networkid 666  --datadir /data/ethereum/private_chain/chain console 2>>test.log
+geth --targetgaslimit 7000000 --gasprice 0 --rpc --rpcaddr "0.0.0.0" --rpcport "8090" --rpcapi "db,eth,net,web3,personal" --rpccorsdomain "*" --networkid 666  --datadir /data/ethereum/private_chain/chain console 2>>test.log
 ```
 
 说明：
@@ -74,6 +74,6 @@ exit
 
 5. 启动私链，并让第一个账号挖矿
 ```
-geth --targetgaslimit 7000000 --gasprice 0 --rpc --rpcaddr "0.0.0.0" --rpcport "8090" --rpcapi "db,eth,net,web3" --rpccorsdomain "*" --networkid 666  --datadir /data/ethereum/private_chain/chain --mine --etherbase <address> 2>>test.log
+geth --targetgaslimit 7000000 --gasprice 0 --rpc --rpcaddr "0.0.0.0" --rpcport "8090" --rpcapi "db,eth,net,web3,personal" --rpccorsdomain "*" --networkid 666  --datadir /data/ethereum/private_chain/chain --mine --etherbase <address> 2>>test.log
 ```
 
