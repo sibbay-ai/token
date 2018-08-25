@@ -23,6 +23,14 @@ module.exports = {
           gas: 6000000,
           gasPrice: 4000000000,
           from: "0x8f106d3e03ccb8042772261661789445fd9d930a"
+      },
+      private_test: {
+          host: "101.37.115.57",
+          port: 18090,
+          network_id: "666",
+          gas: 6000000,
+          gasPrice: 4000000000,
+          from: "0xc65add7b33dd1203181e3802d2374391ba68dd69"
       }
   }
 };
