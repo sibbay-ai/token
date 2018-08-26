@@ -616,6 +616,8 @@ contract SibbayHealthToken is StandardToken, Management {
       accounts[_to].end_date = _date;
       accounts[_to].lockedElement[_date].value = _value;
 
+      // 仅修改_from可用余额
+      accounts[_from].availableBalances = accounts[_from].availableBalances.sub(_value);
       // 修改总账户余额
       transferTotalBalances(_from, _to, _value);
 
@@ -630,6 +632,8 @@ contract SibbayHealthToken is StandardToken, Management {
       accounts[_to].lockedElement[_date].next = accounts[_to].start_date;
       accounts[_to].start_date = _date;
 
+      // 仅修改_from可用余额
+      accounts[_from].availableBalances = accounts[_from].availableBalances.sub(_value);
       // 修改总账户余额
       transferTotalBalances(_from, _to, _value);
 
@@ -643,6 +647,8 @@ contract SibbayHealthToken is StandardToken, Management {
         accounts[_to].lockedElement[accounts[_to].end_date].next = _date;
         accounts[_to].end_date = _date;
 
+      // 仅修改_from可用余额
+      accounts[_from].availableBalances = accounts[_from].availableBalances.sub(_value);
       // 修改总账户余额
       transferTotalBalances(_from, _to, _value);
 
@@ -655,9 +661,12 @@ contract SibbayHealthToken is StandardToken, Management {
      * 然后再插入的位置插入数据
      * */
     uint32 tmp_date = accounts[_to].start_date;
-    while(accounts[_to].lockedElement[tmp_date].next != 0 &&
-          accounts[_to].lockedElement[tmp_date].next < _date)
+    while(true)
     {
+      if((tmp_date == _date) ||
+         (accounts[_to].lockedElement[tmp_date].next == 0) ||
+         (accounts[_to].lockedElement[tmp_date].next > _date))
+          break;
       tmp_date = accounts[_to].lockedElement[tmp_date].next;
     }
     if(tmp_date == _date)
@@ -671,6 +680,8 @@ contract SibbayHealthToken is StandardToken, Management {
       accounts[_to].lockedElement[tmp_date].next = _date;
     }
 
+    // 仅修改_from可用余额
+    accounts[_from].availableBalances = accounts[_from].availableBalances.sub(_value);
     // 修改总账户余额
     transferTotalBalances(_from, _to, _value);
 
@@ -787,6 +798,17 @@ contract SibbayHealthToken is StandardToken, Management {
     onlyOwner
   {
     buySellFlag = false;
+  }
+
+  /**
+   * 获取可用余额
+   * */
+  function getAvailableBalances(address _who)
+    public
+    view
+    returns (uint256)
+  {
+    return accounts[_who].availableBalances;
   }
 
 }

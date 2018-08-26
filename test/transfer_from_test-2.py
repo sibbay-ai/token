@@ -29,13 +29,11 @@ class TestTransferFrom_2(SHToken):
 
         # 设置fund account
         self.set_fund_account(sts.SIBBAY_SHT_OWNER, fund_account, sts.SIBBAY_SHT_PASSWORD)
-        # 解冻账户accounts[1-2], 以防该账户已被冻结
-        self.unfroze(sts.SIBBAY_SHT_OWNER, accounts[1], sts.SIBBAY_SHT_PASSWORD)
-        self.unfroze(sts.SIBBAY_SHT_OWNER, accounts[2], sts.SIBBAY_SHT_PASSWORD)
+        # 向accounts[1], accounts[2] 分别发送 1 ether
+        self.send_ether(sts.SIBBAY_SHT_OWNER, accounts[1], Web3.toWei(1, "ether"), sts.SIBBAY_SHT_PASSWORD)
+        self.send_ether(sts.SIBBAY_SHT_OWNER, accounts[2], Web3.toWei(1, "ether"), sts.SIBBAY_SHT_PASSWORD)
         # 设置代理
         self.approve(accounts[2], accounts[1], 100*magnitude, password, 100*magnitude)
-        # 向accounts[1]发送 1 ether
-        self.send_ether(sts.SIBBAY_SHT_OWNER, accounts[1], Web3.toWei(1, "ether"), sts.SIBBAY_SHT_PASSWORD)
         # 2.2-1.1
         print("start token_test 2.2-1.1")
         # 由owner向账户accounts[2]发送100个token

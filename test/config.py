@@ -8,7 +8,7 @@ accounts = ["0x0000000000000000000000000000000000000000"]
 password = "123456"
 
 # gas, gas price
-gas = 3700000
+gas = 6000000
 gas_price = 4000000000
 
 # 1 token的最小单位

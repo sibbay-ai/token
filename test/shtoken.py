@@ -160,40 +160,50 @@ class SHToken(unittest.TestCase):
         balance_new = self.sht.functions.allowance(_owner, _spender).call()
         self.assertEqual(balance_old - balance_new, _expect)
 
-    def batch_transfer(self, _from, _receivers, _values, _expects):
+    def batch_transfer(self, _from, _receivers, _values, _pwd, _expects):
         _from = Web3.toChecksumAddress(_from)
         # 转换地址，并记录余额
+        balances_old = []
         for i in range(len(_receivers)):
             _receivers[i] = Web3.toChecksumAddress(_receivers[i])
-            balances_old[i] = self.sht.functions.balanceOf(_receivers[i]).call()
+            balances_old.append(self.sht.functions.balanceOf(_receivers[i]).call())
 
         # 解锁_from账户，并批量发送
         self.w3.personal.unlockAccount(_from, _pwd)
-        tx_hash = self.sht.functions.batchTransfer(_receivers, _values).call({"from": _owner, "gas": gas, "gasPrice": gas_price})
+        tx_hash = self.sht.functions.batchTransfer(_receivers, _values).transact({"from": _from, "gas": gas, "gasPrice": gas_price})
+
+        # 等待确认
+        ret = self.wait_tx_confirm(tx_hash)
+        print("batch_transfer with" + str(len(_receivers)) + "receivers gas used:", ret["gasUsed"])
 
         # 查询余额，并验证
         for i in range(len(_receivers)):
-            balances_new[i] = self.sht.functions.balanceOf(_receivers[i]).call()
-            self.assertEqual(balances_new[i] - balances_old[i], _expects[i])
+            ret = self.sht.functions.balanceOf(_receivers[i]).call()
+            self.assertEqual(ret - balances_old[i], _expects[i])
 
-    def batch_transfer_from(self, _spender, _from, _receivers, _values, _expects):
+    def batch_transfer_from(self, _spender, _from, _receivers, _values, _pwd, _expects):
         _spender = Web3.toChecksumAddress(_spender)
         _from = Web3.toChecksumAddress(_from)
         # 转换地址，并记录余额
+        balances_old = []
         for i in range(len(_receivers)):
             _receivers[i] = Web3.toChecksumAddress(_receivers[i])
-            balances_old[i] = self.sht.functions.balanceOf(_receivers[i]).call()
+            balances_old.append(self.sht.functions.balanceOf(_receivers[i]).call())
 
         # 解锁_from账户，并批量发送
         self.w3.personal.unlockAccount(_spender, _pwd)
-        tx_hash = self.sht.functions.batchTransferFrom(_from, _receivers, _values).call({"from": _spender, "gas": gas, "gasPrice": gas_price})
+        tx_hash = self.sht.functions.batchTransferFrom(_from, _receivers, _values).transact({"from": _spender, "gas": gas, "gasPrice": gas_price})
+
+        # 等待确认
+        ret = self.wait_tx_confirm(tx_hash)
+        print("batch_transfer_from with", str(len(_receivers)), "receivers gas used:", ret["gasUsed"])
 
         # 查询余额，并验证
         for i in range(len(_receivers)):
-            balances_new[i] = self.sht.functions.balanceOf(_receivers[i]).call()
-            self.assertEqual(balances_new[i] - balances_old[i], _expects[i])
+            ret = self.sht.functions.balanceOf(_receivers[i]).call()
+            self.assertEqual(ret - balances_old[i], _expects[i])
 
-    def transfer_by_date(self, _from, _to, _values, _dates, _expect):
+    def transfer_by_date(self, _from, _to, _values, _dates, _pwd, _expect):
         _from = Web3.toChecksumAddress(_from)
         _to = Web3.toChecksumAddress(_to)
         # 记录余额
@@ -201,13 +211,17 @@ class SHToken(unittest.TestCase):
 
         # 解锁_from账户，并批量发送
         self.w3.personal.unlockAccount(_from, _pwd)
-        tx_hash = self.sht.functions.transferByDate(_to, _values, _dates).call({"from": _from, "gas": gas, "gasPrice": gas_price})
+        tx_hash = self.sht.functions.transferByDate(_to, _values, _dates).transact({"from": _from, "gas": gas, "gasPrice": gas_price})
+
+        # 等待确认
+        ret = self.wait_tx_confirm(tx_hash)
+        print("transfer_by_date with", str(len(_dates)), "dates gas used:", ret["gasUsed"])
 
         # 查询余额，并验证
         balance_new = self.sht.functions.balanceOf(_to).call()
         self.assertEqual(balance_new - balance_old, _expect)
 
-    def transfer_from_by_date(self, _spender, _from, _to, _values, _dates, _expect):
+    def transfer_from_by_date(self, _spender, _from, _to, _values, _dates, _pwd, _expect):
         _spender = Web3.toChecksumAddress(_spender)
         _from = Web3.toChecksumAddress(_from)
         _to = Web3.toChecksumAddress(_to)
@@ -216,7 +230,11 @@ class SHToken(unittest.TestCase):
 
         # 解锁_from账户，并批量发送
         self.w3.personal.unlockAccount(_spender, _pwd)
-        tx_hash = self.sht.functions.transferByDate(_from, _to, _values, _dates).call({"from": _spender, "gas": gas, "gasPrice": gas_price})
+        tx_hash = self.sht.functions.transferFromByDate(_from, _to, _values, _dates).transact({"from": _spender, "gas": gas, "gasPrice": gas_price})
+
+        # 等待确认
+        ret = self.wait_tx_confirm(tx_hash)
+        print("transfer_from_by_date with", str(len(_dates)), "dates gas used:", ret["gasUsed"])
 
         # 查询余额，并验证
         balance_new = self.sht.functions.balanceOf(_to).call()
@@ -381,7 +399,7 @@ class SHToken(unittest.TestCase):
         balance_new = self.sht.functions.balanceOf(_who).call()
         self.assertEqual(balance_new - balance_old, _expect)
 
-    def sell(self, _who, _value, _pwd, expect):
+    def sell(self, _who, _value, _pwd, _expect):
         _who = Web3.toChecksumAddress(_who)
         # 记录账户_who的余额
         balance_old = self.sht.functions.balanceOf(_who).call()
