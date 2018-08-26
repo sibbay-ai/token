@@ -51,7 +51,7 @@ geth --targetgaslimit 7000000 --gasprice 0 --rpc --rpcaddr "0.0.0.0" --rpcport "
 --gasprice 挖矿接收的最低gas价格，0表示所有交易都接受  
 --networkid 网络id，大于3的任意值，例如当天的日期 20180819  
 --mine 启动挖矿
---minertherads  挖矿的线程格式
+--minerthreads  挖矿的线程格式
 --etherbase 矿工账号
 -- targetgaslimit 就是早上说的那个，块的gaslimit
 --gasprice 最低接受的gas价格
@@ -74,6 +74,6 @@ exit
 
 5. 启动私链，并让第一个账号挖矿
 ```
-geth --targetgaslimit 7000000 --gasprice 0 --rpc --rpcaddr "0.0.0.0" --rpcport "8090" --rpcapi "db,eth,net,web3,personal" --rpccorsdomain "*" --networkid 666  --datadir /data/ethereum/private_chain/chain --mine --etherbase <address> 2>>test.log
+geth --targetgaslimit 7000000 --gasprice 0 --rpc --rpcaddr "0.0.0.0" --rpcport "8090" --rpcapi "db,eth,net,web3,personal" --rpccorsdomain "*" --networkid 666  --datadir /data/ethereum/private_chain/chain --mine --minerthreads 4 --etherbase <address> 2>>test.log
 ```
 
