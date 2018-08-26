@@ -72,6 +72,8 @@ class SHToken(unittest.TestCase):
     def transfer(self, _from, _to, _value, _pwd, _expect):
         _from = Web3.toChecksumAddress(_from)
         _to = Web3.toChecksumAddress(_to)
+        # 记录账户_from的余额
+        balance_old_from = self.sht.functions.balanceOf(_from).call()
         # 记录账户_to的余额
         balance_old = self.sht.functions.balanceOf(_to).call()
 
@@ -83,15 +85,20 @@ class SHToken(unittest.TestCase):
         ret = self.wait_tx_confirm(tx_hash)
         print("transfer gas used:", ret["gasUsed"])
 
+        # 查看账户_from的余额
+        balance_new_from = self.sht.functions.balanceOf(_from).call()
         # 查看账户_to的余额
         balance_new = self.sht.functions.balanceOf(_to).call()
 
         self.assertEqual(balance_new - balance_old, _expect);
+        self.assertEqual(balance_old_from - balance_new_from, _expect);
 
     def transfer_from(self, _spender, _from, _to, _value, _pwd, _expect):
         _spender = Web3.toChecksumAddress(_spender)
         _from = Web3.toChecksumAddress(_from)
         _to = Web3.toChecksumAddress(_to)
+        # 记录账户_from的余额
+        balance_old_from = self.sht.functions.balanceOf(_from).call()
         # 记录账户_to的余额
         balance_old = self.sht.functions.balanceOf(_to).call()
 
@@ -103,10 +110,13 @@ class SHToken(unittest.TestCase):
         ret = self.wait_tx_confirm(tx_hash)
         print("transfer_from gas used:", ret["gasUsed"])
 
+        # 查看账户_from的余额
+        balance_new_from = self.sht.functions.balanceOf(_from).call()
         # 查看账户_to的余额
         balance_new = self.sht.functions.balanceOf(_to).call()
 
         self.assertEqual(balance_new - balance_old, _expect);
+        self.assertEqual(balance_old_from - balance_new_from, _expect);
 
     def approve(self, _owner, _spender, _value, _pwd, _expect):
         # 转换地址
@@ -167,6 +177,8 @@ class SHToken(unittest.TestCase):
 
     def batch_transfer(self, _from, _receivers, _values, _pwd, _expects):
         _from = Web3.toChecksumAddress(_from)
+        # 记录账户_from的余额
+        balance_old_from = self.sht.functions.balanceOf(_from).call()
         # 转换地址，并记录余额
         balances_old = []
         for i in range(len(_receivers)):
@@ -181,14 +193,24 @@ class SHToken(unittest.TestCase):
         ret = self.wait_tx_confirm(tx_hash)
         print("batch_transfer with", str(len(_receivers)), "receivers gas used:", ret["gasUsed"])
 
+        # 查看账户_from的余额
+        balance_new_from = self.sht.functions.balanceOf(_from).call()
         # 查询余额，并验证
         for i in range(len(_receivers)):
             ret = self.sht.functions.balanceOf(_receivers[i]).call()
             self.assertEqual(ret - balances_old[i], _expects[i])
 
+        # 计算expect，验证_from余额
+        expect = 0
+        for i in range(len(_expects)):
+            expect = expect + _expects[i]
+        self.assertEqual(balance_old_from - balance_new_from, expect)
+
     def batch_transfer_from(self, _spender, _from, _receivers, _values, _pwd, _expects):
         _spender = Web3.toChecksumAddress(_spender)
         _from = Web3.toChecksumAddress(_from)
+        # 记录账户_from的余额
+        balance_old_from = self.sht.functions.balanceOf(_from).call()
         # 转换地址，并记录余额
         balances_old = []
         for i in range(len(_receivers)):
@@ -203,14 +225,24 @@ class SHToken(unittest.TestCase):
         ret = self.wait_tx_confirm(tx_hash)
         print("batch_transfer_from with", str(len(_receivers)), "receivers gas used:", ret["gasUsed"])
 
+        # 查看账户_from的余额
+        balance_new_from = self.sht.functions.balanceOf(_from).call()
         # 查询余额，并验证
         for i in range(len(_receivers)):
             ret = self.sht.functions.balanceOf(_receivers[i]).call()
             self.assertEqual(ret - balances_old[i], _expects[i])
 
+        # 计算expect，验证_from余额
+        expect = 0
+        for i in range(len(_expects)):
+            expect = expect + _expects[i]
+        self.assertEqual(balance_old_from - balance_new_from, expect)
+
     def transfer_by_date(self, _from, _to, _values, _dates, _pwd, _expect):
         _from = Web3.toChecksumAddress(_from)
         _to = Web3.toChecksumAddress(_to)
+        # 记录账户_from的余额
+        balance_old_from = self.sht.functions.balanceOf(_from).call()
         # 记录余额
         balance_old = self.sht.functions.balanceOf(_to).call()
 
@@ -222,6 +254,9 @@ class SHToken(unittest.TestCase):
         ret = self.wait_tx_confirm(tx_hash)
         print("transfer_by_date with", str(len(_dates)), "dates gas used:", ret["gasUsed"])
 
+        # 查看账户_from的余额,并验证
+        balance_new_from = self.sht.functions.balanceOf(_from).call()
+        self.assertEqual(balance_old_from - balance_new_from, _expect)
         # 查询余额，并验证
         balance_new = self.sht.functions.balanceOf(_to).call()
         self.assertEqual(balance_new - balance_old, _expect)
@@ -230,6 +265,8 @@ class SHToken(unittest.TestCase):
         _spender = Web3.toChecksumAddress(_spender)
         _from = Web3.toChecksumAddress(_from)
         _to = Web3.toChecksumAddress(_to)
+        # 记录账户_from的余额,并验证
+        balance_old_from = self.sht.functions.balanceOf(_from).call()
         # 记录余额
         balance_old = self.sht.functions.balanceOf(_to).call()
 
@@ -241,6 +278,9 @@ class SHToken(unittest.TestCase):
         ret = self.wait_tx_confirm(tx_hash)
         print("transfer_from_by_date with", str(len(_dates)), "dates gas used:", ret["gasUsed"])
 
+        # 查看账户_from的余额,并验证
+        balance_new_from = self.sht.functions.balanceOf(_from).call()
+        self.assertEqual(balance_old_from - balance_new_from, _expect)
         # 查询余额，并验证
         balance_new = self.sht.functions.balanceOf(_to).call()
         self.assertEqual(balance_new - balance_old, _expect)
