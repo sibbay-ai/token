@@ -8,7 +8,6 @@ from time import sleep,time
 import hashlib
 from mongoengine import connect
 
-from init_data import init_sht_price
 from sht_server import SHTData, SHTClass
 from models import *
 import settings_test as sts
@@ -273,6 +272,17 @@ class SHToken(unittest.TestCase):
         _who = Web3.toChecksumAddress(_who)
         # 获取账户余额
         balance = self.sht.functions.balanceOf(_who).call()
+
+        # 将所有余额转账到回收账户
+        if balance > 0:
+            self.transfer(_who, _collect, balance, _pwd, balance)
+
+    # 清空所有可用余额
+    # 因为可能有未到期的余额，这部分余额不能操作
+    def clear_all_ava_sht(self, _who, _collect, _pwd):
+        _who = Web3.toChecksumAddress(_who)
+        # 获取账户余额
+        balance = self.sht.functions.getAvailableBalances(_who).call()
 
         # 将所有余额转账到回收账户
         if balance > 0:

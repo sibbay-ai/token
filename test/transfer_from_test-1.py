@@ -8,7 +8,6 @@ from time import sleep,time
 import hashlib
 from mongoengine import connect
 
-from init_data import init_sht_price
 from sht_server import SHTData, SHTClass
 from models import *
 import settings_test as sts
