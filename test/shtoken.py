@@ -57,7 +57,8 @@ class SHToken(unittest.TestCase):
         tx_hash = self.w3.eth.sendTransaction({"from": _from, "to": _to, "value": _value, "gas": gas, "gasPrice": gas_price})
 
         # 等待确认
-        self.wait_tx_confirm(tx_hash)
+        ret = self.wait_tx_confirm(tx_hash)
+        print("send_ether gas used:", ret["gasUsed"])
 
         # 查看账户_to余额
         balance_new = self.w3.eth.getBalance(_to)
@@ -80,7 +81,8 @@ class SHToken(unittest.TestCase):
         tx_hash = self.sht.functions.transfer(_to, _value).transact({"from": _from, "gas": gas, "gasPrice": gas_price})
 
         # 等待确认
-        self.wait_tx_confirm(tx_hash)
+        ret = self.wait_tx_confirm(tx_hash)
+        print("transfer gas used:", ret["gasUsed"])
 
         # 查看账户_to的余额
         balance_new = self.sht.functions.balanceOf(_to).call()
@@ -99,7 +101,8 @@ class SHToken(unittest.TestCase):
         tx_hash = self.sht.functions.transferFrom(_from, _to, _value).transact({"from": _spender, "gas": gas, "gasPrice": gas_price})
 
         # 等待确认
-        self.wait_tx_confirm(tx_hash)
+        ret = self.wait_tx_confirm(tx_hash)
+        print("transfer_from gas used:", ret["gasUsed"])
 
         # 查看账户_to的余额
         balance_new = self.sht.functions.balanceOf(_to).call()
@@ -120,7 +123,8 @@ class SHToken(unittest.TestCase):
         tx_hash = self.sht.functions.approve(_spender, _value).transact({"from": _owner, "gas": gas, "gasPrice": gas_price})
 
         # 等待确认
-        self.wait_tx_confirm(tx_hash)
+        ret = self.wait_tx_confirm(tx_hash)
+        print("approve gas used:", ret["gasUsed"])
 
         # 查询代理余额
         ret = self.sht.functions.allowance(_owner, _spender).call()
@@ -137,7 +141,8 @@ class SHToken(unittest.TestCase):
         tx_hash = self.sht.functions.increaseApproval(_spender, _value).transact({"from": _owner, "gas": gas, "gasPrice": gas_price})
 
         # 等待确认
-        self.wait_tx_confirm(tx_hash)
+        ret = self.wait_tx_confirm(tx_hash)
+        print("increase_approval gas used:", ret["gasUsed"])
 
         # 查询代理余额
         balance_new = self.sht.functions.allowance(_owner, _spender).call()
@@ -154,7 +159,8 @@ class SHToken(unittest.TestCase):
         tx_hash = self.sht.functions.decreaseApproval(_spender, _value).transact({"from": _owner, "gas": gas, "gasPrice": gas_price})
 
         # 等待确认
-        self.wait_tx_confirm(tx_hash)
+        ret = self.wait_tx_confirm(tx_hash)
+        print("decrease_approval gas used:", ret["gasUsed"])
 
         # 查询代理余额
         balance_new = self.sht.functions.allowance(_owner, _spender).call()
@@ -174,7 +180,7 @@ class SHToken(unittest.TestCase):
 
         # 等待确认
         ret = self.wait_tx_confirm(tx_hash)
-        print("batch_transfer with" + str(len(_receivers)) + "receivers gas used:", ret["gasUsed"])
+        print("batch_transfer with", str(len(_receivers)), "receivers gas used:", ret["gasUsed"])
 
         # 查询余额，并验证
         for i in range(len(_receivers)):
@@ -253,7 +259,8 @@ class SHToken(unittest.TestCase):
         tx_hash = self.sht.functions.setFundAccount(_fund).transact({"from": _owner, "gas": gas, "gasPrice": gas_price})
 
         # 等待确认
-        self.wait_tx_confirm(tx_hash)
+        ret = self.wait_tx_confirm(tx_hash)
+        print("set_fund_account gas used:", ret["gasUsed"])
 
         # 验证fund account
         ret = self.sht.functions.fundAccount().call()
@@ -288,7 +295,8 @@ class SHToken(unittest.TestCase):
         tx_hash = self.sht.functions.froze(_who).transact({"from": _admin, "gas": gas, "gasPrice": gas_price})
 
         # 等待确认
-        self.wait_tx_confirm(tx_hash)
+        ret = self.wait_tx_confirm(tx_hash)
+        print("froze gas used:", ret["gasUsed"])
 
         ret = self.sht.functions.frozenList(_who).call()
         self.assertEqual(ret, True)
@@ -310,7 +318,8 @@ class SHToken(unittest.TestCase):
         tx_hash = self.sht.functions.unfroze(_who).transact({"from": _admin, "gasPrice": gas_price})
 
         # 等待确认
-        self.wait_tx_confirm(tx_hash)
+        ret = self.wait_tx_confirm(tx_hash)
+        print("unfroze gas used:", ret["gasUsed"])
 
         ret = self.sht.functions.frozenList(_who).call()
         self.assertEqual(ret, False)
@@ -327,7 +336,8 @@ class SHToken(unittest.TestCase):
         tx_hash = self.sht.functions.setSellPrice(_price).transact({"from": _admin, "gasPrice": gas_price})
 
         # 等待确认
-        self.wait_tx_confirm(tx_hash)
+        ret = self.wait_tx_confirm(tx_hash)
+        print("set_sell_price gas used:", ret["gasUsed"])
 
         ret = self.sht.functions.sellPrice().call()
         self.assertEqual(ret, _price)
@@ -343,7 +353,8 @@ class SHToken(unittest.TestCase):
         tx_hash = self.sht.functions.setBuyPrice(_price).transact({"from": _admin, "gasPrice": gas_price})
 
         # 等待确认
-        self.wait_tx_confirm(tx_hash)
+        ret = self.wait_tx_confirm(tx_hash)
+        print("set_buy_price gas used:", ret["gasUsed"])
 
         ret = self.sht.functions.buyPrice().call()
         self.assertEqual(ret, _price)
@@ -360,7 +371,8 @@ class SHToken(unittest.TestCase):
         tx_hash = self.sht.functions.openBuySell().transact({"from": _owner, "gas": gas, "gasPrice": gas_price})
 
         # 等待确认
-        self.wait_tx_confirm(tx_hash)
+        ret = self.wait_tx_confirm(tx_hash)
+        print("open_buy_sell gas used:", ret["gasUsed"])
 
         ret = self.sht.functions.buySellFlag().call()
         self.assertEqual(ret, True)
@@ -377,7 +389,8 @@ class SHToken(unittest.TestCase):
         tx_hash = self.sht.functions.closeBuySell().transact({"from": _owner, "gas": gas, "gasPrice": gas_price})
 
         # 等待确认
-        self.wait_tx_confirm(tx_hash)
+        ret = self.wait_tx_confirm(tx_hash)
+        print("close_buy_sell gas used:", ret["gasUsed"])
 
         ret = self.sht.functions.buySellFlag().call()
         self.assertEqual(ret, False)
@@ -393,7 +406,8 @@ class SHToken(unittest.TestCase):
         tx_hash = self.sht.functions.buy().transact({"from": _who, "value": _value, "gas": gas, "gasPrice": gas_price})
 
         # 等待确认
-        self.wait_tx_confirm(tx_hash)
+        ret = self.wait_tx_confirm(tx_hash)
+        print("buy gas used:", ret["gasUsed"])
 
         # 记录账户_to的余额
         balance_new = self.sht.functions.balanceOf(_who).call()
@@ -409,7 +423,8 @@ class SHToken(unittest.TestCase):
         tx_hash = self.sht.functions.sell(_value).transact({"from": _who, "gas": gas, "gasPrice": gas_price})
 
         # 等待确认
-        self.wait_tx_confirm(tx_hash)
+        ret = self.wait_tx_confirm(tx_hash)
+        print("sell gas used:", ret["gasUsed"])
 
         # 记录账户_to的余额
         balance_new = self.sht.functions.balanceOf(_who).call()
@@ -427,7 +442,8 @@ class SHToken(unittest.TestCase):
         tx_hash = self.sht.functions.pause().transact({"from": _owner, "gas": gas, "gasPrice": gas_price})
 
         # 等待确认
-        self.wait_tx_confirm(tx_hash)
+        ret = self.wait_tx_confirm(tx_hash)
+        print("pause gas used:", ret["gasUsed"])
 
         # 查看合约状态
         ret = self.sht.functions.paused().call()
@@ -445,7 +461,8 @@ class SHToken(unittest.TestCase):
         tx_hash = self.sht.functions.unpause().transact({"from": _owner, "gas": gas, "gasPrice": gas_price})
 
         # 等待确认
-        self.wait_tx_confirm(tx_hash)
+        ret = self.wait_tx_confirm(tx_hash)
+        print("unpause gas used:", ret["gasUsed"])
 
         # 查看合约状态
         ret = self.sht.functions.paused().call()
@@ -464,7 +481,8 @@ class SHToken(unittest.TestCase):
         tx_hash = self.sht.functions.addAdministrator(_who).transact({"from": _owner, "gas": gas, "gasPrice": gas_price})
 
         # 等待确认
-        self.wait_tx_confirm(tx_hash)
+        ret = self.wait_tx_confirm(tx_hash)
+        print("add_administrator gas used:", ret["gasUsed"])
 
         # 查看管理员状态
         ret = self.sht.functions.adminList(_who).call()
@@ -483,7 +501,8 @@ class SHToken(unittest.TestCase):
         tx_hash = self.sht.functions.delAdministrator(_who).transact({"from": _owner, "gas": gas, "gasPrice": gas_price})
 
         # 等待确认
-        self.wait_tx_confirm(tx_hash)
+        ret = self.wait_tx_confirm(tx_hash)
+        print("del_administrator gas used:", ret["gasUsed"])
 
         # 查看管理员状态
         ret = self.sht.functions.adminList(_who).call()
@@ -501,7 +520,8 @@ class SHToken(unittest.TestCase):
         tx_hash = self.sht.functions.withdraw().transact({"from": _owner, "gas": gas, "gasPrice": gas_price})
 
         # 等待确认
-        self.wait_tx_confirm(tx_hash)
+        ret = self.wait_tx_confirm(tx_hash)
+        print("withdraw gas used:", ret["gasUsed"])
 
         # 查看合约余额
         ret = self.w3.eth.getBalance(Web3.toChecksumAddress(sts.SIBBAY_SHT_ADDRESS))

@@ -43,7 +43,6 @@ class TestGasUsed(SHToken):
         #  设置代理
         self.approve(accounts[2], accounts[1], 10*magnitude, password, 10*magnitude)
 
-        '''
         # 创建10个账户, 10个values, 10个expects
         rs = []
         vs = []
@@ -79,7 +78,6 @@ class TestGasUsed(SHToken):
         # batch transfer, batch transferFrom
         self.batch_transfer(accounts[2], rs, vs, password, es)
         self.batch_transfer_from(accounts[1], accounts[2], rs, vs, password, es)
-        '''
 
         # 创建3个转账期限, 3个values, 1个expect
         ts = []
