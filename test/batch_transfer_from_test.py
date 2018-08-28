@@ -1,14 +1,14 @@
 import unittest
 from web3 import Web3
 
-import settings_test as sts
+import settings as sts
 import config
 from shtoken import SHToken
 
 accounts = config.accounts[:]
 
 
-class TestTransfer(SHToken):
+class TestBatchTransferFrom(SHToken):
     def test_transfer(self):
 
         # 赎回地址账户
