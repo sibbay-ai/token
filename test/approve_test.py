@@ -1,7 +1,7 @@
 import unittest
 from web3 import Web3
 
-import settings_test as sts
+import settings as sts
 import config
 from shtoken import SHToken
 

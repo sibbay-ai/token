@@ -1,4 +1,4 @@
-import settings_test as sts
+import settings as sts
 
 # 所有测试密码均为123456
 accounts = ["0x0000000000000000000000000000000000000000"]

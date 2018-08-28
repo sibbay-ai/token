@@ -2,7 +2,7 @@ import unittest
 from web3 import Web3
 from time import sleep
 
-import settings_test as sts
+import settings as sts
 import config
 
 
