@@ -1,6 +1,3 @@
-
-import sys
-sys.path.append("../sht_server")
 import settings_test as sts
 
 # 所有测试密码均为123456
