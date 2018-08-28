@@ -1,30 +1,23 @@
-
 import unittest
-
-import sys
-sys.path.append("../sht_server")
 from web3 import Web3
-from time import sleep,time
-import hashlib
-from mongoengine import connect
 
-from sht_server import SHTData, SHTClass
-from models import *
 import settings_test as sts
-
-from config import *
+import config
 from shtoken import SHToken
+
+accounts = config.accounts[:]
+
 
 class TestTransfer(SHToken):
     def test_transfer(self):
 
         # 赎回地址账户
-        fund_account = self.create_account(password)
+        fund_account = self.create_account(config.password)
         # 回收token账户
-        collect_account = self.create_account(password)
+        collect_account = self.create_account(config.password)
         # 测试账户
-        accounts.append(self.create_account(password))
-        accounts.append(self.create_account(password))
+        accounts.append(self.create_account(config.password))
+        accounts.append(self.create_account(config.password))
 
         # 向 accounts[1] 发送 1 ether
         self.send_ether(sts.SIBBAY_SHT_OWNER, accounts[1], Web3.toWei(1, "ether"), sts.SIBBAY_SHT_PASSWORD)
@@ -32,7 +25,7 @@ class TestTransfer(SHToken):
         # 设置fund account, 设置赎回价格, 设置购买价格, 打开赎回开关
         print("open buy sell flag")
         # 向fund account发送10 token
-        self.transfer(sts.SIBBAY_SHT_OWNER, fund_account, 10*magnitude, sts.SIBBAY_SHT_PASSWORD, 10*magnitude)
+        self.transfer(sts.SIBBAY_SHT_OWNER, fund_account, 10*config.magnitude, sts.SIBBAY_SHT_PASSWORD, 10*config.magnitude)
         self.set_fund_account(sts.SIBBAY_SHT_OWNER, fund_account, sts.SIBBAY_SHT_PASSWORD)
         self.set_sell_price(sts.SIBBAY_SHT_OWNER, Web3.toWei(0.001, "ether"), sts.SIBBAY_SHT_PASSWORD)
         self.set_buy_price(sts.SIBBAY_SHT_OWNER, Web3.toWei(0.1, "ether"), sts.SIBBAY_SHT_PASSWORD)
@@ -50,9 +43,9 @@ class TestTransfer(SHToken):
 
         print("froze and unfroze account")
         # 冻结账户
-        self.froze(accounts[1], accounts[2], password)
+        self.froze(accounts[1], accounts[2], config.password)
         # 解除冻结账户
-        self.unfroze(accounts[1], accounts[2], password)
+        self.unfroze(accounts[1], accounts[2], config.password)
 
         print("del administrator")
         # 删除管理员
@@ -65,8 +58,8 @@ class TestTransfer(SHToken):
         print("buy and sell tokens")
         # 向账户accounts[1]发送 1 ether, 并购买token, 然后赎回token
         self.send_ether(sts.SIBBAY_SHT_OWNER, accounts[1], Web3.toWei(1, "ether"), sts.SIBBAY_SHT_PASSWORD)
-        self.buy(accounts[1], Web3.toWei(1, "ether"), password, 10*magnitude)
-        self.sell(accounts[1], 10*magnitude, password, 10*magnitude)
+        self.buy(accounts[1], Web3.toWei(1, "ether"), config.password, 10*config.magnitude)
+        self.sell(accounts[1], 10*config.magnitude, config.password, 10*config.magnitude)
 
         print("close buy sell flag")
         # 关闭赎回开关
