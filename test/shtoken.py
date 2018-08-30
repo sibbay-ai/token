@@ -85,8 +85,8 @@ class SHToken(unittest.TestCase):
         # 查看账户_to的余额
         balance_new = self.sht.functions.balanceOf(_to).call()
 
-        self.assertEqual(balance_new - balance_old, _expect);
-        self.assertEqual(balance_old_from - balance_new_from, _expect);
+        self.assertEqual(balance_new - balance_old, _expect)
+        self.assertEqual(balance_old_from - balance_new_from, _expect)
 
     def transfer_from(self, _spender, _from, _to, _value, _pwd, _expect):
         _spender = Web3.toChecksumAddress(_spender)
@@ -96,6 +96,8 @@ class SHToken(unittest.TestCase):
         balance_old_from = self.sht.functions.balanceOf(_from).call()
         # 记录账户_to的余额
         balance_old = self.sht.functions.balanceOf(_to).call()
+        # 记录账户 _spender 代理余额
+        approve_balance_old = self.sht.functions.allowance(_from, _spender).call()
 
         # 解锁_spender账户，并发送_vaue个token给账户_to
         self.w3.personal.unlockAccount(_spender, _pwd)
@@ -109,9 +111,12 @@ class SHToken(unittest.TestCase):
         balance_new_from = self.sht.functions.balanceOf(_from).call()
         # 查看账户_to的余额
         balance_new = self.sht.functions.balanceOf(_to).call()
+        # 查看账户 _spender 代理余额
+        approve_balance_new = self.sht.functions.allowance(_from, _spender).call()
 
-        self.assertEqual(balance_new - balance_old, _expect);
-        self.assertEqual(balance_old_from - balance_new_from, _expect);
+        self.assertEqual(balance_new - balance_old, _expect)
+        self.assertEqual(balance_old_from - balance_new_from, _expect)
+        self.assertEqual(approve_balance_old - approve_balance_new , _expect)
 
     def approve(self, _owner, _spender, _value, _pwd, _expect):
         # 转换地址
@@ -571,3 +576,16 @@ class SHToken(unittest.TestCase):
         # 查看合约余额
         ret = self.w3.eth.getBalance(Web3.toChecksumAddress(sts.SIBBAY_SHT_ADDRESS))
         self.assertEqual(ret, 0)
+
+    def balance_of(self, address, _expect):
+        # 查看账户 address 的余额
+        _who = Web3.toChecksumAddress(address)
+        balance_value = self.sht.functions.balanceOf(_who).call()
+        self.assertEqual(balance_value, _expect)
+
+    def eth_balance_of(self, address, _expect):
+        ret = self.w3.eth.getBalance(Web3.toChecksumAddress(address))
+        self.assertEqual(ret, _expect)
+
+    def eth_balance_of_sht_address(self, _expect):
+        self.eth_balance_of(sts.SIBBAY_SHT_ADDRESS, _expect)

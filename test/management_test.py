@@ -16,11 +16,11 @@ class TestManagement(SHToken):
         # 回收token账户
         collect_account = self.create_account(config.password)
         # 测试账户
-        accounts.append(self.create_account(config.password))
-        accounts.append(self.create_account(config.password))
+        test_account_1 = self.create_account(config.password)
+        test_account_2 = self.create_account(config.password)
 
-        # 向 accounts[1] 发送 1 ether
-        self.send_ether(sts.SIBBAY_SHT_OWNER, accounts[1], Web3.toWei(1, "ether"), sts.SIBBAY_SHT_PASSWORD)
+        # 向 test_account_1 发送 1 ether
+        self.send_ether(sts.SIBBAY_SHT_OWNER, test_account_1, Web3.toWei(1, "ether"), sts.SIBBAY_SHT_PASSWORD)
 
         # 设置fund account, 设置赎回价格, 设置购买价格, 打开赎回开关
         print("open buy sell flag")
@@ -39,27 +39,27 @@ class TestManagement(SHToken):
 
         print("add administrator")
         # 添加管理员
-        self.add_administrator(sts.SIBBAY_SHT_OWNER, accounts[1], sts.SIBBAY_SHT_PASSWORD)
+        self.add_administrator(sts.SIBBAY_SHT_OWNER, test_account_1, sts.SIBBAY_SHT_PASSWORD)
 
         print("froze and unfroze account")
         # 冻结账户
-        self.froze(accounts[1], accounts[2], config.password)
+        self.froze(test_account_1, test_account_2, config.password)
         # 解除冻结账户
-        self.unfroze(accounts[1], accounts[2], config.password)
+        self.unfroze(test_account_1, test_account_2, config.password)
 
         print("del administrator")
         # 删除管理员
-        self.del_administrator(sts.SIBBAY_SHT_OWNER, accounts[1], sts.SIBBAY_SHT_PASSWORD)
+        self.del_administrator(sts.SIBBAY_SHT_OWNER, test_account_1, sts.SIBBAY_SHT_PASSWORD)
 
         print("send ether to contract and withdraw")
         # 向合约发送 1 ether
         self.send_ether(sts.SIBBAY_SHT_OWNER, sts.SIBBAY_SHT_ADDRESS, Web3.toWei(1, "ether"), sts.SIBBAY_SHT_PASSWORD)
 
         print("buy and sell tokens")
-        # 向账户accounts[1]发送 1 ether, 并购买token, 然后赎回token
-        self.send_ether(sts.SIBBAY_SHT_OWNER, accounts[1], Web3.toWei(1, "ether"), sts.SIBBAY_SHT_PASSWORD)
-        self.buy(accounts[1], Web3.toWei(1, "ether"), config.password, 10*config.magnitude)
-        self.sell(accounts[1], 10*config.magnitude, config.password, 10*config.magnitude)
+        # 向账户test_account_1发送 1 ether, 并购买token, 然后赎回token
+        self.send_ether(sts.SIBBAY_SHT_OWNER, test_account_1, Web3.toWei(1, "ether"), sts.SIBBAY_SHT_PASSWORD)
+        self.buy(test_account_1, Web3.toWei(1, "ether"), config.password, 10*config.magnitude)
+        self.sell(test_account_1, 10*config.magnitude, config.password, 10*config.magnitude)
 
         print("close buy sell flag")
         # 关闭赎回开关
@@ -68,6 +68,5 @@ class TestManagement(SHToken):
         self.withdraw(sts.SIBBAY_SHT_OWNER, sts.SIBBAY_SHT_ADDRESS)
 
 if __name__ == '__main__':
-#    connect(alias="sht", host=sts.SIBBAY_MONGODB_SHT_HOST)
     unittest.main()
 
