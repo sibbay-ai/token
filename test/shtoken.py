@@ -85,8 +85,8 @@ class SHToken(unittest.TestCase):
         # 查看账户_to的余额
         balance_new = self.sht.functions.balanceOf(_to).call()
 
-        self.assertEqual(balance_new - balance_old, _expect);
-        self.assertEqual(balance_old_from - balance_new_from, _expect);
+        self.assertEqual(balance_new - balance_old, _expect)
+        self.assertEqual(balance_old_from - balance_new_from, _expect)
 
     def transfer_from(self, _spender, _from, _to, _value, _pwd, _expect):
         _spender = Web3.toChecksumAddress(_spender)
@@ -96,6 +96,8 @@ class SHToken(unittest.TestCase):
         balance_old_from = self.sht.functions.balanceOf(_from).call()
         # 记录账户_to的余额
         balance_old = self.sht.functions.balanceOf(_to).call()
+        # 记录账户 _spender 代理余额
+        approve_balance_old = self.sht.functions.allowance(_from, _spender).call()
 
         # 解锁_spender账户，并发送_vaue个token给账户_to
         self.w3.personal.unlockAccount(_spender, _pwd)
@@ -109,9 +111,12 @@ class SHToken(unittest.TestCase):
         balance_new_from = self.sht.functions.balanceOf(_from).call()
         # 查看账户_to的余额
         balance_new = self.sht.functions.balanceOf(_to).call()
+        # 查看账户 _spender 代理余额
+        approve_balance_new = self.sht.functions.allowance(_from, _spender).call()
 
-        self.assertEqual(balance_new - balance_old, _expect);
-        self.assertEqual(balance_old_from - balance_new_from, _expect);
+        self.assertEqual(balance_new - balance_old, _expect)
+        self.assertEqual(balance_old_from - balance_new_from, _expect)
+        self.assertEqual(approve_balance_old - approve_balance_new , _expect)
 
     def approve(self, _owner, _spender, _value, _pwd, _expect):
         # 转换地址
@@ -445,6 +450,12 @@ class SHToken(unittest.TestCase):
         _who = Web3.toChecksumAddress(_who)
         # 记录账户_who的余额
         balance_old = self.sht.functions.balanceOf(_who).call()
+        who_eth_balance_old = self.w3.eth.getBalance(_who)
+
+        # 记录 fundAccount eth 余额
+        fund_account = self.sht.functions.fundAccount().call()
+        fund_account_eth_balance_old = self.w3.eth.getBalance(Web3.toChecksumAddress(fund_account))
+        fund_account_balance_old = self.sht.functions.balanceOf(Web3.toChecksumAddress(fund_account)).call()
 
         # 解锁_who账户，并购买_value 以太币的token
         self.w3.personal.unlockAccount(_who, _pwd)
@@ -457,11 +468,30 @@ class SHToken(unittest.TestCase):
         # 记录账户_to的余额
         balance_new = self.sht.functions.balanceOf(_who).call()
         self.assertEqual(balance_new - balance_old, _expect)
+        # _who 减少的 eth 是否正确
+        who_eth_balance_new = self.w3.eth.getBalance(_who)
+        self.assertEqual(who_eth_balance_old - who_eth_balance_new, ret["gasUsed"] * config.gas_price + Web3.toWei(1, "ether"))
+
+        # fundAccount 增加的 eth 是否正确
+        fund_account_eth_balance_new = self.w3.eth.getBalance( Web3.toChecksumAddress(fund_account))
+        self.assertEqual(fund_account_eth_balance_new - fund_account_eth_balance_old, Web3.toWei(1, "ether"))
+
+        # fundAccount 减少的 token
+        fund_account_balance_new = self.sht.functions.balanceOf(Web3.toChecksumAddress(fund_account)).call()
+        self.assertEqual(fund_account_balance_old - fund_account_balance_new, _expect)
 
     def sell(self, _who, _value, _pwd, _expect):
         _who = Web3.toChecksumAddress(_who)
         # 记录账户_who的余额
         balance_old = self.sht.functions.balanceOf(_who).call()
+        eth_balance_old = self.w3.eth.getBalance(_who)
+
+        # 记录 fundAccount token 余额
+        fund_account = self.sht.functions.fundAccount().call()
+        fund_account_balance_old = self.sht.functions.balanceOf(Web3.toChecksumAddress(fund_account)).call()
+
+        # 记录 合约 eth 余额
+        eth_sht_account_balance_old = self.w3.eth.getBalance(Web3.toChecksumAddress(sts.SIBBAY_SHT_ADDRESS))
 
         # 解锁_who账户，并购买_value 以太币的token
         self.w3.personal.unlockAccount(_who, _pwd)
@@ -471,9 +501,21 @@ class SHToken(unittest.TestCase):
         ret = self.wait_tx_confirm(tx_hash)
         print("sell gas used:", ret["gasUsed"])
 
+        sell_price = self.sht.functions.sellPrice().call()
         # 记录账户_to的余额
         balance_new = self.sht.functions.balanceOf(_who).call()
         self.assertEqual(balance_old - balance_new, _expect)
+        # who eth
+        eth_balance_new = self.w3.eth.getBalance(_who)
+        self.assertEqual(eth_balance_new - eth_balance_old + ret["gasUsed"] * config.gas_price, int(_expect * sell_price / config.magnitude))
+
+        # 记录 fundAccount 余额
+        fund_account_balance_new = self.sht.functions.balanceOf(Web3.toChecksumAddress(fund_account)).call()
+        # 记录 合约 eth 余额
+        eth_sht_account_balance_new = self.w3.eth.getBalance(Web3.toChecksumAddress(sts.SIBBAY_SHT_ADDRESS))
+
+        self.assertEqual(fund_account_balance_new - fund_account_balance_old, _expect)
+        self.assertEqual(eth_sht_account_balance_old - eth_sht_account_balance_new, int(_expect * sell_price / config.magnitude))
 
     def pause(self, _owner, _pwd):
         _owner = Web3.toChecksumAddress(_owner)
@@ -571,3 +613,16 @@ class SHToken(unittest.TestCase):
         # 查看合约余额
         ret = self.w3.eth.getBalance(Web3.toChecksumAddress(sts.SIBBAY_SHT_ADDRESS))
         self.assertEqual(ret, 0)
+
+    def balance_of(self, address, _expect):
+        # 查看账户 address 的余额
+        _who = Web3.toChecksumAddress(address)
+        balance_value = self.sht.functions.balanceOf(_who).call()
+        self.assertEqual(balance_value, _expect)
+
+    def eth_balance_of(self, address, _expect):
+        ret = self.w3.eth.getBalance(Web3.toChecksumAddress(address))
+        self.assertEqual(ret, _expect)
+
+    def eth_balance_of_sht_address(self, _expect):
+        self.eth_balance_of(sts.SIBBAY_SHT_ADDRESS, _expect)

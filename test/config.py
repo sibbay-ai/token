@@ -13,3 +13,5 @@ magnitude = 10**(sts.SIBBAY_SHT_DECIMALS)
 
 # 交易等待确认时间
 waitting_time = 5
+
+# 新的挖矿账号 "0x6cec428831cc802c2ff8a1d9441364c40e5a362b"
