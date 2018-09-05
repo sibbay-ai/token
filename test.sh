@@ -1,3 +1,10 @@
 python test/transfer_from_by_date_test.py
+python test/approve_test.py
 python test/gasused_test.py
+python test/transfer_from_test-1.py
+python test/batch_transfer_from_test.py
 python test/management_test.py
+python test/transfer_from_test-2.py
+python test/batch_transfer_test.py
+python test/transfer_by_date_test.py
+python test/transfer_test.py
