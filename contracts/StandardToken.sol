@@ -26,33 +26,6 @@ contract StandardToken is ERC20, BasicToken {
 
 
   /**
-   * 代理转账
-   * _from token拥有者
-   * _to 转账地址
-   * _value token转账数量
-   */
-  /* 注释掉这个接口，不在这里实现 
-  function transferFrom(
-    address _from,
-    address _to,
-    uint256 _value
-  )
-    public
-    returns (bool)
-  {
-    require(_to != address(0));
-    require(_value <= balances[_from]);
-    require(_value <= allowed[_from][msg.sender]);
-
-    balances[_from] = balances[_from].sub(_value);
-    balances[_to] = balances[_to].add(_value);
-    allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_value);
-    emit TransferFrom(msg.sender, _from, _to, _value);
-    return true;
-  }
-  */
-
-  /**
    * 设置代理
    * _spender 代理账户
    * _value 代理额度
