@@ -139,24 +139,33 @@ contract SibbayHealthToken is StandardToken, Management {
    * */
   function getlockedBalances(address _who) internal
   {
-    uint256 tmp_date;
-    uint256 tmp_value;
+    uint256 tmp_date = accounts[_who].start_date;
+    uint256 tmp_value = accounts[_who].lockedElement[tmp_date].value;
+    uint256 tmp_balances = 0;
+    uint256 tmp_var;
 
     // 锁定期到期
-    while(accounts[_who].start_date != 0 &&
-          accounts[_who].start_date < now)
+    while(tmp_date != 0 &&
+          tmp_date <= now)
     {
-      tmp_date = accounts[_who].start_date;
+      // 记录到期余额
+      tmp_balances = tmp_balances.add(tmp_value);
+
+      // 记录 tmp_date
+      tmp_var = tmp_date;
+
+      // 跳到下一个锁定期
+      tmp_date = accounts[_who].lockedElement[tmp_date].next;
       tmp_value = accounts[_who].lockedElement[tmp_date].value;
 
-      // 减少锁定期余额，增加可用余额
-      accounts[_who].lockedBalances = accounts[_who].lockedBalances.sub(tmp_value);
-      balances[_who] = balances[_who].add(tmp_value);
-
-      // 修改锁定期
-      accounts[_who].start_date = accounts[_who].lockedElement[tmp_date].next;
-      delete accounts[_who].lockedElement[tmp_date];
+      // delete 锁定期余额
+      delete accounts[_who].lockedElement[tmp_var];
     }
+
+    // 修改锁定期数据
+    accounts[_who].start_date = tmp_date;
+    accounts[_who].lockedBalances = accounts[_who].lockedBalances.sub(tmp_balances);
+    balances[_who] = balances[_who].add(tmp_balances);
 
     // 将最早和最晚时间的标志，都置0，即最初状态
     if (accounts[_who].start_date == 0)
@@ -226,9 +235,11 @@ contract SibbayHealthToken is StandardToken, Management {
   {
     /**
      * 要求 _to 账户接收地址为特殊账户地址
+     * 这里只能为return，不能为revert
+     * 普通转账在这里返回, 不赎回ether
      * */
     if (_to != fundAccount)
-        return;
+        return ;
 
     /**
      * 没有打开赎回功能，不能向fundAccount转账
@@ -590,80 +601,68 @@ contract SibbayHealthToken is StandardToken, Management {
   )
     internal
   {
-    /**
-     * 到期时间比当前早，直接转入可用余额
-     * */
+    uint256 start_date = accounts[_to].start_date;
+    uint256 end_date = accounts[_to].end_date;
+    uint256 tmp_var = accounts[_to].lockedElement[_date].value;
+    uint256 tmp_date;
+
     if (_date <= now)
     {
+      // 到期时间比当前早，直接转入可用余额
       // 修改可用账户余额
       transferAvailableBalances(_from, _to, _value);
 
       return ;
     }
 
-    // 还没有收到过锁定期转账
-    if (accounts[_to].start_date == 0)
+    if (start_date == 0)
     {
+      // 还没有收到过锁定期转账
       // 最早时间和最晚时间一样
       accounts[_to].start_date = _date;
       accounts[_to].end_date = _date;
       accounts[_to].lockedElement[_date].value = _value;
-
-      // 锁定期转账
-      transferLockedBalances(_from, _to, _value);
-
-      return ;
     }
-
-    // 锁定期比最早到期的还早
-    if (_date < accounts[_to].start_date)
+    else if (tmp_var > 0)
     {
+      // 收到过相同的锁定期
+      accounts[_to].lockedElement[_date].value = tmp_var.add(_value);
+    }
+    else if (_date < start_date)
+    {
+      // 锁定期比最早到期的还早
       // 添加锁定期，并加入到锁定期列表
       accounts[_to].lockedElement[_date].value = _value;
-      accounts[_to].lockedElement[_date].next = accounts[_to].start_date;
+      accounts[_to].lockedElement[_date].next = start_date;
       accounts[_to].start_date = _date;
-
-      // 锁定期转账
-      transferLockedBalances(_from, _to, _value);
-
-      return ;
     }
-
-    // 锁定期比最晚到期还晚
-    if (_date > accounts[_to].end_date)
+    else if (_date > end_date)
     {
+      // 锁定期比最晚到期还晚
+      // 添加锁定期，并加入到锁定期列表
       accounts[_to].lockedElement[_date].value = _value;
-      accounts[_to].lockedElement[accounts[_to].end_date].next = _date;
+      accounts[_to].lockedElement[end_date].next = _date;
       accounts[_to].end_date = _date;
-
-      // 锁定期转账
-      transferLockedBalances(_from, _to, _value);
-
-      return ;
-    }
-
-    /**
-     * 锁定期在 最早和最晚之间
-     * 首先找到插入的位置
-     * 然后再插入的位置插入数据
-     * */
-    uint256 tmp_date = accounts[_to].start_date;
-    while(true)
-    {
-      if((tmp_date == _date) ||
-         (accounts[_to].lockedElement[tmp_date].next == 0) ||
-         (accounts[_to].lockedElement[tmp_date].next > _date))
-        break;
-      tmp_date = accounts[_to].lockedElement[tmp_date].next;
-    }
-    if(tmp_date == _date)
-    {
-      accounts[_to].lockedElement[tmp_date].value = accounts[_to].lockedElement[tmp_date].value.add(_value);
     }
     else
     {
+      /**
+       * 锁定期在 最早和最晚之间
+       * 首先找到插入的位置
+       * 然后在插入的位置插入数据
+       * tmp_var 即 tmp_next
+       * */
+      tmp_date = start_date;
+      tmp_var = accounts[_to].lockedElement[tmp_date].next;
+      while(tmp_var < _date)
+      {
+        tmp_date = tmp_var;
+        tmp_var = accounts[_to].lockedElement[tmp_date].next;
+      }
+
+      // 记录锁定期并加入列表
       accounts[_to].lockedElement[_date].value = _value;
-      accounts[_to].lockedElement[_date].next = accounts[_to].lockedElement[tmp_date].next;
+      accounts[_to].lockedElement[_date].next = tmp_var;
       accounts[_to].lockedElement[tmp_date].next = _date;
     }
 
