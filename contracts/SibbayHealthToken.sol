@@ -606,6 +606,12 @@ contract SibbayHealthToken is StandardToken, Management {
     uint256 tmp_var = accounts[_to].lockedElement[_date].value;
     uint256 tmp_date;
 
+    if (_value == 0)
+    {
+        // 不做任何处理
+        return ;
+    }
+
     if (_date <= now)
     {
       // 到期时间比当前早，直接转入可用余额
@@ -762,14 +768,14 @@ contract SibbayHealthToken is StandardToken, Management {
   /**
    * 获取可用余额
    * */
-  function getAvailableBalances(address _who) public view returns (uint256) {
+  function availableBalancesOf(address _who) public view returns (uint256) {
     return balances[_who];
   }
 
   /**
    * 获取锁定余额
    * */
-  function getLockedBalances(address _who) public view returns (uint256) {
+  function lockedBalanceOf(address _who) public view returns (uint256) {
     return accounts[_who].lockedBalances;
   }
 
@@ -777,7 +783,7 @@ contract SibbayHealthToken is StandardToken, Management {
    * 根据日期获取锁定余额
    * 返回：锁定余额，下一个锁定期
    * */
-  function getLockedBalancesByDate(address _who, uint256 date) public view returns (uint256, uint256) {
+  function lockedBalancesOfByDate(address _who, uint256 date) public view returns (uint256, uint256) {
     return (accounts[_who].lockedElement[date].value, accounts[_who].lockedElement[date].next);
   }
 
