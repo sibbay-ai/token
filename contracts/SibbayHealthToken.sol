@@ -44,21 +44,21 @@ contract SibbayHealthToken is StandardToken, Management {
    * */
   struct Element {
     uint256 value;
-    uint32 next;
+    uint256 next;
   }
 
   /**
    * 账户
-   * availableBalances 可用余额
+   * lockedBalances 锁定余额
    * lockedElement 锁定期余额
    * start_date 锁定期最早到期时间
    * end_date 锁定期最晚到期时间
    * */
   struct Account {
-      uint256 availableBalances;
-      mapping(uint32 => Element) lockedElement;
-      uint32 start_date;
-      uint32 end_date;
+    uint256 lockedBalances;
+    mapping(uint256 => Element) lockedElement;
+    uint256 start_date;
+    uint256 end_date;
   }
 
   /**
@@ -84,7 +84,6 @@ contract SibbayHealthToken is StandardToken, Management {
   constructor() public {
     totalSupply_ = INITIAL_SUPPLY;
     balances[msg.sender] = INITIAL_SUPPLY;
-    accounts[msg.sender].availableBalances = INITIAL_SUPPLY;
     emit Transfer(0x0, msg.sender, INITIAL_SUPPLY);
 
     /**
@@ -136,29 +135,47 @@ contract SibbayHealthToken is StandardToken, Management {
 
   /**
    * 获取到期的锁定期余额, 内部接口
-   * who: 账户地址
+   * _who: 账户地址
    * */
-  function getlockedBalances(address who) internal
+  function getlockedBalances(address _who) internal
   {
-    uint32 tmp_date;
-    while(accounts[who].start_date != 0 &&
-          accounts[who].start_date < now)
+    uint256 tmp_date = accounts[_who].start_date;
+    uint256 tmp_value = accounts[_who].lockedElement[tmp_date].value;
+    uint256 tmp_balances = 0;
+    uint256 tmp_var;
+
+    // 锁定期到期
+    while(tmp_date != 0 &&
+          tmp_date <= now)
     {
-        accounts[who].availableBalances = accounts[who].availableBalances.add(accounts[who].lockedElement[accounts[who].start_date].value);
-        tmp_date = accounts[who].start_date;
-        accounts[who].start_date = accounts[who].lockedElement[accounts[who].start_date].next;
-        delete accounts[who].lockedElement[tmp_date];
+      // 记录到期余额
+      tmp_balances = tmp_balances.add(tmp_value);
+
+      // 记录 tmp_date
+      tmp_var = tmp_date;
+
+      // 跳到下一个锁定期
+      tmp_date = accounts[_who].lockedElement[tmp_date].next;
+      tmp_value = accounts[_who].lockedElement[tmp_date].value;
+
+      // delete 锁定期余额
+      delete accounts[_who].lockedElement[tmp_var];
     }
 
+    // 修改锁定期数据
+    accounts[_who].start_date = tmp_date;
+    accounts[_who].lockedBalances = accounts[_who].lockedBalances.sub(tmp_balances);
+    balances[_who] = balances[_who].add(tmp_balances);
+
     // 将最早和最晚时间的标志，都置0，即最初状态
-    if (accounts[who].start_date == 0)
-        accounts[who].end_date = 0;
+    if (accounts[_who].start_date == 0)
+        accounts[_who].end_date = 0;
   }
 
   /**
    * 可用余额转账，内部接口
    * _from token的拥有者
-   * _to token的接受者
+   * _to token的接收者
    * _value token的数量
    * */
   function transferAvailableBalances(
@@ -169,38 +186,38 @@ contract SibbayHealthToken is StandardToken, Management {
     internal
   {
     // 检查可用余额
-    require(_value <= accounts[_from].availableBalances);
+    require(_value <= balances[_from]);
 
     // 修改可用余额
-    accounts[_from].availableBalances = accounts[_from].availableBalances.sub(_value);
-    accounts[_to].availableBalances = accounts[_to].availableBalances.add(_value);
+    balances[_from] = balances[_from].sub(_value);
+    balances[_to] = balances[_to].add(_value);
+
+    // 触发转账事件
+    if(_from == msg.sender)
+      emit Transfer(_from, _to, _value);
+    else
+      emit TransferFrom(msg.sender, _from, _to, _value);
   }
 
   /**
-   * 总余额转账，内部接口
+   * 锁定余额转账，内部接口
    * _from token的拥有者
    * _to token的接收者
    * _value token的数量
    * */
-  function transferTotalBalances(
+  function transferLockedBalances(
     address _from,
     address _to,
     uint256 _value
   )
     internal
   {
-    // 检查总余额
+    // 检查可用余额
     require(_value <= balances[_from]);
 
-    // 修改总余额
+    // 修改可用余额和锁定余额
     balances[_from] = balances[_from].sub(_value);
-    balances[_to] = balances[_to].add(_value);
-
-    // 触发转账事件
-    if(_from == msg.sender)
-        emit Transfer(_from, _to, _value);
-    else
-        emit TransferFrom(msg.sender, _from, _to, _value);
+    accounts[_to].lockedBalances = accounts[_to].lockedBalances.add(_value);
   }
 
   /**
@@ -218,9 +235,11 @@ contract SibbayHealthToken is StandardToken, Management {
   {
     /**
      * 要求 _to 账户接收地址为特殊账户地址
+     * 这里只能为return，不能为revert
+     * 普通转账在这里返回, 不赎回ether
      * */
     if (_to != fundAccount)
-        return;
+        return ;
 
     /**
      * 没有打开赎回功能，不能向fundAccount转账
@@ -272,9 +291,6 @@ contract SibbayHealthToken is StandardToken, Management {
     // 修改可用账户余额
     transferAvailableBalances(msg.sender, _to, _value);
 
-    // 修改总账户余额
-    transferTotalBalances(msg.sender, _to,  _value);
-
     // 回传以太币
     transferEther(msg.sender, _to, _value);
 
@@ -310,14 +326,11 @@ contract SibbayHealthToken is StandardToken, Management {
     // 检查代理额度
     require(_value <= allowed[_from][msg.sender]);
 
-    // 修改可用账户余额
-    transferAvailableBalances(_from, _to, _value);
-
-    // 修改总账户余额
-    transferTotalBalances(_from, _to,  _value);
-
     // 修改代理额度
     allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_value);
+
+    // 修改可用账户余额
+    transferAvailableBalances(_from, _to, _value);
 
     return true;
   }
@@ -401,7 +414,7 @@ contract SibbayHealthToken is StandardToken, Management {
     {
       total = total.add(_values[i]);
     }
-    require(total <= accounts[msg.sender].availableBalances);
+    require(total <= balances[msg.sender]);
 
     // 一一 转账
     for (i = 0; i < _receivers.length; i ++)
@@ -414,9 +427,6 @@ contract SibbayHealthToken is StandardToken, Management {
 
       // 修改可用账户余额
       transferAvailableBalances(msg.sender, _receivers[i], _values[i]);
-
-      // 修改总账户余额
-      transferTotalBalances(msg.sender, _receivers[i], _values[i]);
     }
   }
 
@@ -451,10 +461,13 @@ contract SibbayHealthToken is StandardToken, Management {
     {
       total = total.add(_values[i]);
     }
-    require(total <= accounts[_from].availableBalances);
+    require(total <= balances[_from]);
 
     // 判断代理额度足够
     require(total <= allowed[_from][msg.sender]);
+
+    // 修改代理额度
+    allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(total);
 
     // 一一 转账
     for (i = 0; i < _receivers.length; i ++)
@@ -467,13 +480,7 @@ contract SibbayHealthToken is StandardToken, Management {
 
       // 修改可用账户余额
       transferAvailableBalances(_from, _receivers[i], _values[i]);
-
-      // 修改总账户余额
-      transferTotalBalances(_from, _receivers[i], _values[i]);
     }
-
-    // 修改代理额度
-    allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(total);
   }
 
   /**
@@ -486,7 +493,7 @@ contract SibbayHealthToken is StandardToken, Management {
   function transferByDate(
     address _receiver,
     uint256[] _values,
-    uint32[] _dates
+    uint256[] _dates
   )
     public
     whenNotPaused
@@ -514,7 +521,7 @@ contract SibbayHealthToken is StandardToken, Management {
     {
       total = total.add(_values[i]);
     }
-    require(total <= accounts[msg.sender].availableBalances);
+    require(total <= balances[msg.sender]);
 
     // 转账
     for(i = 0; i < _values.length; i ++)
@@ -535,7 +542,7 @@ contract SibbayHealthToken is StandardToken, Management {
     address _from,
     address _receiver,
     uint256[] _values,
-    uint32[] _dates
+    uint256[] _dates
   )
     public
     whenNotPaused
@@ -564,19 +571,19 @@ contract SibbayHealthToken is StandardToken, Management {
     {
       total = total.add(_values[i]);
     }
-    require(total <= accounts[_from].availableBalances);
+    require(total <= balances[_from]);
 
     // 判断代理额度足够
     require(total <= allowed[_from][msg.sender]);
+
+    // 修改代理额度
+    allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(total);
 
     // 转账
     for(i = 0; i < _values.length; i ++)
     {
       transferByDateSingle(_from, _receiver, _values[i], _dates[i]);
     }
-
-    // 修改代理额度
-    allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(total);
   }
 
   /**
@@ -590,100 +597,83 @@ contract SibbayHealthToken is StandardToken, Management {
     address _from,
     address _to,
     uint256 _value,
-    uint32 _date
+    uint256 _date
   )
     internal
   {
-    /**
-     * 到期时间比当前早，直接转入可用余额
-     * */
+    uint256 start_date = accounts[_to].start_date;
+    uint256 end_date = accounts[_to].end_date;
+    uint256 tmp_var = accounts[_to].lockedElement[_date].value;
+    uint256 tmp_date;
+
+    if (_value == 0)
+    {
+        // 不做任何处理
+        return ;
+    }
+
     if (_date <= now)
     {
+      // 到期时间比当前早，直接转入可用余额
       // 修改可用账户余额
       transferAvailableBalances(_from, _to, _value);
-
-      // 修改总账户余额
-      transferTotalBalances(_from, _to, _value);
 
       return ;
     }
 
-    // 还没有收到过锁定期转账
-    if (accounts[_to].start_date == 0)
+    if (start_date == 0)
     {
+      // 还没有收到过锁定期转账
       // 最早时间和最晚时间一样
       accounts[_to].start_date = _date;
       accounts[_to].end_date = _date;
       accounts[_to].lockedElement[_date].value = _value;
-
-      // 仅修改_from可用余额
-      accounts[_from].availableBalances = accounts[_from].availableBalances.sub(_value);
-      // 修改总账户余额
-      transferTotalBalances(_from, _to, _value);
-
-      return ;
     }
-
-    // 锁定期比最早到期的还早
-    if (_date < accounts[_to].start_date)
+    else if (tmp_var > 0)
     {
+      // 收到过相同的锁定期
+      accounts[_to].lockedElement[_date].value = tmp_var.add(_value);
+    }
+    else if (_date < start_date)
+    {
+      // 锁定期比最早到期的还早
       // 添加锁定期，并加入到锁定期列表
       accounts[_to].lockedElement[_date].value = _value;
-      accounts[_to].lockedElement[_date].next = accounts[_to].start_date;
+      accounts[_to].lockedElement[_date].next = start_date;
       accounts[_to].start_date = _date;
-
-      // 仅修改_from可用余额
-      accounts[_from].availableBalances = accounts[_from].availableBalances.sub(_value);
-      // 修改总账户余额
-      transferTotalBalances(_from, _to, _value);
-
-      return ;
     }
-
-    // 锁定期比最晚到期还晚
-    if (_date > accounts[_to].end_date)
+    else if (_date > end_date)
     {
-        accounts[_to].lockedElement[_date].value = _value;
-        accounts[_to].lockedElement[accounts[_to].end_date].next = _date;
-        accounts[_to].end_date = _date;
-
-      // 仅修改_from可用余额
-      accounts[_from].availableBalances = accounts[_from].availableBalances.sub(_value);
-      // 修改总账户余额
-      transferTotalBalances(_from, _to, _value);
-
-      return ;
-    }
-
-    /**
-     * 锁定期在 最早和最晚之间
-     * 首先找到插入的位置
-     * 然后再插入的位置插入数据
-     * */
-    uint32 tmp_date = accounts[_to].start_date;
-    while(true)
-    {
-      if((tmp_date == _date) ||
-         (accounts[_to].lockedElement[tmp_date].next == 0) ||
-         (accounts[_to].lockedElement[tmp_date].next > _date))
-          break;
-      tmp_date = accounts[_to].lockedElement[tmp_date].next;
-    }
-    if(tmp_date == _date)
-    {
-      accounts[_to].lockedElement[tmp_date].value = accounts[_to].lockedElement[tmp_date].value.add(_value);
+      // 锁定期比最晚到期还晚
+      // 添加锁定期，并加入到锁定期列表
+      accounts[_to].lockedElement[_date].value = _value;
+      accounts[_to].lockedElement[end_date].next = _date;
+      accounts[_to].end_date = _date;
     }
     else
     {
+      /**
+       * 锁定期在 最早和最晚之间
+       * 首先找到插入的位置
+       * 然后在插入的位置插入数据
+       * tmp_var 即 tmp_next
+       * */
+      tmp_date = start_date;
+      tmp_var = accounts[_to].lockedElement[tmp_date].next;
+      while(tmp_var < _date)
+      {
+        tmp_date = tmp_var;
+        tmp_var = accounts[_to].lockedElement[tmp_date].next;
+      }
+
+      // 记录锁定期并加入列表
       accounts[_to].lockedElement[_date].value = _value;
-      accounts[_to].lockedElement[_date].next = accounts[_to].lockedElement[tmp_date].next;
+      accounts[_to].lockedElement[_date].next = tmp_var;
       accounts[_to].lockedElement[tmp_date].next = _date;
     }
 
-    // 仅修改_from可用余额
-    accounts[_from].availableBalances = accounts[_from].availableBalances.sub(_value);
-    // 修改总账户余额
-    transferTotalBalances(_from, _to, _value);
+    // 锁定期转账
+    transferLockedBalances(_from, _to, _value);
 
     return ;
   }
@@ -715,9 +705,6 @@ contract SibbayHealthToken is StandardToken, Management {
       // 修改可用余额
       transferAvailableBalances(fundAccount, msg.sender, tvalue);
 
-      // 修改总余额
-      transferTotalBalances(fundAccount, msg.sender, tvalue);
-
       // 触发Buy事件
       emit Buy(msg.sender, msg.value, tvalue);
     }
@@ -726,12 +713,7 @@ contract SibbayHealthToken is StandardToken, Management {
   /**
    * sell tokens
    * */
-  function sell(uint256 _value)
-    public
-    whenOpenBuySell
-    whenNotPaused
-    whenNotFrozen(msg.sender)
-  {
+  function sell(uint256 _value) public whenOpenBuySell whenNotPaused whenNotFrozen(msg.sender) {
     require(fundAccount != address(0));
     transfer(fundAccount, _value);
   }
@@ -739,10 +721,7 @@ contract SibbayHealthToken is StandardToken, Management {
   /**
    * 设置token赎回价格
    * */
-  function setSellPrice(uint256 price)
-    public
-    whenAdministrator(msg.sender)
-  {
+  function setSellPrice(uint256 price) public whenAdministrator(msg.sender) {
     require(price > 0);
     sellPrice = price;
 
@@ -752,10 +731,7 @@ contract SibbayHealthToken is StandardToken, Management {
   /**
    * 设置token购买价格
    * */
-  function setBuyPrice(uint256 price)
-    public
-    whenAdministrator(msg.sender)
-  {
+  function setBuyPrice(uint256 price) public whenAdministrator(msg.sender) {
     require(price > 0);
     buyPrice = price;
 
@@ -765,10 +741,7 @@ contract SibbayHealthToken is StandardToken, Management {
   /**
    * 设置特殊资金账户
    * */
-  function setFundAccount(address fund)
-    public
-    onlyOwner
-  {
+  function setFundAccount(address fund) public onlyOwner {
     require(fund != address(0));
     fundAccount = fund;
 
@@ -778,11 +751,7 @@ contract SibbayHealthToken is StandardToken, Management {
   /**
    * 开启购买赎回token
    * */
-  function openBuySell()
-    public
-    whenCloseBuySell
-    onlyOwner
-  {
+  function openBuySell() public whenCloseBuySell onlyOwner {
     require(fundAccount != address(0));
     require(sellPrice > 0);
     require(buyPrice > 0);
@@ -792,23 +761,37 @@ contract SibbayHealthToken is StandardToken, Management {
   /**
    * 关闭购买赎回token
    * */
-  function closeBuySell()
-    public
-    whenOpenBuySell
-    onlyOwner
-  {
+  function closeBuySell() public whenOpenBuySell onlyOwner {
     buySellFlag = false;
   }
 
   /**
    * 获取可用余额
    * */
-  function getAvailableBalances(address _who)
-    public
-    view
-    returns (uint256)
-  {
-    return accounts[_who].availableBalances;
+  function availableBalancesOf(address _who) public view returns (uint256) {
+    return balances[_who];
+  }
+
+  /**
+   * 获取锁定余额
+   * */
+  function lockedBalanceOf(address _who) public view returns (uint256) {
+    return accounts[_who].lockedBalances;
+  }
+
+  /**
+   * 根据日期获取锁定余额
+   * 返回：锁定余额，下一个锁定期
+   * */
+  function lockedBalancesOfByDate(address _who, uint256 date) public view returns (uint256, uint256) {
+    return (accounts[_who].lockedElement[date].value, accounts[_who].lockedElement[date].next);
+  }
+
+  /**
+   * 查询账户总余额
+   * */
+  function balanceOf(address _owner) public view returns (uint256) {
+    return balances[_owner] + accounts[_owner].lockedBalances;
   }
 
 }
