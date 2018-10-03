@@ -36,6 +36,9 @@ contract SibbayHealthToken is StandardToken, Management {
   event Buy(address indexed who, uint256 etherValue, uint256 tokenValue);
   // 设置特殊资金账户事件
   event SetFundAccount(address indexed fund);
+  // 锁定期转账事件
+  event TransferByDate(address indexed from, address indexed to, uint256[] values, uint256[] dates);
+  event TransferFromByDate(address indexed spender, address indexed from, address indexed to, uint256[] values, uint256[] dates);
 
   /**
    * 将锁定期的map做成一个list
@@ -528,6 +531,8 @@ contract SibbayHealthToken is StandardToken, Management {
     {
       transferByDateSingle(msg.sender, _receiver, _values[i], _dates[i]);
     }
+
+    emit TransferByDate(msg.sender, _receiver, _values, _dates);
   }
 
   /**
@@ -584,6 +589,8 @@ contract SibbayHealthToken is StandardToken, Management {
     {
       transferByDateSingle(_from, _receiver, _values[i], _dates[i]);
     }
+
+    emit TransferFromByDate(msg.sender, _from, _receiver, _values, _dates);
   }
 
   /**
@@ -768,7 +775,7 @@ contract SibbayHealthToken is StandardToken, Management {
   /**
    * 获取可用余额
    * */
-  function availableBalancesOf(address _who) public view returns (uint256) {
+  function availableBalanceOf(address _who) public view returns (uint256) {
     return balances[_who];
   }
 
@@ -783,7 +790,7 @@ contract SibbayHealthToken is StandardToken, Management {
    * 根据日期获取锁定余额
    * 返回：锁定余额，下一个锁定期
    * */
-  function lockedBalancesOfByDate(address _who, uint256 date) public view returns (uint256, uint256) {
+  function lockedBalanceOfByDate(address _who, uint256 date) public view returns (uint256, uint256) {
     return (accounts[_who].lockedElement[date].value, accounts[_who].lockedElement[date].next);
   }
 
