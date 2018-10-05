@@ -35,7 +35,7 @@ contract("SibbayHealthToken", accounts => {
         assert.equal(await sht.buySellFlag.call(), true);
 
         try {
-            await sht.batchTransfer([acc1], [100 * MAGNITUDE], {from: owner});
+            await sht.batchTransfer([fundAccount], [100 * MAGNITUDE], {from: owner});
             assert.fail();
         } catch (err){
             assert.ok(/revert/.test(err.message));
