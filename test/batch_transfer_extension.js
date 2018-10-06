@@ -3,7 +3,7 @@ var SibbayHealthToken = artifacts.require("./SibbayHealthToken.sol");
 const { increaseTime } = require("./utils/increaseTime.js");
 
 contract("SibbayHealthToken", accounts => {
-    const [owner, fundAccount, acc1, acc2, acc3] = accounts;
+    const [owner, fundAccount, acc1, acc2, acc3, acc4] = accounts;
     const MAGNITUDE = 10 ** 18;
     const DAY = 3600 * 24;
     // sell price 0.001 ether
@@ -35,7 +35,7 @@ contract("SibbayHealthToken", accounts => {
         assert.equal(await sht.buySellFlag.call(), true);
 
         try {
-            await sht.batchTransfer([acc1], [100 * MAGNITUDE], {from: owner});
+            await sht.batchTransfer([owner], [100 * MAGNITUDE], {from: acc1});
             assert.fail();
         } catch (err){
             assert.ok(/revert/.test(err.message));
