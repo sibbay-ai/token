@@ -270,24 +270,24 @@
       "type": "function"
     }
   ],
-  "bytecode": "0x608060405260008060146101000a81548160ff02191690831515021790555034801561002a57600080fd5b50336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506001600260008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff021916908315150217905550610c05806100f36000396000f3006080604052600436106100ba576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806315dfaccd146100bf57806327304dfd146101025780633f4ba83a1461015d5780635c975abb146101745780636a8269b4146101a3578063715018a6146101fe5780638456cb59146102155780638da5cb5b1461022c578063b5632cec14610283578063c9991176146102c6578063d6b5082f14610309578063f2fde38b1461034c575b600080fd5b3480156100cb57600080fd5b50610100600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061038f565b005b34801561010e57600080fd5b50610143600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061047f565b604051808215151515815260200191505060405180910390f35b34801561016957600080fd5b5061017261049f565b005b34801561018057600080fd5b5061018961055d565b604051808215151515815260200191505060405180910390f35b3480156101af57600080fd5b506101e4600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610570565b604051808215151515815260200191505060405180910390f35b34801561020a57600080fd5b50610213610590565b005b34801561022157600080fd5b5061022a610692565b005b34801561023857600080fd5b50610241610752565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34801561028f57600080fd5b506102c4600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610777565b005b3480156102d257600080fd5b50610307600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061087d565b005b34801561031557600080fd5b5061034a600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610976565b005b34801561035857600080fd5b5061038d600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610a84565b005b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156103ea57600080fd5b600260008273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81549060ff02191690558073ffffffffffffffffffffffffffffffffffffffff167fa5afe14290b6481c42b0941584b7c9093cc3d4cf9dc885904881f063e012e31360405160405180910390a250565b60026020528060005260406000206000915054906101000a900460ff1681565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156104fa57600080fd5b600060149054906101000a900460ff16151561051557600080fd5b60008060146101000a81548160ff0219169083151502179055507f7805862f689e2f13df9f062ff482ad3ad112aca9e0847911ed832e158c525b3360405160405180910390a1565b600060149054906101000a900460ff1681565b60016020528060005260406000206000915054906101000a900460ff1681565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156105eb57600080fd5b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167ff8df31144d9c2f0f6b59d69b8b98abd5459d07f2742c4df920b25aae33c6482060405160405180910390a260008060006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156106ed57600080fd5b600060149054906101000a900460ff1615151561070957600080fd5b6001600060146101000a81548160ff0219169083151502179055507f6985a02210a168e66602d3235cb6db0e70f92b3ba4d376a33c0f3d9434bff62560405160405180910390a1565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b33600260008273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff1615156107d057600080fd5b600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81549060ff02191690558173ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff167fa8ca4c1e2e1ebc26164949943a221a5199219743fcc8533fdb005f039ed4785b60405160405180910390a35050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156108d857600080fd5b6001600260008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055508073ffffffffffffffffffffffffffffffffffffffff167f6e5eedde7d0d690d55dea362660be04ef1eb36252e48817545afb1ae6b245a4060405160405180910390a250565b33600260008273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff1615156109cf57600080fd5b60018060008473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055508173ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff167f2ae3d8beb1529a220b658a87b905671775be575d98eb1c786b4b9da45a2d7aea60405160405180910390a35050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610adf57600080fd5b600073ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff1614151515610b1b57600080fd5b8073ffffffffffffffffffffffffffffffffffffffff166000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a3806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550505600a165627a7a72305820d20fd46128a6b5c4430d35f27e5f8f15654792505457eaebc2cefcad5cdaf9e20029",
-  "deployedBytecode": "0x6080604052600436106100ba576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806315dfaccd146100bf57806327304dfd146101025780633f4ba83a1461015d5780635c975abb146101745780636a8269b4146101a3578063715018a6146101fe5780638456cb59146102155780638da5cb5b1461022c578063b5632cec14610283578063c9991176146102c6578063d6b5082f14610309578063f2fde38b1461034c575b600080fd5b3480156100cb57600080fd5b50610100600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061038f565b005b34801561010e57600080fd5b50610143600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061047f565b604051808215151515815260200191505060405180910390f35b34801561016957600080fd5b5061017261049f565b005b34801561018057600080fd5b5061018961055d565b604051808215151515815260200191505060405180910390f35b3480156101af57600080fd5b506101e4600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610570565b604051808215151515815260200191505060405180910390f35b34801561020a57600080fd5b50610213610590565b005b34801561022157600080fd5b5061022a610692565b005b34801561023857600080fd5b50610241610752565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34801561028f57600080fd5b506102c4600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610777565b005b3480156102d257600080fd5b50610307600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061087d565b005b34801561031557600080fd5b5061034a600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610976565b005b34801561035857600080fd5b5061038d600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610a84565b005b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156103ea57600080fd5b600260008273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81549060ff02191690558073ffffffffffffffffffffffffffffffffffffffff167fa5afe14290b6481c42b0941584b7c9093cc3d4cf9dc885904881f063e012e31360405160405180910390a250565b60026020528060005260406000206000915054906101000a900460ff1681565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156104fa57600080fd5b600060149054906101000a900460ff16151561051557600080fd5b60008060146101000a81548160ff0219169083151502179055507f7805862f689e2f13df9f062ff482ad3ad112aca9e0847911ed832e158c525b3360405160405180910390a1565b600060149054906101000a900460ff1681565b60016020528060005260406000206000915054906101000a900460ff1681565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156105eb57600080fd5b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167ff8df31144d9c2f0f6b59d69b8b98abd5459d07f2742c4df920b25aae33c6482060405160405180910390a260008060006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156106ed57600080fd5b600060149054906101000a900460ff1615151561070957600080fd5b6001600060146101000a81548160ff0219169083151502179055507f6985a02210a168e66602d3235cb6db0e70f92b3ba4d376a33c0f3d9434bff62560405160405180910390a1565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b33600260008273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff1615156107d057600080fd5b600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81549060ff02191690558173ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff167fa8ca4c1e2e1ebc26164949943a221a5199219743fcc8533fdb005f039ed4785b60405160405180910390a35050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156108d857600080fd5b6001600260008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055508073ffffffffffffffffffffffffffffffffffffffff167f6e5eedde7d0d690d55dea362660be04ef1eb36252e48817545afb1ae6b245a4060405160405180910390a250565b33600260008273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff1615156109cf57600080fd5b60018060008473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055508173ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff167f2ae3d8beb1529a220b658a87b905671775be575d98eb1c786b4b9da45a2d7aea60405160405180910390a35050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610adf57600080fd5b600073ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff1614151515610b1b57600080fd5b8073ffffffffffffffffffffffffffffffffffffffff166000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a3806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550505600a165627a7a72305820d20fd46128a6b5c4430d35f27e5f8f15654792505457eaebc2cefcad5cdaf9e20029",
-  "sourceMap": "135:2468:3:-;;;707:5;686:26;;;;;;;;;;;;;;;;;;;;872:55;8:9:-1;5:2;;;30:1;27;20:12;5:2;872:55:3;575:10:4;567:5;;:18;;;;;;;;;;;;;;;;;;918:4:3;899:9;:16;909:5;;;;;;;;;;;899:16;;;;;;;;;;;;;;;;:23;;;;;;;;;;;;;;;;;;135:2468;;;;;;",
-  "deployedSourceMap": "135:2468:3:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2481:120;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2481:120:3;;;;;;;;;;;;;;;;;;;;;;;;;;;;762:41;;8:9:-1;5:2;;;30:1;27;20:12;5:2;762:41:3;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1847:92;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1847:92:3;;;;;;686:26;;8:9:-1;5:2;;;30:1;27;20:12;5:2;686:26:3;;;;;;;;;;;;;;;;;;;;;;;;;;;716:42;;8:9:-1;5:2;;;30:1;27;20:12;5:2;716:42:3;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1162:111:4;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1162:111:4;;;;;;1717:90:3;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1717:90:3;;;;;;238:20:4;;8:9:-1;5:2;;;30:1;27;20:12;5:2;238:20:4;;;;;;;;;;;;;;;;;;;;;;;;;;;2148:135:3;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2148:135:3;;;;;;;;;;;;;;;;;;;;;;;;;;;;2322:120;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2322:120:3;;;;;;;;;;;;;;;;;;;;;;;;;;;;1975:131;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1975:131:3;;;;;;;;;;;;;;;;;;;;;;;;;;;;898:174:4;;8:9:-1;5:2;;;30:1;27;20:12;5:2;898:174:4;;;;;;;;;;;;;;;;;;;;;;;;;;;;2481:120:3;719:5:4;;;;;;;;;;;705:19;;:10;:19;;;697:28;;;;;;;;2550:9:3;:14;2560:3;2550:14;;;;;;;;;;;;;;;;2543:21;;;;;;;;;;;2592:3;2575:21;;;;;;;;;;;;2481:120;:::o;762:41::-;;;;;;;;;;;;;;;;;;;;;;:::o;1847:92::-;719:5:4;;;;;;;;;;;705:19;;:10;:19;;;697:28;;;;;;;;1138:6:3;;;;;;;;;;;1130:15;;;;;;;;1909:5;1900:6;;:14;;;;;;;;;;;;;;;;;;1925:9;;;;;;;;;;1847:92::o;686:26::-;;;;;;;;;;;;;:::o;716:42::-;;;;;;;;;;;;;;;;;;;;;;:::o;1162:111:4:-;719:5;;;;;;;;;;;705:19;;:10;:19;;;697:28;;;;;;;;1238:5;;;;;;;;;;;1219:25;;;;;;;;;;;;1266:1;1250:5;;:18;;;;;;;;;;;;;;;;;;1162:111::o;1717:90:3:-;719:5:4;;;;;;;;;;;705:19;;:10;:19;;;697:28;;;;;;;;1028:6:3;;;;;;;;;;;1027:7;1019:16;;;;;;;;1780:4;1771:6;;:13;;;;;;;;;;;;;;;;;;1795:7;;;;;;;;;;1717:90::o;238:20:4:-;;;;;;;;;;;;;:::o;2148:135:3:-;2196:10;1524:9;:14;1534:3;1524:14;;;;;;;;;;;;;;;;;;;;;;;;;1516:23;;;;;;;;2228:10;:15;2239:3;2228:15;;;;;;;;;;;;;;;;2221:22;;;;;;;;;;;2274:3;2254:24;;2262:10;2254:24;;;;;;;;;;;;2148:135;;:::o;2322:120::-;719:5:4;;;;;;;;;;;705:19;;:10;:19;;;697:28;;;;;;;;2401:4:3;2384:9;:14;2394:3;2384:14;;;;;;;;;;;;;;;;:21;;;;;;;;;;;;;;;;;;2433:3;2416:21;;;;;;;;;;;;2322:120;:::o;1975:131::-;2021:10;1524:9;:14;1534:3;1524:14;;;;;;;;;;;;;;;;;;;;;;;;;1516:23;;;;;;;;2064:4;2046:10;:15;2057:3;2046:15;;;;;;;;;;;;;;;;:22;;;;;;;;;;;;;;;;;;2097:3;2079:22;;2085:10;2079:22;;;;;;;;;;;;1975:131;;:::o;898:174:4:-;719:5;;;;;;;;;;;705:19;;:10;:19;;;697:28;;;;;;;;994:1;974:22;;:8;:22;;;;966:31;;;;;;;;1036:8;1008:37;;1029:5;;;;;;;;;;;1008:37;;;;;;;;;;;;1059:8;1051:5;;:16;;;;;;;;;;;;;;;;;;898:174;:::o",
+  "bytecode": "0x608060405260008060146101000a81548160ff02191690831515021790555034801561002a57600080fd5b50336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506001600260008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff021916908315150217905550610c05806100f36000396000f3006080604052600436106100ba576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806315dfaccd146100bf57806327304dfd146101025780633f4ba83a1461015d5780635c975abb146101745780636a8269b4146101a3578063715018a6146101fe5780638456cb59146102155780638da5cb5b1461022c578063b5632cec14610283578063c9991176146102c6578063d6b5082f14610309578063f2fde38b1461034c575b600080fd5b3480156100cb57600080fd5b50610100600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061038f565b005b34801561010e57600080fd5b50610143600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061047f565b604051808215151515815260200191505060405180910390f35b34801561016957600080fd5b5061017261049f565b005b34801561018057600080fd5b5061018961055d565b604051808215151515815260200191505060405180910390f35b3480156101af57600080fd5b506101e4600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610570565b604051808215151515815260200191505060405180910390f35b34801561020a57600080fd5b50610213610590565b005b34801561022157600080fd5b5061022a610692565b005b34801561023857600080fd5b50610241610752565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34801561028f57600080fd5b506102c4600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610777565b005b3480156102d257600080fd5b50610307600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061087d565b005b34801561031557600080fd5b5061034a600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610976565b005b34801561035857600080fd5b5061038d600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610a84565b005b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156103ea57600080fd5b600260008273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81549060ff02191690558073ffffffffffffffffffffffffffffffffffffffff167fa5afe14290b6481c42b0941584b7c9093cc3d4cf9dc885904881f063e012e31360405160405180910390a250565b60026020528060005260406000206000915054906101000a900460ff1681565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156104fa57600080fd5b600060149054906101000a900460ff16151561051557600080fd5b60008060146101000a81548160ff0219169083151502179055507f7805862f689e2f13df9f062ff482ad3ad112aca9e0847911ed832e158c525b3360405160405180910390a1565b600060149054906101000a900460ff1681565b60016020528060005260406000206000915054906101000a900460ff1681565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156105eb57600080fd5b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167ff8df31144d9c2f0f6b59d69b8b98abd5459d07f2742c4df920b25aae33c6482060405160405180910390a260008060006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156106ed57600080fd5b600060149054906101000a900460ff1615151561070957600080fd5b6001600060146101000a81548160ff0219169083151502179055507f6985a02210a168e66602d3235cb6db0e70f92b3ba4d376a33c0f3d9434bff62560405160405180910390a1565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b33600260008273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff1615156107d057600080fd5b600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81549060ff02191690558173ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff167fa8ca4c1e2e1ebc26164949943a221a5199219743fcc8533fdb005f039ed4785b60405160405180910390a35050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156108d857600080fd5b6001600260008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055508073ffffffffffffffffffffffffffffffffffffffff167f6e5eedde7d0d690d55dea362660be04ef1eb36252e48817545afb1ae6b245a4060405160405180910390a250565b33600260008273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff1615156109cf57600080fd5b60018060008473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055508173ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff167f2ae3d8beb1529a220b658a87b905671775be575d98eb1c786b4b9da45a2d7aea60405160405180910390a35050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610adf57600080fd5b600073ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff1614151515610b1b57600080fd5b8073ffffffffffffffffffffffffffffffffffffffff166000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a3806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550505600a165627a7a7230582072f7b5cf1d28db7f5c118d288775cebafbcbdb692e25d718705a51f606d8751b0029",
+  "deployedBytecode": "0x6080604052600436106100ba576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806315dfaccd146100bf57806327304dfd146101025780633f4ba83a1461015d5780635c975abb146101745780636a8269b4146101a3578063715018a6146101fe5780638456cb59146102155780638da5cb5b1461022c578063b5632cec14610283578063c9991176146102c6578063d6b5082f14610309578063f2fde38b1461034c575b600080fd5b3480156100cb57600080fd5b50610100600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061038f565b005b34801561010e57600080fd5b50610143600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061047f565b604051808215151515815260200191505060405180910390f35b34801561016957600080fd5b5061017261049f565b005b34801561018057600080fd5b5061018961055d565b604051808215151515815260200191505060405180910390f35b3480156101af57600080fd5b506101e4600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610570565b604051808215151515815260200191505060405180910390f35b34801561020a57600080fd5b50610213610590565b005b34801561022157600080fd5b5061022a610692565b005b34801561023857600080fd5b50610241610752565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34801561028f57600080fd5b506102c4600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610777565b005b3480156102d257600080fd5b50610307600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061087d565b005b34801561031557600080fd5b5061034a600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610976565b005b34801561035857600080fd5b5061038d600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610a84565b005b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156103ea57600080fd5b600260008273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81549060ff02191690558073ffffffffffffffffffffffffffffffffffffffff167fa5afe14290b6481c42b0941584b7c9093cc3d4cf9dc885904881f063e012e31360405160405180910390a250565b60026020528060005260406000206000915054906101000a900460ff1681565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156104fa57600080fd5b600060149054906101000a900460ff16151561051557600080fd5b60008060146101000a81548160ff0219169083151502179055507f7805862f689e2f13df9f062ff482ad3ad112aca9e0847911ed832e158c525b3360405160405180910390a1565b600060149054906101000a900460ff1681565b60016020528060005260406000206000915054906101000a900460ff1681565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156105eb57600080fd5b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167ff8df31144d9c2f0f6b59d69b8b98abd5459d07f2742c4df920b25aae33c6482060405160405180910390a260008060006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156106ed57600080fd5b600060149054906101000a900460ff1615151561070957600080fd5b6001600060146101000a81548160ff0219169083151502179055507f6985a02210a168e66602d3235cb6db0e70f92b3ba4d376a33c0f3d9434bff62560405160405180910390a1565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b33600260008273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff1615156107d057600080fd5b600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81549060ff02191690558173ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff167fa8ca4c1e2e1ebc26164949943a221a5199219743fcc8533fdb005f039ed4785b60405160405180910390a35050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156108d857600080fd5b6001600260008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055508073ffffffffffffffffffffffffffffffffffffffff167f6e5eedde7d0d690d55dea362660be04ef1eb36252e48817545afb1ae6b245a4060405160405180910390a250565b33600260008273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff1615156109cf57600080fd5b60018060008473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055508173ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff167f2ae3d8beb1529a220b658a87b905671775be575d98eb1c786b4b9da45a2d7aea60405160405180910390a35050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610adf57600080fd5b600073ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff1614151515610b1b57600080fd5b8073ffffffffffffffffffffffffffffffffffffffff166000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a3806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550505600a165627a7a7230582072f7b5cf1d28db7f5c118d288775cebafbcbdb692e25d718705a51f606d8751b0029",
+  "sourceMap": "135:2468:3:-;;;707:5;686:26;;;;;;;;;;;;;;;;;;;;872:55;8:9:-1;5:2;;;30:1;27;20:12;5:2;872:55:3;575:10:5;567:5;;:18;;;;;;;;;;;;;;;;;;918:4:3;899:9;:16;909:5;;;;;;;;;;;899:16;;;;;;;;;;;;;;;;:23;;;;;;;;;;;;;;;;;;135:2468;;;;;;",
+  "deployedSourceMap": "135:2468:3:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2481:120;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2481:120:3;;;;;;;;;;;;;;;;;;;;;;;;;;;;762:41;;8:9:-1;5:2;;;30:1;27;20:12;5:2;762:41:3;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1847:92;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1847:92:3;;;;;;686:26;;8:9:-1;5:2;;;30:1;27;20:12;5:2;686:26:3;;;;;;;;;;;;;;;;;;;;;;;;;;;716:42;;8:9:-1;5:2;;;30:1;27;20:12;5:2;716:42:3;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1162:111:5;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1162:111:5;;;;;;1717:90:3;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1717:90:3;;;;;;238:20:5;;8:9:-1;5:2;;;30:1;27;20:12;5:2;238:20:5;;;;;;;;;;;;;;;;;;;;;;;;;;;2148:135:3;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2148:135:3;;;;;;;;;;;;;;;;;;;;;;;;;;;;2322:120;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2322:120:3;;;;;;;;;;;;;;;;;;;;;;;;;;;;1975:131;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1975:131:3;;;;;;;;;;;;;;;;;;;;;;;;;;;;898:174:5;;8:9:-1;5:2;;;30:1;27;20:12;5:2;898:174:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;2481:120:3;719:5:5;;;;;;;;;;;705:19;;:10;:19;;;697:28;;;;;;;;2550:9:3;:14;2560:3;2550:14;;;;;;;;;;;;;;;;2543:21;;;;;;;;;;;2592:3;2575:21;;;;;;;;;;;;2481:120;:::o;762:41::-;;;;;;;;;;;;;;;;;;;;;;:::o;1847:92::-;719:5:5;;;;;;;;;;;705:19;;:10;:19;;;697:28;;;;;;;;1138:6:3;;;;;;;;;;;1130:15;;;;;;;;1909:5;1900:6;;:14;;;;;;;;;;;;;;;;;;1925:9;;;;;;;;;;1847:92::o;686:26::-;;;;;;;;;;;;;:::o;716:42::-;;;;;;;;;;;;;;;;;;;;;;:::o;1162:111:5:-;719:5;;;;;;;;;;;705:19;;:10;:19;;;697:28;;;;;;;;1238:5;;;;;;;;;;;1219:25;;;;;;;;;;;;1266:1;1250:5;;:18;;;;;;;;;;;;;;;;;;1162:111::o;1717:90:3:-;719:5:5;;;;;;;;;;;705:19;;:10;:19;;;697:28;;;;;;;;1028:6:3;;;;;;;;;;;1027:7;1019:16;;;;;;;;1780:4;1771:6;;:13;;;;;;;;;;;;;;;;;;1795:7;;;;;;;;;;1717:90::o;238:20:5:-;;;;;;;;;;;;;:::o;2148:135:3:-;2196:10;1524:9;:14;1534:3;1524:14;;;;;;;;;;;;;;;;;;;;;;;;;1516:23;;;;;;;;2228:10;:15;2239:3;2228:15;;;;;;;;;;;;;;;;2221:22;;;;;;;;;;;2274:3;2254:24;;2262:10;2254:24;;;;;;;;;;;;2148:135;;:::o;2322:120::-;719:5:5;;;;;;;;;;;705:19;;:10;:19;;;697:28;;;;;;;;2401:4:3;2384:9;:14;2394:3;2384:14;;;;;;;;;;;;;;;;:21;;;;;;;;;;;;;;;;;;2433:3;2416:21;;;;;;;;;;;;2322:120;:::o;1975:131::-;2021:10;1524:9;:14;1534:3;1524:14;;;;;;;;;;;;;;;;;;;;;;;;;1516:23;;;;;;;;2064:4;2046:10;:15;2057:3;2046:15;;;;;;;;;;;;;;;;:22;;;;;;;;;;;;;;;;;;2097:3;2079:22;;2085:10;2079:22;;;;;;;;;;;;1975:131;;:::o;898:174:5:-;719:5;;;;;;;;;;;705:19;;:10;:19;;;697:28;;;;;;;;994:1;974:22;;:8;:22;;;;966:31;;;;;;;;1036:8;1008:37;;1029:5;;;;;;;;;;;1008:37;;;;;;;;;;;;1059:8;1051:5;;:16;;;;;;;;;;;;;;;;;;898:174;:::o",
   "source": "pragma solidity ^0.4.24;\n\n\nimport \"./Ownable.sol\";\n\n\n/**\n * 管理合约\n * 功能：\n * 暂停合约\n * 冻结账户\n * 管理员\n */\ncontract Management is Ownable {\n\n  /**\n   * 暂停和取消暂停事件\n   * */\n  event Pause();\n  event Unpause();\n\n  /**\n   * 冻结和取消冻结事件\n   * */\n  event Froze(address indexed admin, address indexed who);\n  event Unfroze(address indexed admin, address indexed who);\n\n  /**\n   * 增加和删除管理员事件\n   * */\n  event AddAdministrator(address indexed admin);\n  event DelAdministrator(address indexed admin);\n\n  /**\n   * 合约暂停标志, True 暂停，false 未暂停\n   * 合约冻结账户\n   * 合约管理员\n   * */\n  bool public paused = false;\n  mapping(address => bool) public frozenList;\n  mapping(address => bool) public adminList;\n\n  /**\n   * 构造函数\n   * 初始化owner是管理员\n   * */\n  constructor() public {\n    adminList[owner] = true;\n  }\n\n  /**\n   * modifier 要求合约正在运行状态\n   */\n  modifier whenNotPaused() {\n    require(!paused);\n    _;\n  }\n\n  /**\n   * modifier 要求合约暂停状态\n   */\n  modifier whenPaused() {\n    require(paused);\n    _;\n  }\n\n  /**\n   * modifier 要求账户未冻结状态\n   * */\n  modifier whenNotFrozen(address who) {\n    require(!frozenList[who]);\n    _;\n  }\n\n  /**\n   * modifier 要求账户冻结状态\n   * */\n  modifier whenFrozen(address who) {\n    require(frozenList[who]);\n    _;\n  }\n\n  /**\n   * 要求是管理员\n   * */\n  modifier whenAdministrator(address who) {\n    require(adminList[who]);\n    _;\n  }\n\n  /**\n   * 要求不是管理员\n   * */\n  modifier whenNotAdministrator(address who) {\n    require(!adminList[who]);\n    _;\n  }\n\n  /**\n   * * 暂停合约\n   */\n  function pause() onlyOwner whenNotPaused public {\n    paused = true;\n    emit Pause();\n  }\n\n  /**\n   * 取消暂停合约\n   */\n  function unpause() onlyOwner whenPaused public {\n    paused = false;\n    emit Unpause();\n  }\n\n  /**\n   * 冻结账户\n   * */\n  function froze(address who) whenAdministrator(msg.sender) public {\n    frozenList[who] = true;\n    emit Froze(msg.sender, who);\n  }\n\n  /**\n   * 取消冻结账户\n   * */\n  function unfroze(address who) whenAdministrator(msg.sender) public {\n    delete frozenList[who];\n    emit Unfroze(msg.sender, who);\n  }\n\n  /**\n   * 添加管理员\n   * */\n  function addAdministrator(address who) onlyOwner public {\n    adminList[who] = true;\n    emit AddAdministrator(who);\n  }\n\n  /**\n   * 删除管理员\n   * */\n  function delAdministrator(address who) onlyOwner public {\n    delete adminList[who];\n    emit DelAdministrator(who);\n  }\n}\n",
-  "sourcePath": "/Users/lifei/workspaces/sibbay-ai/token/contracts/Management.sol",
+  "sourcePath": "/home/henry/learning/git/token/contracts/Management.sol",
   "ast": {
-    "absolutePath": "/Users/lifei/workspaces/sibbay-ai/token/contracts/Management.sol",
+    "absolutePath": "/home/henry/learning/git/token/contracts/Management.sol",
     "exportedSymbols": {
       "Management": [
-        336
+        324
       ]
     },
-    "id": 337,
+    "id": 325,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 112,
+        "id": 100,
         "literals": [
           "solidity",
           "^",
@@ -298,12 +298,12 @@
         "src": "0:24:3"
       },
       {
-        "absolutePath": "/Users/lifei/workspaces/sibbay-ai/token/contracts/Ownable.sol",
+        "absolutePath": "/home/henry/learning/git/token/contracts/Ownable.sol",
         "file": "./Ownable.sol",
-        "id": 113,
+        "id": 101,
         "nodeType": "ImportDirective",
-        "scope": 337,
-        "sourceUnit": 413,
+        "scope": 325,
+        "sourceUnit": 458,
         "src": "27:23:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -314,31 +314,31 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 114,
+              "id": 102,
               "name": "Ownable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 412,
+              "referencedDeclaration": 457,
               "src": "158:7:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Ownable_$412",
+                "typeIdentifier": "t_contract$_Ownable_$457",
                 "typeString": "contract Ownable"
               }
             },
-            "id": 115,
+            "id": 103,
             "nodeType": "InheritanceSpecifier",
             "src": "158:7:3"
           }
         ],
         "contractDependencies": [
-          412
+          457
         ],
         "contractKind": "contract",
         "documentation": "管理合约\n功能：\n暂停合约\n冻结账户\n管理员",
         "fullyImplemented": true,
-        "id": 336,
+        "id": 324,
         "linearizedBaseContracts": [
-          336,
-          412
+          324,
+          457
         ],
         "name": "Management",
         "nodeType": "ContractDefinition",
@@ -346,11 +346,11 @@
           {
             "anonymous": false,
             "documentation": "暂停和取消暂停事件\n",
-            "id": 117,
+            "id": 105,
             "name": "Pause",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 116,
+              "id": 104,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "229:2:3"
@@ -360,11 +360,11 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 119,
+            "id": 107,
             "name": "Unpause",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 118,
+              "id": 106,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "248:2:3"
@@ -374,20 +374,20 @@
           {
             "anonymous": false,
             "documentation": "冻结和取消冻结事件\n",
-            "id": 125,
+            "id": 113,
             "name": "Froze",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 124,
+              "id": 112,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 121,
+                  "id": 109,
                   "indexed": true,
                   "name": "admin",
                   "nodeType": "VariableDeclaration",
-                  "scope": 125,
+                  "scope": 113,
                   "src": "314:21:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -396,7 +396,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 120,
+                    "id": 108,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "314:7:3",
@@ -410,11 +410,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 123,
+                  "id": 111,
                   "indexed": true,
                   "name": "who",
                   "nodeType": "VariableDeclaration",
-                  "scope": 125,
+                  "scope": 113,
                   "src": "337:19:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -423,7 +423,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 122,
+                    "id": 110,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "337:7:3",
@@ -443,20 +443,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 131,
+            "id": 119,
             "name": "Unfroze",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 130,
+              "id": 118,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 127,
+                  "id": 115,
                   "indexed": true,
                   "name": "admin",
                   "nodeType": "VariableDeclaration",
-                  "scope": 131,
+                  "scope": 119,
                   "src": "375:21:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -465,7 +465,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 126,
+                    "id": 114,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "375:7:3",
@@ -479,11 +479,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 129,
+                  "id": 117,
                   "indexed": true,
                   "name": "who",
                   "nodeType": "VariableDeclaration",
-                  "scope": 131,
+                  "scope": 119,
                   "src": "398:19:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -492,7 +492,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 128,
+                    "id": 116,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "398:7:3",
@@ -512,20 +512,20 @@
           {
             "anonymous": false,
             "documentation": "增加和删除管理员事件\n",
-            "id": 135,
+            "id": 123,
             "name": "AddAdministrator",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 134,
+              "id": 122,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 133,
+                  "id": 121,
                   "indexed": true,
                   "name": "admin",
                   "nodeType": "VariableDeclaration",
-                  "scope": 135,
+                  "scope": 123,
                   "src": "496:21:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -534,7 +534,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 132,
+                    "id": 120,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "496:7:3",
@@ -554,20 +554,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 139,
+            "id": 127,
             "name": "DelAdministrator",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 138,
+              "id": 126,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 137,
+                  "id": 125,
                   "indexed": true,
                   "name": "admin",
                   "nodeType": "VariableDeclaration",
-                  "scope": 139,
+                  "scope": 127,
                   "src": "545:21:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -576,7 +576,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 136,
+                    "id": 124,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "545:7:3",
@@ -595,10 +595,10 @@
           },
           {
             "constant": false,
-            "id": 142,
+            "id": 130,
             "name": "paused",
             "nodeType": "VariableDeclaration",
-            "scope": 336,
+            "scope": 324,
             "src": "686:26:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -607,7 +607,7 @@
               "typeString": "bool"
             },
             "typeName": {
-              "id": 140,
+              "id": 128,
               "name": "bool",
               "nodeType": "ElementaryTypeName",
               "src": "686:4:3",
@@ -619,7 +619,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "66616c7365",
-              "id": 141,
+              "id": 129,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -638,10 +638,10 @@
           },
           {
             "constant": false,
-            "id": 146,
+            "id": 134,
             "name": "frozenList",
             "nodeType": "VariableDeclaration",
-            "scope": 336,
+            "scope": 324,
             "src": "716:42:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -650,9 +650,9 @@
               "typeString": "mapping(address => bool)"
             },
             "typeName": {
-              "id": 145,
+              "id": 133,
               "keyType": {
-                "id": 143,
+                "id": 131,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "724:7:3",
@@ -668,7 +668,7 @@
                 "typeString": "mapping(address => bool)"
               },
               "valueType": {
-                "id": 144,
+                "id": 132,
                 "name": "bool",
                 "nodeType": "ElementaryTypeName",
                 "src": "735:4:3",
@@ -683,10 +683,10 @@
           },
           {
             "constant": false,
-            "id": 150,
+            "id": 138,
             "name": "adminList",
             "nodeType": "VariableDeclaration",
-            "scope": 336,
+            "scope": 324,
             "src": "762:41:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -695,9 +695,9 @@
               "typeString": "mapping(address => bool)"
             },
             "typeName": {
-              "id": 149,
+              "id": 137,
               "keyType": {
-                "id": 147,
+                "id": 135,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "770:7:3",
@@ -713,7 +713,7 @@
                 "typeString": "mapping(address => bool)"
               },
               "valueType": {
-                "id": 148,
+                "id": 136,
                 "name": "bool",
                 "nodeType": "ElementaryTypeName",
                 "src": "781:4:3",
@@ -728,14 +728,14 @@
           },
           {
             "body": {
-              "id": 159,
+              "id": 147,
               "nodeType": "Block",
               "src": "893:34:3",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 157,
+                    "id": 145,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -744,25 +744,25 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 153,
+                        "id": 141,
                         "name": "adminList",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 150,
+                        "referencedDeclaration": 138,
                         "src": "899:9:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                           "typeString": "mapping(address => bool)"
                         }
                       },
-                      "id": 155,
+                      "id": 143,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "id": 154,
+                        "id": 142,
                         "name": "owner",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 340,
+                        "referencedDeclaration": 385,
                         "src": "909:5:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -785,7 +785,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "74727565",
-                      "id": 156,
+                      "id": 144,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -806,14 +806,14 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 158,
+                  "id": 146,
                   "nodeType": "ExpressionStatement",
                   "src": "899:23:3"
                 }
               ]
             },
             "documentation": "构造函数\n初始化owner是管理员\n",
-            "id": 160,
+            "id": 148,
             "implemented": true,
             "isConstructor": true,
             "isDeclaredConst": false,
@@ -821,19 +821,19 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 151,
+              "id": 139,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "883:2:3"
             },
             "payable": false,
             "returnParameters": {
-              "id": 152,
+              "id": 140,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "893:0:3"
             },
-            "scope": 336,
+            "scope": 324,
             "src": "872:55:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -841,7 +841,7 @@
           },
           {
             "body": {
-              "id": 168,
+              "id": 156,
               "nodeType": "Block",
               "src": "1013:34:3",
               "statements": [
@@ -851,7 +851,7 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 164,
+                        "id": 152,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -862,11 +862,11 @@
                         "src": "1027:7:3",
                         "subExpression": {
                           "argumentTypes": null,
-                          "id": 163,
+                          "id": 151,
                           "name": "paused",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 142,
+                          "referencedDeclaration": 130,
                           "src": "1028:6:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bool",
@@ -886,21 +886,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 162,
+                      "id": 150,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2444,
-                        2445
+                        2477,
+                        2478
                       ],
-                      "referencedDeclaration": 2444,
+                      "referencedDeclaration": 2477,
                       "src": "1019:7:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 165,
+                    "id": 153,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -914,23 +914,23 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 166,
+                  "id": 154,
                   "nodeType": "ExpressionStatement",
                   "src": "1019:16:3"
                 },
                 {
-                  "id": 167,
+                  "id": 155,
                   "nodeType": "PlaceholderStatement",
                   "src": "1041:1:3"
                 }
               ]
             },
             "documentation": "modifier 要求合约正在运行状态",
-            "id": 169,
+            "id": 157,
             "name": "whenNotPaused",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 161,
+              "id": 149,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1010:2:3"
@@ -940,7 +940,7 @@
           },
           {
             "body": {
-              "id": 176,
+              "id": 164,
               "nodeType": "Block",
               "src": "1124:33:3",
               "statements": [
@@ -950,11 +950,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 172,
+                        "id": 160,
                         "name": "paused",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 142,
+                        "referencedDeclaration": 130,
                         "src": "1138:6:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
@@ -969,21 +969,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 171,
+                      "id": 159,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2444,
-                        2445
+                        2477,
+                        2478
                       ],
-                      "referencedDeclaration": 2444,
+                      "referencedDeclaration": 2477,
                       "src": "1130:7:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 173,
+                    "id": 161,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -997,23 +997,23 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 174,
+                  "id": 162,
                   "nodeType": "ExpressionStatement",
                   "src": "1130:15:3"
                 },
                 {
-                  "id": 175,
+                  "id": 163,
                   "nodeType": "PlaceholderStatement",
                   "src": "1151:1:3"
                 }
               ]
             },
             "documentation": "modifier 要求合约暂停状态",
-            "id": 177,
+            "id": 165,
             "name": "whenPaused",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 170,
+              "id": 158,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1121:2:3"
@@ -1023,7 +1023,7 @@
           },
           {
             "body": {
-              "id": 189,
+              "id": 177,
               "nodeType": "Block",
               "src": "1253:43:3",
               "statements": [
@@ -1033,7 +1033,7 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 185,
+                        "id": 173,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1046,25 +1046,25 @@
                           "argumentTypes": null,
                           "baseExpression": {
                             "argumentTypes": null,
-                            "id": 182,
+                            "id": 170,
                             "name": "frozenList",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 146,
+                            "referencedDeclaration": 134,
                             "src": "1268:10:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                               "typeString": "mapping(address => bool)"
                             }
                           },
-                          "id": 184,
+                          "id": 172,
                           "indexExpression": {
                             "argumentTypes": null,
-                            "id": 183,
+                            "id": 171,
                             "name": "who",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 179,
+                            "referencedDeclaration": 167,
                             "src": "1279:3:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
@@ -1095,21 +1095,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 181,
+                      "id": 169,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2444,
-                        2445
+                        2477,
+                        2478
                       ],
-                      "referencedDeclaration": 2444,
+                      "referencedDeclaration": 2477,
                       "src": "1259:7:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 186,
+                    "id": 174,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1123,31 +1123,31 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 187,
+                  "id": 175,
                   "nodeType": "ExpressionStatement",
                   "src": "1259:25:3"
                 },
                 {
-                  "id": 188,
+                  "id": 176,
                   "nodeType": "PlaceholderStatement",
                   "src": "1290:1:3"
                 }
               ]
             },
             "documentation": "modifier 要求账户未冻结状态\n",
-            "id": 190,
+            "id": 178,
             "name": "whenNotFrozen",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 180,
+              "id": 168,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 179,
+                  "id": 167,
                   "name": "who",
                   "nodeType": "VariableDeclaration",
-                  "scope": 190,
+                  "scope": 178,
                   "src": "1240:11:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1156,7 +1156,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 178,
+                    "id": 166,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1240:7:3",
@@ -1176,7 +1176,7 @@
           },
           {
             "body": {
-              "id": 201,
+              "id": 189,
               "nodeType": "Block",
               "src": "1386:42:3",
               "statements": [
@@ -1188,25 +1188,25 @@
                         "argumentTypes": null,
                         "baseExpression": {
                           "argumentTypes": null,
-                          "id": 195,
+                          "id": 183,
                           "name": "frozenList",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 146,
+                          "referencedDeclaration": 134,
                           "src": "1400:10:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                             "typeString": "mapping(address => bool)"
                           }
                         },
-                        "id": 197,
+                        "id": 185,
                         "indexExpression": {
                           "argumentTypes": null,
-                          "id": 196,
+                          "id": 184,
                           "name": "who",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 192,
+                          "referencedDeclaration": 180,
                           "src": "1411:3:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
@@ -1232,21 +1232,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 194,
+                      "id": 182,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2444,
-                        2445
+                        2477,
+                        2478
                       ],
-                      "referencedDeclaration": 2444,
+                      "referencedDeclaration": 2477,
                       "src": "1392:7:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 198,
+                    "id": 186,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1260,31 +1260,31 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 199,
+                  "id": 187,
                   "nodeType": "ExpressionStatement",
                   "src": "1392:24:3"
                 },
                 {
-                  "id": 200,
+                  "id": 188,
                   "nodeType": "PlaceholderStatement",
                   "src": "1422:1:3"
                 }
               ]
             },
             "documentation": "modifier 要求账户冻结状态\n",
-            "id": 202,
+            "id": 190,
             "name": "whenFrozen",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 193,
+              "id": 181,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 192,
+                  "id": 180,
                   "name": "who",
                   "nodeType": "VariableDeclaration",
-                  "scope": 202,
+                  "scope": 190,
                   "src": "1373:11:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1293,7 +1293,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 191,
+                    "id": 179,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1373:7:3",
@@ -1313,7 +1313,7 @@
           },
           {
             "body": {
-              "id": 213,
+              "id": 201,
               "nodeType": "Block",
               "src": "1510:41:3",
               "statements": [
@@ -1325,25 +1325,25 @@
                         "argumentTypes": null,
                         "baseExpression": {
                           "argumentTypes": null,
-                          "id": 207,
+                          "id": 195,
                           "name": "adminList",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 150,
+                          "referencedDeclaration": 138,
                           "src": "1524:9:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                             "typeString": "mapping(address => bool)"
                           }
                         },
-                        "id": 209,
+                        "id": 197,
                         "indexExpression": {
                           "argumentTypes": null,
-                          "id": 208,
+                          "id": 196,
                           "name": "who",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 204,
+                          "referencedDeclaration": 192,
                           "src": "1534:3:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
@@ -1369,21 +1369,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 206,
+                      "id": 194,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2444,
-                        2445
+                        2477,
+                        2478
                       ],
-                      "referencedDeclaration": 2444,
+                      "referencedDeclaration": 2477,
                       "src": "1516:7:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 210,
+                    "id": 198,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1397,31 +1397,31 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 211,
+                  "id": 199,
                   "nodeType": "ExpressionStatement",
                   "src": "1516:23:3"
                 },
                 {
-                  "id": 212,
+                  "id": 200,
                   "nodeType": "PlaceholderStatement",
                   "src": "1545:1:3"
                 }
               ]
             },
             "documentation": "要求是管理员\n",
-            "id": 214,
+            "id": 202,
             "name": "whenAdministrator",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 205,
+              "id": 193,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 204,
+                  "id": 192,
                   "name": "who",
                   "nodeType": "VariableDeclaration",
-                  "scope": 214,
+                  "scope": 202,
                   "src": "1497:11:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1430,7 +1430,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 203,
+                    "id": 191,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1497:7:3",
@@ -1450,7 +1450,7 @@
           },
           {
             "body": {
-              "id": 226,
+              "id": 214,
               "nodeType": "Block",
               "src": "1639:42:3",
               "statements": [
@@ -1460,7 +1460,7 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 222,
+                        "id": 210,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1473,25 +1473,25 @@
                           "argumentTypes": null,
                           "baseExpression": {
                             "argumentTypes": null,
-                            "id": 219,
+                            "id": 207,
                             "name": "adminList",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 150,
+                            "referencedDeclaration": 138,
                             "src": "1654:9:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                               "typeString": "mapping(address => bool)"
                             }
                           },
-                          "id": 221,
+                          "id": 209,
                           "indexExpression": {
                             "argumentTypes": null,
-                            "id": 220,
+                            "id": 208,
                             "name": "who",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 216,
+                            "referencedDeclaration": 204,
                             "src": "1664:3:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
@@ -1522,21 +1522,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 218,
+                      "id": 206,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2444,
-                        2445
+                        2477,
+                        2478
                       ],
-                      "referencedDeclaration": 2444,
+                      "referencedDeclaration": 2477,
                       "src": "1645:7:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 223,
+                    "id": 211,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1550,31 +1550,31 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 224,
+                  "id": 212,
                   "nodeType": "ExpressionStatement",
                   "src": "1645:24:3"
                 },
                 {
-                  "id": 225,
+                  "id": 213,
                   "nodeType": "PlaceholderStatement",
                   "src": "1675:1:3"
                 }
               ]
             },
             "documentation": "要求不是管理员\n",
-            "id": 227,
+            "id": 215,
             "name": "whenNotAdministrator",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 217,
+              "id": 205,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 216,
+                  "id": 204,
                   "name": "who",
                   "nodeType": "VariableDeclaration",
-                  "scope": 227,
+                  "scope": 215,
                   "src": "1626:11:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1583,7 +1583,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 215,
+                    "id": 203,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1626:7:3",
@@ -1603,25 +1603,25 @@
           },
           {
             "body": {
-              "id": 241,
+              "id": 229,
               "nodeType": "Block",
               "src": "1765:42:3",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 236,
+                    "id": 224,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 234,
+                      "id": 222,
                       "name": "paused",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 142,
+                      "referencedDeclaration": 130,
                       "src": "1771:6:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
@@ -1633,7 +1633,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "74727565",
-                      "id": 235,
+                      "id": 223,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -1654,7 +1654,7 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 237,
+                  "id": 225,
                   "nodeType": "ExpressionStatement",
                   "src": "1771:13:3"
                 },
@@ -1664,18 +1664,18 @@
                     "arguments": [],
                     "expression": {
                       "argumentTypes": [],
-                      "id": 238,
+                      "id": 226,
                       "name": "Pause",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 117,
+                      "referencedDeclaration": 105,
                       "src": "1795:5:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$__$returns$__$",
                         "typeString": "function ()"
                       }
                     },
-                    "id": 239,
+                    "id": 227,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1689,28 +1689,28 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 240,
+                  "id": 228,
                   "nodeType": "EmitStatement",
                   "src": "1790:12:3"
                 }
               ]
             },
             "documentation": "* 暂停合约",
-            "id": 242,
+            "id": 230,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
             "modifiers": [
               {
                 "arguments": null,
-                "id": 230,
+                "id": 218,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 229,
+                  "id": 217,
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 370,
+                  "referencedDeclaration": 415,
                   "src": "1734:9:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -1722,14 +1722,14 @@
               },
               {
                 "arguments": null,
-                "id": 232,
+                "id": 220,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 231,
+                  "id": 219,
                   "name": "whenNotPaused",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 169,
+                  "referencedDeclaration": 157,
                   "src": "1744:13:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -1743,19 +1743,19 @@
             "name": "pause",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 228,
+              "id": 216,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1731:2:3"
             },
             "payable": false,
             "returnParameters": {
-              "id": 233,
+              "id": 221,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1765:0:3"
             },
-            "scope": 336,
+            "scope": 324,
             "src": "1717:90:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1763,25 +1763,25 @@
           },
           {
             "body": {
-              "id": 256,
+              "id": 244,
               "nodeType": "Block",
               "src": "1894:45:3",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 251,
+                    "id": 239,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 249,
+                      "id": 237,
                       "name": "paused",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 142,
+                      "referencedDeclaration": 130,
                       "src": "1900:6:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
@@ -1793,7 +1793,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "66616c7365",
-                      "id": 250,
+                      "id": 238,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -1814,7 +1814,7 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 252,
+                  "id": 240,
                   "nodeType": "ExpressionStatement",
                   "src": "1900:14:3"
                 },
@@ -1824,18 +1824,18 @@
                     "arguments": [],
                     "expression": {
                       "argumentTypes": [],
-                      "id": 253,
+                      "id": 241,
                       "name": "Unpause",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 119,
+                      "referencedDeclaration": 107,
                       "src": "1925:7:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$__$returns$__$",
                         "typeString": "function ()"
                       }
                     },
-                    "id": 254,
+                    "id": 242,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1849,28 +1849,28 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 255,
+                  "id": 243,
                   "nodeType": "EmitStatement",
                   "src": "1920:14:3"
                 }
               ]
             },
             "documentation": "取消暂停合约",
-            "id": 257,
+            "id": 245,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
             "modifiers": [
               {
                 "arguments": null,
-                "id": 245,
+                "id": 233,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 244,
+                  "id": 232,
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 370,
+                  "referencedDeclaration": 415,
                   "src": "1866:9:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -1882,14 +1882,14 @@
               },
               {
                 "arguments": null,
-                "id": 247,
+                "id": 235,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 246,
+                  "id": 234,
                   "name": "whenPaused",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 177,
+                  "referencedDeclaration": 165,
                   "src": "1876:10:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -1903,19 +1903,19 @@
             "name": "unpause",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 243,
+              "id": 231,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1863:2:3"
             },
             "payable": false,
             "returnParameters": {
-              "id": 248,
+              "id": 236,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1894:0:3"
             },
-            "scope": 336,
+            "scope": 324,
             "src": "1847:92:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1923,14 +1923,14 @@
           },
           {
             "body": {
-              "id": 278,
+              "id": 266,
               "nodeType": "Block",
               "src": "2040:66:3",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 270,
+                    "id": 258,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1939,25 +1939,25 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 266,
+                        "id": 254,
                         "name": "frozenList",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 146,
+                        "referencedDeclaration": 134,
                         "src": "2046:10:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                           "typeString": "mapping(address => bool)"
                         }
                       },
-                      "id": 268,
+                      "id": 256,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "id": 267,
+                        "id": 255,
                         "name": "who",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 259,
+                        "referencedDeclaration": 247,
                         "src": "2057:3:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -1980,7 +1980,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "74727565",
-                      "id": 269,
+                      "id": 257,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -2001,7 +2001,7 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 271,
+                  "id": 259,
                   "nodeType": "ExpressionStatement",
                   "src": "2046:22:3"
                 },
@@ -2013,18 +2013,18 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 273,
+                          "id": 261,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2441,
+                          "referencedDeclaration": 2474,
                           "src": "2085:3:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
                             "typeString": "msg"
                           }
                         },
-                        "id": 274,
+                        "id": 262,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -2040,11 +2040,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 275,
+                        "id": 263,
                         "name": "who",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 259,
+                        "referencedDeclaration": 247,
                         "src": "2097:3:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -2063,18 +2063,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 272,
+                      "id": 260,
                       "name": "Froze",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 125,
+                      "referencedDeclaration": 113,
                       "src": "2079:5:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$returns$__$",
                         "typeString": "function (address,address)"
                       }
                     },
-                    "id": 276,
+                    "id": 264,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2088,14 +2088,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 277,
+                  "id": 265,
                   "nodeType": "EmitStatement",
                   "src": "2074:27:3"
                 }
               ]
             },
             "documentation": "冻结账户\n",
-            "id": 279,
+            "id": 267,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -2106,18 +2106,18 @@
                     "argumentTypes": null,
                     "expression": {
                       "argumentTypes": null,
-                      "id": 262,
+                      "id": 250,
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2441,
+                      "referencedDeclaration": 2474,
                       "src": "2021:3:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
                         "typeString": "msg"
                       }
                     },
-                    "id": 263,
+                    "id": 251,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2132,14 +2132,14 @@
                     }
                   }
                 ],
-                "id": 264,
+                "id": 252,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 261,
+                  "id": 249,
                   "name": "whenAdministrator",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 214,
+                  "referencedDeclaration": 202,
                   "src": "2003:17:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$_t_address_$",
@@ -2153,15 +2153,15 @@
             "name": "froze",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 260,
+              "id": 248,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 259,
+                  "id": 247,
                   "name": "who",
                   "nodeType": "VariableDeclaration",
-                  "scope": 279,
+                  "scope": 267,
                   "src": "1990:11:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2170,7 +2170,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 258,
+                    "id": 246,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1990:7:3",
@@ -2187,12 +2187,12 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 265,
+              "id": 253,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2040:0:3"
             },
-            "scope": 336,
+            "scope": 324,
             "src": "1975:131:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -2200,14 +2200,14 @@
           },
           {
             "body": {
-              "id": 299,
+              "id": 287,
               "nodeType": "Block",
               "src": "2215:68:3",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 291,
+                    "id": 279,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2220,25 +2220,25 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 288,
+                        "id": 276,
                         "name": "frozenList",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 146,
+                        "referencedDeclaration": 134,
                         "src": "2228:10:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                           "typeString": "mapping(address => bool)"
                         }
                       },
-                      "id": 290,
+                      "id": 278,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "id": 289,
+                        "id": 277,
                         "name": "who",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 281,
+                        "referencedDeclaration": 269,
                         "src": "2239:3:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -2261,7 +2261,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 292,
+                  "id": 280,
                   "nodeType": "ExpressionStatement",
                   "src": "2221:22:3"
                 },
@@ -2273,18 +2273,18 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 294,
+                          "id": 282,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2441,
+                          "referencedDeclaration": 2474,
                           "src": "2262:3:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
                             "typeString": "msg"
                           }
                         },
-                        "id": 295,
+                        "id": 283,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -2300,11 +2300,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 296,
+                        "id": 284,
                         "name": "who",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 281,
+                        "referencedDeclaration": 269,
                         "src": "2274:3:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -2323,18 +2323,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 293,
+                      "id": 281,
                       "name": "Unfroze",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 131,
+                      "referencedDeclaration": 119,
                       "src": "2254:7:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$returns$__$",
                         "typeString": "function (address,address)"
                       }
                     },
-                    "id": 297,
+                    "id": 285,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2348,14 +2348,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 298,
+                  "id": 286,
                   "nodeType": "EmitStatement",
                   "src": "2249:29:3"
                 }
               ]
             },
             "documentation": "取消冻结账户\n",
-            "id": 300,
+            "id": 288,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -2366,18 +2366,18 @@
                     "argumentTypes": null,
                     "expression": {
                       "argumentTypes": null,
-                      "id": 284,
+                      "id": 272,
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2441,
+                      "referencedDeclaration": 2474,
                       "src": "2196:3:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
                         "typeString": "msg"
                       }
                     },
-                    "id": 285,
+                    "id": 273,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2392,14 +2392,14 @@
                     }
                   }
                 ],
-                "id": 286,
+                "id": 274,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 283,
+                  "id": 271,
                   "name": "whenAdministrator",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 214,
+                  "referencedDeclaration": 202,
                   "src": "2178:17:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$_t_address_$",
@@ -2413,15 +2413,15 @@
             "name": "unfroze",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 282,
+              "id": 270,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 281,
+                  "id": 269,
                   "name": "who",
                   "nodeType": "VariableDeclaration",
-                  "scope": 300,
+                  "scope": 288,
                   "src": "2165:11:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2430,7 +2430,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 280,
+                    "id": 268,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "2165:7:3",
@@ -2447,12 +2447,12 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 287,
+              "id": 275,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2215:0:3"
             },
-            "scope": 336,
+            "scope": 324,
             "src": "2148:135:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -2460,14 +2460,14 @@
           },
           {
             "body": {
-              "id": 317,
+              "id": 305,
               "nodeType": "Block",
               "src": "2378:64:3",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 311,
+                    "id": 299,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2476,25 +2476,25 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 307,
+                        "id": 295,
                         "name": "adminList",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 150,
+                        "referencedDeclaration": 138,
                         "src": "2384:9:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                           "typeString": "mapping(address => bool)"
                         }
                       },
-                      "id": 309,
+                      "id": 297,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "id": 308,
+                        "id": 296,
                         "name": "who",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 302,
+                        "referencedDeclaration": 290,
                         "src": "2394:3:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -2517,7 +2517,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "74727565",
-                      "id": 310,
+                      "id": 298,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -2538,7 +2538,7 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 312,
+                  "id": 300,
                   "nodeType": "ExpressionStatement",
                   "src": "2384:21:3"
                 },
@@ -2548,11 +2548,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 314,
+                        "id": 302,
                         "name": "who",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 302,
+                        "referencedDeclaration": 290,
                         "src": "2433:3:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -2567,18 +2567,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 313,
+                      "id": 301,
                       "name": "AddAdministrator",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 135,
+                      "referencedDeclaration": 123,
                       "src": "2416:16:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 315,
+                    "id": 303,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2592,28 +2592,28 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 316,
+                  "id": 304,
                   "nodeType": "EmitStatement",
                   "src": "2411:26:3"
                 }
               ]
             },
             "documentation": "添加管理员\n",
-            "id": 318,
+            "id": 306,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
             "modifiers": [
               {
                 "arguments": null,
-                "id": 305,
+                "id": 293,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 304,
+                  "id": 292,
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 370,
+                  "referencedDeclaration": 415,
                   "src": "2361:9:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -2627,15 +2627,15 @@
             "name": "addAdministrator",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 303,
+              "id": 291,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 302,
+                  "id": 290,
                   "name": "who",
                   "nodeType": "VariableDeclaration",
-                  "scope": 318,
+                  "scope": 306,
                   "src": "2348:11:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2644,7 +2644,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 301,
+                    "id": 289,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "2348:7:3",
@@ -2661,12 +2661,12 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 306,
+              "id": 294,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2378:0:3"
             },
-            "scope": 336,
+            "scope": 324,
             "src": "2322:120:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -2674,14 +2674,14 @@
           },
           {
             "body": {
-              "id": 334,
+              "id": 322,
               "nodeType": "Block",
               "src": "2537:64:3",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 328,
+                    "id": 316,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2694,25 +2694,25 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 325,
+                        "id": 313,
                         "name": "adminList",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 150,
+                        "referencedDeclaration": 138,
                         "src": "2550:9:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                           "typeString": "mapping(address => bool)"
                         }
                       },
-                      "id": 327,
+                      "id": 315,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "id": 326,
+                        "id": 314,
                         "name": "who",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 320,
+                        "referencedDeclaration": 308,
                         "src": "2560:3:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -2735,7 +2735,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 329,
+                  "id": 317,
                   "nodeType": "ExpressionStatement",
                   "src": "2543:21:3"
                 },
@@ -2745,11 +2745,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 331,
+                        "id": 319,
                         "name": "who",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 320,
+                        "referencedDeclaration": 308,
                         "src": "2592:3:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -2764,18 +2764,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 330,
+                      "id": 318,
                       "name": "DelAdministrator",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 139,
+                      "referencedDeclaration": 127,
                       "src": "2575:16:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 332,
+                    "id": 320,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2789,28 +2789,28 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 333,
+                  "id": 321,
                   "nodeType": "EmitStatement",
                   "src": "2570:26:3"
                 }
               ]
             },
             "documentation": "删除管理员\n",
-            "id": 335,
+            "id": 323,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
             "modifiers": [
               {
                 "arguments": null,
-                "id": 323,
+                "id": 311,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 322,
+                  "id": 310,
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 370,
+                  "referencedDeclaration": 415,
                   "src": "2520:9:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -2824,15 +2824,15 @@
             "name": "delAdministrator",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 321,
+              "id": 309,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 320,
+                  "id": 308,
                   "name": "who",
                   "nodeType": "VariableDeclaration",
-                  "scope": 335,
+                  "scope": 323,
                   "src": "2507:11:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2841,7 +2841,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 319,
+                    "id": 307,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "2507:7:3",
@@ -2858,36 +2858,36 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 324,
+              "id": 312,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2537:0:3"
             },
-            "scope": 336,
+            "scope": 324,
             "src": "2481:120:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 337,
+        "scope": 325,
         "src": "135:2468:3"
       }
     ],
     "src": "0:2604:3"
   },
   "legacyAST": {
-    "absolutePath": "/Users/lifei/workspaces/sibbay-ai/token/contracts/Management.sol",
+    "absolutePath": "/home/henry/learning/git/token/contracts/Management.sol",
     "exportedSymbols": {
       "Management": [
-        336
+        324
       ]
     },
-    "id": 337,
+    "id": 325,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 112,
+        "id": 100,
         "literals": [
           "solidity",
           "^",
@@ -2898,12 +2898,12 @@
         "src": "0:24:3"
       },
       {
-        "absolutePath": "/Users/lifei/workspaces/sibbay-ai/token/contracts/Ownable.sol",
+        "absolutePath": "/home/henry/learning/git/token/contracts/Ownable.sol",
         "file": "./Ownable.sol",
-        "id": 113,
+        "id": 101,
         "nodeType": "ImportDirective",
-        "scope": 337,
-        "sourceUnit": 413,
+        "scope": 325,
+        "sourceUnit": 458,
         "src": "27:23:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -2914,31 +2914,31 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 114,
+              "id": 102,
               "name": "Ownable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 412,
+              "referencedDeclaration": 457,
               "src": "158:7:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Ownable_$412",
+                "typeIdentifier": "t_contract$_Ownable_$457",
                 "typeString": "contract Ownable"
               }
             },
-            "id": 115,
+            "id": 103,
             "nodeType": "InheritanceSpecifier",
             "src": "158:7:3"
           }
         ],
         "contractDependencies": [
-          412
+          457
         ],
         "contractKind": "contract",
         "documentation": "管理合约\n功能：\n暂停合约\n冻结账户\n管理员",
         "fullyImplemented": true,
-        "id": 336,
+        "id": 324,
         "linearizedBaseContracts": [
-          336,
-          412
+          324,
+          457
         ],
         "name": "Management",
         "nodeType": "ContractDefinition",
@@ -2946,11 +2946,11 @@
           {
             "anonymous": false,
             "documentation": "暂停和取消暂停事件\n",
-            "id": 117,
+            "id": 105,
             "name": "Pause",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 116,
+              "id": 104,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "229:2:3"
@@ -2960,11 +2960,11 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 119,
+            "id": 107,
             "name": "Unpause",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 118,
+              "id": 106,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "248:2:3"
@@ -2974,20 +2974,20 @@
           {
             "anonymous": false,
             "documentation": "冻结和取消冻结事件\n",
-            "id": 125,
+            "id": 113,
             "name": "Froze",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 124,
+              "id": 112,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 121,
+                  "id": 109,
                   "indexed": true,
                   "name": "admin",
                   "nodeType": "VariableDeclaration",
-                  "scope": 125,
+                  "scope": 113,
                   "src": "314:21:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2996,7 +2996,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 120,
+                    "id": 108,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "314:7:3",
@@ -3010,11 +3010,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 123,
+                  "id": 111,
                   "indexed": true,
                   "name": "who",
                   "nodeType": "VariableDeclaration",
-                  "scope": 125,
+                  "scope": 113,
                   "src": "337:19:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3023,7 +3023,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 122,
+                    "id": 110,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "337:7:3",
@@ -3043,20 +3043,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 131,
+            "id": 119,
             "name": "Unfroze",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 130,
+              "id": 118,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 127,
+                  "id": 115,
                   "indexed": true,
                   "name": "admin",
                   "nodeType": "VariableDeclaration",
-                  "scope": 131,
+                  "scope": 119,
                   "src": "375:21:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3065,7 +3065,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 126,
+                    "id": 114,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "375:7:3",
@@ -3079,11 +3079,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 129,
+                  "id": 117,
                   "indexed": true,
                   "name": "who",
                   "nodeType": "VariableDeclaration",
-                  "scope": 131,
+                  "scope": 119,
                   "src": "398:19:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3092,7 +3092,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 128,
+                    "id": 116,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "398:7:3",
@@ -3112,20 +3112,20 @@
           {
             "anonymous": false,
             "documentation": "增加和删除管理员事件\n",
-            "id": 135,
+            "id": 123,
             "name": "AddAdministrator",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 134,
+              "id": 122,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 133,
+                  "id": 121,
                   "indexed": true,
                   "name": "admin",
                   "nodeType": "VariableDeclaration",
-                  "scope": 135,
+                  "scope": 123,
                   "src": "496:21:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3134,7 +3134,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 132,
+                    "id": 120,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "496:7:3",
@@ -3154,20 +3154,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 139,
+            "id": 127,
             "name": "DelAdministrator",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 138,
+              "id": 126,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 137,
+                  "id": 125,
                   "indexed": true,
                   "name": "admin",
                   "nodeType": "VariableDeclaration",
-                  "scope": 139,
+                  "scope": 127,
                   "src": "545:21:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3176,7 +3176,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 136,
+                    "id": 124,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "545:7:3",
@@ -3195,10 +3195,10 @@
           },
           {
             "constant": false,
-            "id": 142,
+            "id": 130,
             "name": "paused",
             "nodeType": "VariableDeclaration",
-            "scope": 336,
+            "scope": 324,
             "src": "686:26:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -3207,7 +3207,7 @@
               "typeString": "bool"
             },
             "typeName": {
-              "id": 140,
+              "id": 128,
               "name": "bool",
               "nodeType": "ElementaryTypeName",
               "src": "686:4:3",
@@ -3219,7 +3219,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "66616c7365",
-              "id": 141,
+              "id": 129,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -3238,10 +3238,10 @@
           },
           {
             "constant": false,
-            "id": 146,
+            "id": 134,
             "name": "frozenList",
             "nodeType": "VariableDeclaration",
-            "scope": 336,
+            "scope": 324,
             "src": "716:42:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -3250,9 +3250,9 @@
               "typeString": "mapping(address => bool)"
             },
             "typeName": {
-              "id": 145,
+              "id": 133,
               "keyType": {
-                "id": 143,
+                "id": 131,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "724:7:3",
@@ -3268,7 +3268,7 @@
                 "typeString": "mapping(address => bool)"
               },
               "valueType": {
-                "id": 144,
+                "id": 132,
                 "name": "bool",
                 "nodeType": "ElementaryTypeName",
                 "src": "735:4:3",
@@ -3283,10 +3283,10 @@
           },
           {
             "constant": false,
-            "id": 150,
+            "id": 138,
             "name": "adminList",
             "nodeType": "VariableDeclaration",
-            "scope": 336,
+            "scope": 324,
             "src": "762:41:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -3295,9 +3295,9 @@
               "typeString": "mapping(address => bool)"
             },
             "typeName": {
-              "id": 149,
+              "id": 137,
               "keyType": {
-                "id": 147,
+                "id": 135,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "770:7:3",
@@ -3313,7 +3313,7 @@
                 "typeString": "mapping(address => bool)"
               },
               "valueType": {
-                "id": 148,
+                "id": 136,
                 "name": "bool",
                 "nodeType": "ElementaryTypeName",
                 "src": "781:4:3",
@@ -3328,14 +3328,14 @@
           },
           {
             "body": {
-              "id": 159,
+              "id": 147,
               "nodeType": "Block",
               "src": "893:34:3",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 157,
+                    "id": 145,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3344,25 +3344,25 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 153,
+                        "id": 141,
                         "name": "adminList",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 150,
+                        "referencedDeclaration": 138,
                         "src": "899:9:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                           "typeString": "mapping(address => bool)"
                         }
                       },
-                      "id": 155,
+                      "id": 143,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "id": 154,
+                        "id": 142,
                         "name": "owner",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 340,
+                        "referencedDeclaration": 385,
                         "src": "909:5:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -3385,7 +3385,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "74727565",
-                      "id": 156,
+                      "id": 144,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -3406,14 +3406,14 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 158,
+                  "id": 146,
                   "nodeType": "ExpressionStatement",
                   "src": "899:23:3"
                 }
               ]
             },
             "documentation": "构造函数\n初始化owner是管理员\n",
-            "id": 160,
+            "id": 148,
             "implemented": true,
             "isConstructor": true,
             "isDeclaredConst": false,
@@ -3421,19 +3421,19 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 151,
+              "id": 139,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "883:2:3"
             },
             "payable": false,
             "returnParameters": {
-              "id": 152,
+              "id": 140,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "893:0:3"
             },
-            "scope": 336,
+            "scope": 324,
             "src": "872:55:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -3441,7 +3441,7 @@
           },
           {
             "body": {
-              "id": 168,
+              "id": 156,
               "nodeType": "Block",
               "src": "1013:34:3",
               "statements": [
@@ -3451,7 +3451,7 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 164,
+                        "id": 152,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -3462,11 +3462,11 @@
                         "src": "1027:7:3",
                         "subExpression": {
                           "argumentTypes": null,
-                          "id": 163,
+                          "id": 151,
                           "name": "paused",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 142,
+                          "referencedDeclaration": 130,
                           "src": "1028:6:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bool",
@@ -3486,21 +3486,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 162,
+                      "id": 150,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2444,
-                        2445
+                        2477,
+                        2478
                       ],
-                      "referencedDeclaration": 2444,
+                      "referencedDeclaration": 2477,
                       "src": "1019:7:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 165,
+                    "id": 153,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3514,23 +3514,23 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 166,
+                  "id": 154,
                   "nodeType": "ExpressionStatement",
                   "src": "1019:16:3"
                 },
                 {
-                  "id": 167,
+                  "id": 155,
                   "nodeType": "PlaceholderStatement",
                   "src": "1041:1:3"
                 }
               ]
             },
             "documentation": "modifier 要求合约正在运行状态",
-            "id": 169,
+            "id": 157,
             "name": "whenNotPaused",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 161,
+              "id": 149,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1010:2:3"
@@ -3540,7 +3540,7 @@
           },
           {
             "body": {
-              "id": 176,
+              "id": 164,
               "nodeType": "Block",
               "src": "1124:33:3",
               "statements": [
@@ -3550,11 +3550,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 172,
+                        "id": 160,
                         "name": "paused",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 142,
+                        "referencedDeclaration": 130,
                         "src": "1138:6:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
@@ -3569,21 +3569,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 171,
+                      "id": 159,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2444,
-                        2445
+                        2477,
+                        2478
                       ],
-                      "referencedDeclaration": 2444,
+                      "referencedDeclaration": 2477,
                       "src": "1130:7:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 173,
+                    "id": 161,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3597,23 +3597,23 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 174,
+                  "id": 162,
                   "nodeType": "ExpressionStatement",
                   "src": "1130:15:3"
                 },
                 {
-                  "id": 175,
+                  "id": 163,
                   "nodeType": "PlaceholderStatement",
                   "src": "1151:1:3"
                 }
               ]
             },
             "documentation": "modifier 要求合约暂停状态",
-            "id": 177,
+            "id": 165,
             "name": "whenPaused",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 170,
+              "id": 158,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1121:2:3"
@@ -3623,7 +3623,7 @@
           },
           {
             "body": {
-              "id": 189,
+              "id": 177,
               "nodeType": "Block",
               "src": "1253:43:3",
               "statements": [
@@ -3633,7 +3633,7 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 185,
+                        "id": 173,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -3646,25 +3646,25 @@
                           "argumentTypes": null,
                           "baseExpression": {
                             "argumentTypes": null,
-                            "id": 182,
+                            "id": 170,
                             "name": "frozenList",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 146,
+                            "referencedDeclaration": 134,
                             "src": "1268:10:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                               "typeString": "mapping(address => bool)"
                             }
                           },
-                          "id": 184,
+                          "id": 172,
                           "indexExpression": {
                             "argumentTypes": null,
-                            "id": 183,
+                            "id": 171,
                             "name": "who",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 179,
+                            "referencedDeclaration": 167,
                             "src": "1279:3:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
@@ -3695,21 +3695,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 181,
+                      "id": 169,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2444,
-                        2445
+                        2477,
+                        2478
                       ],
-                      "referencedDeclaration": 2444,
+                      "referencedDeclaration": 2477,
                       "src": "1259:7:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 186,
+                    "id": 174,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3723,31 +3723,31 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 187,
+                  "id": 175,
                   "nodeType": "ExpressionStatement",
                   "src": "1259:25:3"
                 },
                 {
-                  "id": 188,
+                  "id": 176,
                   "nodeType": "PlaceholderStatement",
                   "src": "1290:1:3"
                 }
               ]
             },
             "documentation": "modifier 要求账户未冻结状态\n",
-            "id": 190,
+            "id": 178,
             "name": "whenNotFrozen",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 180,
+              "id": 168,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 179,
+                  "id": 167,
                   "name": "who",
                   "nodeType": "VariableDeclaration",
-                  "scope": 190,
+                  "scope": 178,
                   "src": "1240:11:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3756,7 +3756,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 178,
+                    "id": 166,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1240:7:3",
@@ -3776,7 +3776,7 @@
           },
           {
             "body": {
-              "id": 201,
+              "id": 189,
               "nodeType": "Block",
               "src": "1386:42:3",
               "statements": [
@@ -3788,25 +3788,25 @@
                         "argumentTypes": null,
                         "baseExpression": {
                           "argumentTypes": null,
-                          "id": 195,
+                          "id": 183,
                           "name": "frozenList",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 146,
+                          "referencedDeclaration": 134,
                           "src": "1400:10:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                             "typeString": "mapping(address => bool)"
                           }
                         },
-                        "id": 197,
+                        "id": 185,
                         "indexExpression": {
                           "argumentTypes": null,
-                          "id": 196,
+                          "id": 184,
                           "name": "who",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 192,
+                          "referencedDeclaration": 180,
                           "src": "1411:3:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
@@ -3832,21 +3832,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 194,
+                      "id": 182,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2444,
-                        2445
+                        2477,
+                        2478
                       ],
-                      "referencedDeclaration": 2444,
+                      "referencedDeclaration": 2477,
                       "src": "1392:7:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 198,
+                    "id": 186,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3860,31 +3860,31 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 199,
+                  "id": 187,
                   "nodeType": "ExpressionStatement",
                   "src": "1392:24:3"
                 },
                 {
-                  "id": 200,
+                  "id": 188,
                   "nodeType": "PlaceholderStatement",
                   "src": "1422:1:3"
                 }
               ]
             },
             "documentation": "modifier 要求账户冻结状态\n",
-            "id": 202,
+            "id": 190,
             "name": "whenFrozen",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 193,
+              "id": 181,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 192,
+                  "id": 180,
                   "name": "who",
                   "nodeType": "VariableDeclaration",
-                  "scope": 202,
+                  "scope": 190,
                   "src": "1373:11:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3893,7 +3893,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 191,
+                    "id": 179,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1373:7:3",
@@ -3913,7 +3913,7 @@
           },
           {
             "body": {
-              "id": 213,
+              "id": 201,
               "nodeType": "Block",
               "src": "1510:41:3",
               "statements": [
@@ -3925,25 +3925,25 @@
                         "argumentTypes": null,
                         "baseExpression": {
                           "argumentTypes": null,
-                          "id": 207,
+                          "id": 195,
                           "name": "adminList",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 150,
+                          "referencedDeclaration": 138,
                           "src": "1524:9:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                             "typeString": "mapping(address => bool)"
                           }
                         },
-                        "id": 209,
+                        "id": 197,
                         "indexExpression": {
                           "argumentTypes": null,
-                          "id": 208,
+                          "id": 196,
                           "name": "who",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 204,
+                          "referencedDeclaration": 192,
                           "src": "1534:3:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
@@ -3969,21 +3969,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 206,
+                      "id": 194,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2444,
-                        2445
+                        2477,
+                        2478
                       ],
-                      "referencedDeclaration": 2444,
+                      "referencedDeclaration": 2477,
                       "src": "1516:7:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 210,
+                    "id": 198,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3997,31 +3997,31 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 211,
+                  "id": 199,
                   "nodeType": "ExpressionStatement",
                   "src": "1516:23:3"
                 },
                 {
-                  "id": 212,
+                  "id": 200,
                   "nodeType": "PlaceholderStatement",
                   "src": "1545:1:3"
                 }
               ]
             },
             "documentation": "要求是管理员\n",
-            "id": 214,
+            "id": 202,
             "name": "whenAdministrator",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 205,
+              "id": 193,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 204,
+                  "id": 192,
                   "name": "who",
                   "nodeType": "VariableDeclaration",
-                  "scope": 214,
+                  "scope": 202,
                   "src": "1497:11:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4030,7 +4030,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 203,
+                    "id": 191,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1497:7:3",
@@ -4050,7 +4050,7 @@
           },
           {
             "body": {
-              "id": 226,
+              "id": 214,
               "nodeType": "Block",
               "src": "1639:42:3",
               "statements": [
@@ -4060,7 +4060,7 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 222,
+                        "id": 210,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -4073,25 +4073,25 @@
                           "argumentTypes": null,
                           "baseExpression": {
                             "argumentTypes": null,
-                            "id": 219,
+                            "id": 207,
                             "name": "adminList",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 150,
+                            "referencedDeclaration": 138,
                             "src": "1654:9:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                               "typeString": "mapping(address => bool)"
                             }
                           },
-                          "id": 221,
+                          "id": 209,
                           "indexExpression": {
                             "argumentTypes": null,
-                            "id": 220,
+                            "id": 208,
                             "name": "who",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 216,
+                            "referencedDeclaration": 204,
                             "src": "1664:3:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
@@ -4122,21 +4122,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 218,
+                      "id": 206,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2444,
-                        2445
+                        2477,
+                        2478
                       ],
-                      "referencedDeclaration": 2444,
+                      "referencedDeclaration": 2477,
                       "src": "1645:7:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 223,
+                    "id": 211,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -4150,31 +4150,31 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 224,
+                  "id": 212,
                   "nodeType": "ExpressionStatement",
                   "src": "1645:24:3"
                 },
                 {
-                  "id": 225,
+                  "id": 213,
                   "nodeType": "PlaceholderStatement",
                   "src": "1675:1:3"
                 }
               ]
             },
             "documentation": "要求不是管理员\n",
-            "id": 227,
+            "id": 215,
             "name": "whenNotAdministrator",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 217,
+              "id": 205,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 216,
+                  "id": 204,
                   "name": "who",
                   "nodeType": "VariableDeclaration",
-                  "scope": 227,
+                  "scope": 215,
                   "src": "1626:11:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4183,7 +4183,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 215,
+                    "id": 203,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1626:7:3",
@@ -4203,25 +4203,25 @@
           },
           {
             "body": {
-              "id": 241,
+              "id": 229,
               "nodeType": "Block",
               "src": "1765:42:3",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 236,
+                    "id": 224,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 234,
+                      "id": 222,
                       "name": "paused",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 142,
+                      "referencedDeclaration": 130,
                       "src": "1771:6:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
@@ -4233,7 +4233,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "74727565",
-                      "id": 235,
+                      "id": 223,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -4254,7 +4254,7 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 237,
+                  "id": 225,
                   "nodeType": "ExpressionStatement",
                   "src": "1771:13:3"
                 },
@@ -4264,18 +4264,18 @@
                     "arguments": [],
                     "expression": {
                       "argumentTypes": [],
-                      "id": 238,
+                      "id": 226,
                       "name": "Pause",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 117,
+                      "referencedDeclaration": 105,
                       "src": "1795:5:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$__$returns$__$",
                         "typeString": "function ()"
                       }
                     },
-                    "id": 239,
+                    "id": 227,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -4289,28 +4289,28 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 240,
+                  "id": 228,
                   "nodeType": "EmitStatement",
                   "src": "1790:12:3"
                 }
               ]
             },
             "documentation": "* 暂停合约",
-            "id": 242,
+            "id": 230,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
             "modifiers": [
               {
                 "arguments": null,
-                "id": 230,
+                "id": 218,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 229,
+                  "id": 217,
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 370,
+                  "referencedDeclaration": 415,
                   "src": "1734:9:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -4322,14 +4322,14 @@
               },
               {
                 "arguments": null,
-                "id": 232,
+                "id": 220,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 231,
+                  "id": 219,
                   "name": "whenNotPaused",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 169,
+                  "referencedDeclaration": 157,
                   "src": "1744:13:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -4343,19 +4343,19 @@
             "name": "pause",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 228,
+              "id": 216,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1731:2:3"
             },
             "payable": false,
             "returnParameters": {
-              "id": 233,
+              "id": 221,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1765:0:3"
             },
-            "scope": 336,
+            "scope": 324,
             "src": "1717:90:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -4363,25 +4363,25 @@
           },
           {
             "body": {
-              "id": 256,
+              "id": 244,
               "nodeType": "Block",
               "src": "1894:45:3",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 251,
+                    "id": 239,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 249,
+                      "id": 237,
                       "name": "paused",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 142,
+                      "referencedDeclaration": 130,
                       "src": "1900:6:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
@@ -4393,7 +4393,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "66616c7365",
-                      "id": 250,
+                      "id": 238,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -4414,7 +4414,7 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 252,
+                  "id": 240,
                   "nodeType": "ExpressionStatement",
                   "src": "1900:14:3"
                 },
@@ -4424,18 +4424,18 @@
                     "arguments": [],
                     "expression": {
                       "argumentTypes": [],
-                      "id": 253,
+                      "id": 241,
                       "name": "Unpause",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 119,
+                      "referencedDeclaration": 107,
                       "src": "1925:7:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$__$returns$__$",
                         "typeString": "function ()"
                       }
                     },
-                    "id": 254,
+                    "id": 242,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -4449,28 +4449,28 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 255,
+                  "id": 243,
                   "nodeType": "EmitStatement",
                   "src": "1920:14:3"
                 }
               ]
             },
             "documentation": "取消暂停合约",
-            "id": 257,
+            "id": 245,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
             "modifiers": [
               {
                 "arguments": null,
-                "id": 245,
+                "id": 233,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 244,
+                  "id": 232,
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 370,
+                  "referencedDeclaration": 415,
                   "src": "1866:9:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -4482,14 +4482,14 @@
               },
               {
                 "arguments": null,
-                "id": 247,
+                "id": 235,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 246,
+                  "id": 234,
                   "name": "whenPaused",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 177,
+                  "referencedDeclaration": 165,
                   "src": "1876:10:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -4503,19 +4503,19 @@
             "name": "unpause",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 243,
+              "id": 231,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1863:2:3"
             },
             "payable": false,
             "returnParameters": {
-              "id": 248,
+              "id": 236,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1894:0:3"
             },
-            "scope": 336,
+            "scope": 324,
             "src": "1847:92:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -4523,14 +4523,14 @@
           },
           {
             "body": {
-              "id": 278,
+              "id": 266,
               "nodeType": "Block",
               "src": "2040:66:3",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 270,
+                    "id": 258,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -4539,25 +4539,25 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 266,
+                        "id": 254,
                         "name": "frozenList",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 146,
+                        "referencedDeclaration": 134,
                         "src": "2046:10:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                           "typeString": "mapping(address => bool)"
                         }
                       },
-                      "id": 268,
+                      "id": 256,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "id": 267,
+                        "id": 255,
                         "name": "who",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 259,
+                        "referencedDeclaration": 247,
                         "src": "2057:3:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -4580,7 +4580,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "74727565",
-                      "id": 269,
+                      "id": 257,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -4601,7 +4601,7 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 271,
+                  "id": 259,
                   "nodeType": "ExpressionStatement",
                   "src": "2046:22:3"
                 },
@@ -4613,18 +4613,18 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 273,
+                          "id": 261,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2441,
+                          "referencedDeclaration": 2474,
                           "src": "2085:3:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
                             "typeString": "msg"
                           }
                         },
-                        "id": 274,
+                        "id": 262,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -4640,11 +4640,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 275,
+                        "id": 263,
                         "name": "who",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 259,
+                        "referencedDeclaration": 247,
                         "src": "2097:3:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -4663,18 +4663,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 272,
+                      "id": 260,
                       "name": "Froze",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 125,
+                      "referencedDeclaration": 113,
                       "src": "2079:5:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$returns$__$",
                         "typeString": "function (address,address)"
                       }
                     },
-                    "id": 276,
+                    "id": 264,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -4688,14 +4688,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 277,
+                  "id": 265,
                   "nodeType": "EmitStatement",
                   "src": "2074:27:3"
                 }
               ]
             },
             "documentation": "冻结账户\n",
-            "id": 279,
+            "id": 267,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -4706,18 +4706,18 @@
                     "argumentTypes": null,
                     "expression": {
                       "argumentTypes": null,
-                      "id": 262,
+                      "id": 250,
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2441,
+                      "referencedDeclaration": 2474,
                       "src": "2021:3:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
                         "typeString": "msg"
                       }
                     },
-                    "id": 263,
+                    "id": 251,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -4732,14 +4732,14 @@
                     }
                   }
                 ],
-                "id": 264,
+                "id": 252,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 261,
+                  "id": 249,
                   "name": "whenAdministrator",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 214,
+                  "referencedDeclaration": 202,
                   "src": "2003:17:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$_t_address_$",
@@ -4753,15 +4753,15 @@
             "name": "froze",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 260,
+              "id": 248,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 259,
+                  "id": 247,
                   "name": "who",
                   "nodeType": "VariableDeclaration",
-                  "scope": 279,
+                  "scope": 267,
                   "src": "1990:11:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4770,7 +4770,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 258,
+                    "id": 246,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1990:7:3",
@@ -4787,12 +4787,12 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 265,
+              "id": 253,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2040:0:3"
             },
-            "scope": 336,
+            "scope": 324,
             "src": "1975:131:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -4800,14 +4800,14 @@
           },
           {
             "body": {
-              "id": 299,
+              "id": 287,
               "nodeType": "Block",
               "src": "2215:68:3",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 291,
+                    "id": 279,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -4820,25 +4820,25 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 288,
+                        "id": 276,
                         "name": "frozenList",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 146,
+                        "referencedDeclaration": 134,
                         "src": "2228:10:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                           "typeString": "mapping(address => bool)"
                         }
                       },
-                      "id": 290,
+                      "id": 278,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "id": 289,
+                        "id": 277,
                         "name": "who",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 281,
+                        "referencedDeclaration": 269,
                         "src": "2239:3:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -4861,7 +4861,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 292,
+                  "id": 280,
                   "nodeType": "ExpressionStatement",
                   "src": "2221:22:3"
                 },
@@ -4873,18 +4873,18 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 294,
+                          "id": 282,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2441,
+                          "referencedDeclaration": 2474,
                           "src": "2262:3:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
                             "typeString": "msg"
                           }
                         },
-                        "id": 295,
+                        "id": 283,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -4900,11 +4900,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 296,
+                        "id": 284,
                         "name": "who",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 281,
+                        "referencedDeclaration": 269,
                         "src": "2274:3:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -4923,18 +4923,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 293,
+                      "id": 281,
                       "name": "Unfroze",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 131,
+                      "referencedDeclaration": 119,
                       "src": "2254:7:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$returns$__$",
                         "typeString": "function (address,address)"
                       }
                     },
-                    "id": 297,
+                    "id": 285,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -4948,14 +4948,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 298,
+                  "id": 286,
                   "nodeType": "EmitStatement",
                   "src": "2249:29:3"
                 }
               ]
             },
             "documentation": "取消冻结账户\n",
-            "id": 300,
+            "id": 288,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -4966,18 +4966,18 @@
                     "argumentTypes": null,
                     "expression": {
                       "argumentTypes": null,
-                      "id": 284,
+                      "id": 272,
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2441,
+                      "referencedDeclaration": 2474,
                       "src": "2196:3:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
                         "typeString": "msg"
                       }
                     },
-                    "id": 285,
+                    "id": 273,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -4992,14 +4992,14 @@
                     }
                   }
                 ],
-                "id": 286,
+                "id": 274,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 283,
+                  "id": 271,
                   "name": "whenAdministrator",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 214,
+                  "referencedDeclaration": 202,
                   "src": "2178:17:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$_t_address_$",
@@ -5013,15 +5013,15 @@
             "name": "unfroze",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 282,
+              "id": 270,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 281,
+                  "id": 269,
                   "name": "who",
                   "nodeType": "VariableDeclaration",
-                  "scope": 300,
+                  "scope": 288,
                   "src": "2165:11:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -5030,7 +5030,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 280,
+                    "id": 268,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "2165:7:3",
@@ -5047,12 +5047,12 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 287,
+              "id": 275,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2215:0:3"
             },
-            "scope": 336,
+            "scope": 324,
             "src": "2148:135:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -5060,14 +5060,14 @@
           },
           {
             "body": {
-              "id": 317,
+              "id": 305,
               "nodeType": "Block",
               "src": "2378:64:3",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 311,
+                    "id": 299,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -5076,25 +5076,25 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 307,
+                        "id": 295,
                         "name": "adminList",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 150,
+                        "referencedDeclaration": 138,
                         "src": "2384:9:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                           "typeString": "mapping(address => bool)"
                         }
                       },
-                      "id": 309,
+                      "id": 297,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "id": 308,
+                        "id": 296,
                         "name": "who",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 302,
+                        "referencedDeclaration": 290,
                         "src": "2394:3:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -5117,7 +5117,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "74727565",
-                      "id": 310,
+                      "id": 298,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -5138,7 +5138,7 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 312,
+                  "id": 300,
                   "nodeType": "ExpressionStatement",
                   "src": "2384:21:3"
                 },
@@ -5148,11 +5148,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 314,
+                        "id": 302,
                         "name": "who",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 302,
+                        "referencedDeclaration": 290,
                         "src": "2433:3:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -5167,18 +5167,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 313,
+                      "id": 301,
                       "name": "AddAdministrator",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 135,
+                      "referencedDeclaration": 123,
                       "src": "2416:16:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 315,
+                    "id": 303,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -5192,28 +5192,28 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 316,
+                  "id": 304,
                   "nodeType": "EmitStatement",
                   "src": "2411:26:3"
                 }
               ]
             },
             "documentation": "添加管理员\n",
-            "id": 318,
+            "id": 306,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
             "modifiers": [
               {
                 "arguments": null,
-                "id": 305,
+                "id": 293,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 304,
+                  "id": 292,
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 370,
+                  "referencedDeclaration": 415,
                   "src": "2361:9:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -5227,15 +5227,15 @@
             "name": "addAdministrator",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 303,
+              "id": 291,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 302,
+                  "id": 290,
                   "name": "who",
                   "nodeType": "VariableDeclaration",
-                  "scope": 318,
+                  "scope": 306,
                   "src": "2348:11:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -5244,7 +5244,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 301,
+                    "id": 289,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "2348:7:3",
@@ -5261,12 +5261,12 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 306,
+              "id": 294,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2378:0:3"
             },
-            "scope": 336,
+            "scope": 324,
             "src": "2322:120:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -5274,14 +5274,14 @@
           },
           {
             "body": {
-              "id": 334,
+              "id": 322,
               "nodeType": "Block",
               "src": "2537:64:3",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 328,
+                    "id": 316,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -5294,25 +5294,25 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 325,
+                        "id": 313,
                         "name": "adminList",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 150,
+                        "referencedDeclaration": 138,
                         "src": "2550:9:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                           "typeString": "mapping(address => bool)"
                         }
                       },
-                      "id": 327,
+                      "id": 315,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "id": 326,
+                        "id": 314,
                         "name": "who",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 320,
+                        "referencedDeclaration": 308,
                         "src": "2560:3:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -5335,7 +5335,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 329,
+                  "id": 317,
                   "nodeType": "ExpressionStatement",
                   "src": "2543:21:3"
                 },
@@ -5345,11 +5345,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 331,
+                        "id": 319,
                         "name": "who",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 320,
+                        "referencedDeclaration": 308,
                         "src": "2592:3:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -5364,18 +5364,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 330,
+                      "id": 318,
                       "name": "DelAdministrator",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 139,
+                      "referencedDeclaration": 127,
                       "src": "2575:16:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 332,
+                    "id": 320,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -5389,28 +5389,28 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 333,
+                  "id": 321,
                   "nodeType": "EmitStatement",
                   "src": "2570:26:3"
                 }
               ]
             },
             "documentation": "删除管理员\n",
-            "id": 335,
+            "id": 323,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
             "modifiers": [
               {
                 "arguments": null,
-                "id": 323,
+                "id": 311,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 322,
+                  "id": 310,
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 370,
+                  "referencedDeclaration": 415,
                   "src": "2520:9:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -5424,15 +5424,15 @@
             "name": "delAdministrator",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 321,
+              "id": 309,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 320,
+                  "id": 308,
                   "name": "who",
                   "nodeType": "VariableDeclaration",
-                  "scope": 335,
+                  "scope": 323,
                   "src": "2507:11:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -5441,7 +5441,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 319,
+                    "id": 307,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "2507:7:3",
@@ -5458,19 +5458,19 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 324,
+              "id": 312,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2537:0:3"
             },
-            "scope": 336,
+            "scope": 324,
             "src": "2481:120:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 337,
+        "scope": 325,
         "src": "135:2468:3"
       }
     ],
@@ -5482,5 +5482,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-08-26T05:07:11.402Z"
+  "updatedAt": "2018-10-05T07:08:48.793Z"
 }

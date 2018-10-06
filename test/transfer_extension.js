@@ -1,6 +1,7 @@
 
 var SibbayHealthToken = artifacts.require("./SibbayHealthToken.sol");
 const { increaseTime } = require("./utils/increaseTime.js");
+const { latestTime } = require("./utils/latestTime.js");
 
 contract("SibbayHealthToken", accounts => {
 
@@ -12,10 +13,11 @@ contract("SibbayHealthToken", accounts => {
     // buy price 0.1 ether
     let buyPrice = 10 ** 17;
     let sht;
-    let time = Math.floor(Date.now() / 1000);
+    let time;
 
     beforeEach(async() => {
         sht = await SibbayHealthToken.new();
+        time = await latestTime();
     });
 
     it("transfer 100 tokens to fund account and get eth should be successful", async() => {
