@@ -123,7 +123,10 @@ contract Management is Ownable {
   /**
    * 取消冻结账户
    * */
-  function unfroze(address who) whenAdministrator(msg.sender) public {
+  function unfroze(address who) whenAdministrator(msg.sender)  public {
+    //不允许自己解冻,即使自己是admin
+    require(who != msg.sender);
+
     delete frozenList[who];
     emit Unfroze(msg.sender, who);
   }
