@@ -1,0 +1,28 @@
+{
+  "name": "sht",
+  "version": "1.0.0",
+  "description": "sht",
+  "main": "truffle.js",
+  "directories": {
+    "doc": "doc",
+    "test": "test"
+  },
+  "dependencies": {
+    "log4js": "^3.0.5",
+    "pify": "^4.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sibbay-ai/token.git"
+  },
+  "author": "henry",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sibbay-ai/token/issues"
+  },
+  "homepage": "https://github.com/sibbay-ai/token#readme"
+}
