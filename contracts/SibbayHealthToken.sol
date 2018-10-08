@@ -137,10 +137,10 @@ contract SibbayHealthToken is StandardToken, Management {
   }
 
   /**
-   * 获取到期的锁定期余额, 内部接口
+   * 重新计算到期的锁定期余额, 内部接口
    * _who: 账户地址
    * */
-  function getlockedBalances(address _who) internal
+  function refreshlockedBalances(address _who) internal
   {
     uint256 tmp_date = accounts[_who].start_date;
     uint256 tmp_value = accounts[_who].lockedElement[tmp_date].value;
@@ -289,7 +289,8 @@ contract SibbayHealthToken is StandardToken, Management {
     /**
      * 获取到期的锁定期余额
      * */
-    getlockedBalances(msg.sender);
+    refreshlockedBalances(msg.sender);
+    refreshlockedBalances(_to);
 
     // 修改可用账户余额
     transferAvailableBalances(msg.sender, _to, _value);
@@ -324,7 +325,8 @@ contract SibbayHealthToken is StandardToken, Management {
     /**
      * 获取到期的锁定期余额
      * */
-    getlockedBalances(_from);
+    refreshlockedBalances(_from);
+    refreshlockedBalances(_to);
 
     // 检查代理额度
     require(_value <= allowed[_from][msg.sender]);
@@ -408,7 +410,7 @@ contract SibbayHealthToken is StandardToken, Management {
     /**
      * 获取到期的锁定期余额
      * */
-    getlockedBalances(msg.sender);
+    refreshlockedBalances(msg.sender);
 
     // 判断可用余额足够
     uint32 i = 0;
@@ -428,6 +430,7 @@ contract SibbayHealthToken is StandardToken, Management {
       // 不能向0地址转账
       require(_receivers[i] != address(0));
 
+      refreshlockedBalances(_receivers[i]);
       // 修改可用账户余额
       transferAvailableBalances(msg.sender, _receivers[i], _values[i]);
     }
@@ -455,7 +458,7 @@ contract SibbayHealthToken is StandardToken, Management {
     /**
      * 获取到期的锁定期余额
      * */
-    getlockedBalances(_from);
+    refreshlockedBalances(_from);
 
     // 判断可用余额足够
     uint32 i = 0;
@@ -481,6 +484,7 @@ contract SibbayHealthToken is StandardToken, Management {
       // 不能向0地址转账
       require(_receivers[i] != address(0));
 
+      refreshlockedBalances(_receivers[i]);
       // 修改可用账户余额
       transferAvailableBalances(_from, _receivers[i], _values[i]);
     }
@@ -515,7 +519,8 @@ contract SibbayHealthToken is StandardToken, Management {
     /**
      * 获取到期的锁定期余额
      * */
-    getlockedBalances(msg.sender);
+    refreshlockedBalances(msg.sender);
+    refreshlockedBalances(_receiver);
 
     // 判断可用余额足够
     uint32 i = 0;
@@ -567,7 +572,8 @@ contract SibbayHealthToken is StandardToken, Management {
     /**
      * 获取到期的锁定期余额
      * */
-    getlockedBalances(_from);
+    refreshlockedBalances(_from);
+    refreshlockedBalances(_receiver);
 
     // 判断可用余额足够
     uint32 i = 0;
@@ -770,6 +776,13 @@ contract SibbayHealthToken is StandardToken, Management {
    * */
   function closeBuySell() public whenOpenBuySell onlyOwner {
     buySellFlag = false;
+  }
+
+  /**
+   * 重新计算账号的lockbalance
+   * */
+  function refresh(address _who) public  {
+    refreshlockedBalances(_who);
   }
 
   /**

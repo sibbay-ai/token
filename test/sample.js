@@ -1,5 +1,4 @@
 
-
 /*
  * 测试样板
  * 仅供truffle testcase使用
