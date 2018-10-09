@@ -1,6 +1,7 @@
 var SibbayHealthToken = artifacts.require("./SibbayHealthToken.sol");
 var log4js = require('log4js');
 const { increaseTime } = require("./utils/increaseTime.js");
+const { latestTime } = require("./utils/latestTime.js");
 
 contract("SibbayHealthToken", accounts => {
 
@@ -14,45 +15,33 @@ contract("SibbayHealthToken", accounts => {
     // buy price 0.1 ether
     let buyPrice = 10 ** 17;
     let sht;
-    let time = Math.floor(Date.now() / 1000);
+    let time;
 
-    function sleep(second){
-        var start = Math.floor(Date.now() / 1000);
-        let now = Math.floor(Date.now() / 1000);
-        while ((start+second)>= now)
-        {
-            now = Math.floor(Date.now() / 1000);
-        }
-    }
     beforeEach(async() => {
         sht = await SibbayHealthToken.new();
+        time = await latestTime();
     });
 
     it("transfer by date 日期更新", async() => {
-        time = Math.floor(Date.now() / 1000);
         await sht.transferByDate(acc3, [1 * MAGNITUDE, 2*MAGNITUDE, 3*MAGNITUDE], [time + DAY,time + 2*DAY,time + 3*DAY], {from: owner});
         await sht.transferByDate(acc3, [1 * MAGNITUDE, 2*MAGNITUDE, 3*MAGNITUDE], [time + 5,time + 2*3600,time + 24*3600], {from: owner});
         var res = await sht.accounts.call(acc3)
         var first = res[1]
         assert.equal(first, time + 5);
-        //logger.info(first);
         // increase time
         await increaseTime(6);
 
         res = await sht.accounts.call(acc3)
         first = res[1]
         assert.equal(first, time + 5);
-        //logger.info(first,Math.floor(Date.now() / 1000));
         await sht.refresh(acc3)
         res = await sht.accounts.call(acc3)
         first = res[1]
-        //logger.info(first,time + DAY);
         assert.equal(first, time + 2*3600);
 
     })
 
     it("transfer by date 大量压力", async() => {
-        time = Math.floor(Date.now() / 1000);
         var times = 30
         let i = 0
         while (i<times){
@@ -85,7 +74,6 @@ contract("SibbayHealthToken", accounts => {
 
 
     it("transfer by date 相同日期重叠相加", async() => {
-        time = Math.floor(Date.now() / 1000);
         await sht.transferByDate(acc1, [1 * MAGNITUDE], [time + DAY], {from: owner});
         await sht.transferByDate(acc1, [0.3 * MAGNITUDE], [time + DAY], {from: owner});
 
@@ -99,7 +87,6 @@ contract("SibbayHealthToken", accounts => {
     })
 
     it("transfer by date 时间交错+叠加", async() => {
-        time = Math.floor(Date.now() / 1000);
         await sht.transferByDate(acc2, [1 * MAGNITUDE, 2*MAGNITUDE, 3*MAGNITUDE], [time + 3*DAY,time + 2*DAY,time + 1*DAY], {from: owner});
         await sht.transferByDate(acc2, [0.1 * MAGNITUDE, 0.2*MAGNITUDE, 0.3*MAGNITUDE], [time + 1*DAY,time + 2*3600,time + 1*3600], {from: owner});
 

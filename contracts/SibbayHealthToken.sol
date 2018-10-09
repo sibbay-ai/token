@@ -140,7 +140,7 @@ contract SibbayHealthToken is StandardToken, Management {
    * 重新计算到期的锁定期余额, 内部接口
    * _who: 账户地址
    * */
-  function refreshlockedBalances(address _who) internal
+  function refreshlockedBalances(address _who, bool _update) internal returns (uint256)
   {
     uint256 tmp_date = accounts[_who].start_date;
     uint256 tmp_value = accounts[_who].lockedElement[tmp_date].value;
@@ -162,8 +162,13 @@ contract SibbayHealthToken is StandardToken, Management {
       tmp_value = accounts[_who].lockedElement[tmp_date].value;
 
       // delete 锁定期余额
-      delete accounts[_who].lockedElement[tmp_var];
+      if (_update)
+        delete accounts[_who].lockedElement[tmp_var];
     }
+
+    // return expired balance
+    if(!_update)
+      return tmp_balances;
 
     // 修改锁定期数据
     accounts[_who].start_date = tmp_date;
@@ -173,6 +178,8 @@ contract SibbayHealthToken is StandardToken, Management {
     // 将最早和最晚时间的标志，都置0，即最初状态
     if (accounts[_who].start_date == 0)
         accounts[_who].end_date = 0;
+
+    return tmp_balances;
   }
 
   /**
@@ -289,8 +296,8 @@ contract SibbayHealthToken is StandardToken, Management {
     /**
      * 获取到期的锁定期余额
      * */
-    refreshlockedBalances(msg.sender);
-    refreshlockedBalances(_to);
+    refreshlockedBalances(msg.sender, true);
+    refreshlockedBalances(_to, true);
 
     // 修改可用账户余额
     transferAvailableBalances(msg.sender, _to, _value);
@@ -325,8 +332,8 @@ contract SibbayHealthToken is StandardToken, Management {
     /**
      * 获取到期的锁定期余额
      * */
-    refreshlockedBalances(_from);
-    refreshlockedBalances(_to);
+    refreshlockedBalances(_from, true);
+    refreshlockedBalances(_to, true);
 
     // 检查代理额度
     require(_value <= allowed[_from][msg.sender]);
@@ -410,7 +417,7 @@ contract SibbayHealthToken is StandardToken, Management {
     /**
      * 获取到期的锁定期余额
      * */
-    refreshlockedBalances(msg.sender);
+    refreshlockedBalances(msg.sender, true);
 
     // 判断可用余额足够
     uint32 i = 0;
@@ -430,7 +437,7 @@ contract SibbayHealthToken is StandardToken, Management {
       // 不能向0地址转账
       require(_receivers[i] != address(0));
 
-      refreshlockedBalances(_receivers[i]);
+      refreshlockedBalances(_receivers[i], true);
       // 修改可用账户余额
       transferAvailableBalances(msg.sender, _receivers[i], _values[i]);
     }
@@ -458,7 +465,7 @@ contract SibbayHealthToken is StandardToken, Management {
     /**
      * 获取到期的锁定期余额
      * */
-    refreshlockedBalances(_from);
+    refreshlockedBalances(_from, true);
 
     // 判断可用余额足够
     uint32 i = 0;
@@ -484,7 +491,7 @@ contract SibbayHealthToken is StandardToken, Management {
       // 不能向0地址转账
       require(_receivers[i] != address(0));
 
-      refreshlockedBalances(_receivers[i]);
+      refreshlockedBalances(_receivers[i], true);
       // 修改可用账户余额
       transferAvailableBalances(_from, _receivers[i], _values[i]);
     }
@@ -519,8 +526,8 @@ contract SibbayHealthToken is StandardToken, Management {
     /**
      * 获取到期的锁定期余额
      * */
-    refreshlockedBalances(msg.sender);
-    refreshlockedBalances(_receiver);
+    refreshlockedBalances(msg.sender, true);
+    refreshlockedBalances(_receiver, true);
 
     // 判断可用余额足够
     uint32 i = 0;
@@ -572,8 +579,8 @@ contract SibbayHealthToken is StandardToken, Management {
     /**
      * 获取到期的锁定期余额
      * */
-    refreshlockedBalances(_from);
-    refreshlockedBalances(_receiver);
+    refreshlockedBalances(_from, true);
+    refreshlockedBalances(_receiver, true);
 
     // 判断可用余额足够
     uint32 i = 0;
@@ -782,21 +789,21 @@ contract SibbayHealthToken is StandardToken, Management {
    * 重新计算账号的lockbalance
    * */
   function refresh(address _who) public  {
-    refreshlockedBalances(_who);
+    refreshlockedBalances(_who, true);
   }
 
   /**
    * 获取可用余额
    * */
   function availableBalanceOf(address _who) public view returns (uint256) {
-    return balances[_who];
+    return (balances[_who] + refreshlockedBalances(_who, false));
   }
 
   /**
    * 获取锁定余额
    * */
   function lockedBalanceOf(address _who) public view returns (uint256) {
-    return accounts[_who].lockedBalances;
+    return (accounts[_who].lockedBalances - refreshlockedBalances(_who, false));
   }
 
   /**

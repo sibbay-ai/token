@@ -24,6 +24,14 @@ module.exports = {
           gasPrice: 4000000000,
           from: "0x8f106d3e03ccb8042772261661789445fd9d930a"
       },
+      mytest: {
+          host: "127.0.0.1",
+          port: 8090,
+          network_id: "666",
+          gas: 7000000,
+          gasPrice: 4000000000,
+          from: "0x09de6b21f6c115871e6440ece7950fe26b6764fd"
+      },
       private_test: {
           host: "101.37.115.57",
           port: 18090,

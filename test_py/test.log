@@ -1,0 +1,426 @@
+$ bash test.sh 
+/home/henry/learning/git/token/test_py/settings.py:3: UserWarning: Not reading /home/henry/learning/git/token/test_py/.env - it doesn't exist.
+dotenv.read_dotenv()
+connect to node by http: http://127.0.0.1:8090
+set_fund_account gas used: 45109
+set_sell_price gas used: 44789
+set_buy_price gas used: 44217
+open_buy_sell gas used: 28488
+send_ether gas used: 21000
+send_ether gas used: 21000
+transfer_by_date with 1 dates gas used: 105279
+start token_test 9.1
+transfer_from_by_date with 1 dates gas used: 6000000
+transfer_from_by_date with 1 dates gas used: 6000000
+transfer_from_by_date with 1 dates gas used: 6000000
+transfer_from_by_date with 1 dates gas used: 6000000
+transfer_from_by_date with 1 dates gas used: 6000000
+start token_test 9.2-9.1
+approve gas used: 46618
+transfer_from_by_date with 1 dates gas used: 113265
+transfer_from_by_date with 1 dates gas used: 98265
+transfer_from_by_date with 1 dates gas used: 171468
+transfer_from_by_date with 1 dates gas used: 136536
+transfer_from_by_date with 1 dates gas used: 137033
+start token_test 9.2-8.2.1
+approve gas used: 31618
+transfer_from_by_date with 2 dates gas used: 109926
+transfer_from_by_date with 2 dates gas used: 153791
+transfer_from_by_date with 2 dates gas used: 197592
+start token_test 9.2-8.2.2
+approve gas used: 31618
+transfer_from_by_date with 2 dates gas used: 94926
+approve gas used: 46618
+transfer_from_by_date with 2 dates gas used: 139657
+approve gas used: 46618
+transfer_from_by_date with 2 dates gas used: 183458
+start token_test 9.2-8.2.3
+approve gas used: 46618
+transfer_from_by_date with 2 dates gas used: 6000000
+transfer_from_by_date with 2 dates gas used: 6000000
+transfer_from_by_date with 2 dates gas used: 6000000
+.
+----------------------------------------------------------------------
+Ran 1 test in 1076.010s
+
+OK
+/home/henry/learning/git/token/test_py/settings.py:3: UserWarning: Not reading /home/henry/learning/git/token/test_py/.env - it doesn't exist.
+dotenv.read_dotenv()
+connect to node by http: http://127.0.0.1:8090
+send_ether gas used: 21000
+start token_test 3.1
+start token_test 3.2
+approve gas used: 46682
+start token_test 3.3
+approve gas used: 16234
+start token_test 4.1
+increase_approval gas used: 32893
+start token_test 4.2
+increase_approval gas used: 48341
+start token_test 4.3
+increase_approval gas used: 6000000
+start token_test 5.1
+decrease_approval gas used: 32529
+start token_test 5.2
+decrease_approval gas used: 32913
+start token_test 5.3
+decrease_approval gas used: 19486
+.
+----------------------------------------------------------------------
+Ran 1 test in 316.501s
+
+OK
+/home/henry/learning/git/token/test_py/settings.py:3: UserWarning: Not reading /home/henry/learning/git/token/test_py/.env - it doesn't exist.
+dotenv.read_dotenv()
+connect to node by http: http://127.0.0.1:8090
+set_fund_account gas used: 30109
+send_ether gas used: 21000
+send_ether gas used: 21000
+transfer gas used: 98293
+approve gas used: 46554
+batch transfer and batch transfer from for 10 receivers
+batch_transfer with 10 receivers gas used: 579841
+batch_transfer_from with 10 receivers gas used: 441137
+batch transfer and batch transfer from for 50 receivers
+batch_transfer with 50 receivers gas used: 2563358
+batch_transfer_from with 50 receivers gas used: 1989614
+batch transfer and batch transfer from for 100 receivers
+batch_transfer with 100 receivers gas used: 4630129
+batch_transfer_from with 100 receivers gas used: 3925021
+transfer by date and transfer from by date for 3 dates
+transfer_by_date with 3 dates gas used: 137215
+transfer_from_by_date with 3 dates gas used: 131013
+transfer by date and transfer from by date for 5 dates
+transfer_by_date with 5 dates gas used: 154536
+transfer_from_by_date with 5 dates gas used: 164082
+transfer by date and transfer from by date for 10 dates
+transfer_by_date with 10 dates gas used: 235435
+transfer_from_by_date with 10 dates gas used: 246851
+.
+----------------------------------------------------------------------
+Ran 1 test in 1359.622s
+
+OK
+/home/henry/learning/git/token/test_py/settings.py:3: UserWarning: Not reading /home/henry/learning/git/token/test_py/.env - it doesn't exist.
+dotenv.read_dotenv()
+connect to node by http: http://127.0.0.1:8090
+set_fund_account gas used: 30109
+send_ether gas used: 21000
+send_ether gas used: 21000
+start token_test 2.1 - 1.1.1 代理余额为0，普通账户向0地址转账 
+transfer gas used: 98357
+transfer_from gas used: 6000000
+start token_test 2.1 - 1.1.2 代理余额为0，冻结账户向0地址转账 
+froze gas used: 45923
+transfer_from gas used: 6000000
+unfroze gas used: 15897
+start token_test 2.1 - 1.2.2 代理余额为0，余额大于0时转账0个token
+transfer_from gas used: 90533
+start token_test 2.1 - 1.2.1 代理余额为0，余额为0时转账0个token
+transfer gas used: 83357
+transfer_from gas used: 90533
+start token_test 2.1 - 1.3.1 代理余额为0，余额为0时，转账大于余额
+transfer_from gas used: 6000000
+start token_test 2.1 - 1.3.2 代理余额为0，余额大于0时，转账大于余额
+transfer gas used: 98357
+transfer_from gas used: 6000000
+start token_test 2.1 - 1.3.3 代理余额为0，余额大于0时，转账2^256-1个token
+transfer_from gas used: 6000000
+start token_test 2.1 - 1.4 代理余额为0，转账部分余额
+transfer_from gas used: 6000000
+start token_test 2.1 - 1.5 代理余额为0，转账所有余额
+transfer_from gas used: 6000000
+start token_test 2.1 - 1.6.1 代理余额为0，当关闭赎回开关时，向赎回地址转账
+close_buy_sell gas used: 28253
+send_ether gas used: 21040
+transfer_from gas used: 6000000
+start token_test 2.1 - 1.6.2 代理余额为0，当打开赎回开关时，向赎回地址转账0个token
+open_buy_sell gas used: 28488
+transfer_from gas used: 6000000
+start token_test 2.1 - 1.6.3 代理余额为0，当打开赎回开关时，向赎回地址转账大于0个token
+transfer_from gas used: 6000000
+start token_test 2.1 - 1.6.4 代理余额为0，当打开赎回开关时，向赎回地址转账，转账赎回的金额大于合约预存金额
+transfer_from gas used: 6000000
+start token_test 2.1 - 1.7.1 代理余额为0，向冻结账户转账0个token
+froze gas used: 45923
+transfer_from gas used: 90533
+start token_test 2.1 - 1.7.2 代理余额为0，向冻结账户转账大于0个token
+transfer_from gas used: 6000000
+.
+----------------------------------------------------------------------
+Ran 1 test in 765.515s
+
+OK
+/home/henry/learning/git/token/test_py/settings.py:3: UserWarning: Not reading /home/henry/learning/git/token/test_py/.env - it doesn't exist.
+dotenv.read_dotenv()
+connect to node by http: http://127.0.0.1:8090
+set_fund_account gas used: 30109
+send_ether gas used: 21000
+send_ether gas used: 21000
+start token_test 7.1-1.1
+transfer gas used: 98293
+approve gas used: 46618
+batch_transfer_from with 1 receivers gas used: 6000000
+froze gas used: 45923
+batch_transfer_from with 1 receivers gas used: 6000000
+unfroze gas used: 15897
+transfer gas used: 83293
+start token_test 7.1-1.2
+approve gas used: 16234
+batch_transfer_from with 1 receivers gas used: 92839
+batch_transfer with 1 receivers gas used: 100293
+approve gas used: 46618
+batch_transfer_from with 1 receivers gas used: 92839
+transfer gas used: 68293
+start token_test 7.1-1.3
+batch_transfer with 1 receivers gas used: 100293
+approve gas used: 16234
+batch_transfer_from with 1 receivers gas used: 6000000
+approve gas used: 46618
+batch_transfer_from with 1 receivers gas used: 6000000
+batch_transfer_from with 1 receivers gas used: 6000000
+start token_test 7.1-1.4
+batch_transfer_from with 1 receivers gas used: 93223
+start token_test 7.1-1.5
+batch_transfer_from with 1 receivers gas used: 63223
+start token_test 7.1-1.6
+close_buy_sell gas used: 28253
+withdraw gas used: 30081
+send_ether gas used: 21040
+batch_transfer with 1 receivers gas used: 100357
+approve gas used: 46682
+batch_transfer_from with 1 receivers gas used: 6000000
+open_buy_sell gas used: 28488
+batch_transfer_from with 1 receivers gas used: 6000000
+batch_transfer_from with 1 receivers gas used: 6000000
+batch_transfer_from with 1 receivers gas used: 6000000
+start token_test 7.1-1.7
+froze gas used: 45923
+batch_transfer_from with 1 receivers gas used: 92839
+batch_transfer_from with 1 receivers gas used: 108223
+start token_test 7.2
+approve gas used: 31618
+batch_transfer_from with 2 receivers gas used: 6000000
+batch_transfer_from with 2 receivers gas used: 147136
+batch_transfer_from with 2 receivers gas used: 117136
+.
+----------------------------------------------------------------------
+Ran 1 test in 1349.199s
+
+OK
+/home/henry/learning/git/token/test_py/settings.py:3: UserWarning: Not reading /home/henry/learning/git/token/test_py/.env - it doesn't exist.
+dotenv.read_dotenv()
+connect to node by http: http://127.0.0.1:8090
+send_ether gas used: 21000
+open buy sell flag
+transfer gas used: 98293
+set_fund_account gas used: 30109
+pause and unpause contract
+pause gas used: 28659
+unpause gas used: 28348
+add administrator
+add_administrator gas used: 45441
+froze and unfroze account
+froze gas used: 45923
+unfroze gas used: 15897
+del administrator
+del_administrator gas used: 14867
+send ether to contract and withdraw
+send_ether gas used: 21040
+buy and sell tokens
+send_ether gas used: 21000
+buy gas used: 71968
+sell gas used: 94434
+close buy sell flag
+close_buy_sell gas used: 28253
+withdraw gas used: 30081
+.
+----------------------------------------------------------------------
+Ran 1 test in 495.523s
+
+OK
+/home/henry/learning/git/token/test_py/settings.py:3: UserWarning: Not reading /home/henry/learning/git/token/test_py/.env - it doesn't exist.
+dotenv.read_dotenv()
+connect to node by http: http://127.0.0.1:8090
+set_fund_account gas used: 30109
+send_ether gas used: 21000
+send_ether gas used: 21000
+approve gas used: 46682
+start token_test 2.2-1.1
+transfer gas used: 98357
+transfer_from gas used: 6000000
+froze gas used: 45923
+transfer_from gas used: 6000000
+unfroze gas used: 15897
+start token_test 2.2-1.2
+approve gas used: 16234
+transfer_from gas used: 90533
+approve gas used: 46682
+transfer_from gas used: 90533
+start token_test 2.2-1.3
+approve gas used: 16234
+transfer_from gas used: 6000000
+approve gas used: 46682
+transfer_from gas used: 6000000
+transfer_from gas used: 6000000
+start token_test 2.2-1.4
+transfer_from gas used: 105917
+start token_test 2.2-1.5
+transfer_from gas used: 60917
+start token_test 2.2-1.6
+send_ether gas used: 21040
+transfer gas used: 98357
+approve gas used: 46682
+transfer_from gas used: 6000000
+open_buy_sell gas used: 28488
+transfer_from gas used: 6000000
+transfer_from gas used: 6000000
+transfer_from gas used: 6000000
+start token_test 2.2-1.7
+froze gas used: 45923
+transfer_from gas used: 90533
+transfer_from gas used: 105981
+.
+----------------------------------------------------------------------
+Ran 1 test in 973.273s
+
+OK
+/home/henry/learning/git/token/test_py/settings.py:3: UserWarning: Not reading /home/henry/learning/git/token/test_py/.env - it doesn't exist.
+dotenv.read_dotenv()
+connect to node by http: http://127.0.0.1:8090
+set_fund_account gas used: 30045
+send_ether gas used: 21000
+start token_test 6.1-1.1
+batch_transfer with 1 receivers gas used: 100293
+batch_transfer with 1 receivers gas used: 6000000
+froze gas used: 45923
+batch_transfer with 1 receivers gas used: 6000000
+unfroze gas used: 15897
+start token_test 6.1-1.2
+transfer gas used: 83293
+batch_transfer with 1 receivers gas used: 84909
+batch_transfer with 1 receivers gas used: 100357
+batch_transfer with 1 receivers gas used: 84909
+start token_test 6.1-1.3
+transfer gas used: 68357
+batch_transfer with 1 receivers gas used: 6000000
+batch_transfer with 1 receivers gas used: 100357
+batch_transfer with 1 receivers gas used: 6000000
+batch_transfer with 1 receivers gas used: 6000000
+start token_test 6.1-1.4
+batch_transfer with 1 receivers gas used: 85293
+start token_test 6.1-1.5
+batch_transfer with 1 receivers gas used: 70293
+start token_test 6.1-1.6
+close_buy_sell gas used: 28253
+withdraw gas used: 30081
+send_ether gas used: 21040
+batch_transfer with 1 receivers gas used: 100357
+batch_transfer with 1 receivers gas used: 6000000
+open_buy_sell gas used: 28488
+batch_transfer with 1 receivers gas used: 6000000
+batch_transfer with 1 receivers gas used: 6000000
+batch_transfer with 1 receivers gas used: 6000000
+start token_test 6.1-1.7
+froze gas used: 45923
+batch_transfer with 1 receivers gas used: 84909
+batch_transfer with 1 receivers gas used: 85357
+start token_test 6.2
+unfroze gas used: 15897
+transfer gas used: 68357
+batch_transfer with 1 receivers gas used: 100293
+batch_transfer with 2 receivers gas used: 6000000
+batch_transfer with 2 receivers gas used: 153768
+batch_transfer with 2 receivers gas used: 108768
+.
+----------------------------------------------------------------------
+Ran 1 test in 1156.859s
+
+OK
+/home/henry/learning/git/token/test_py/settings.py:3: UserWarning: Not reading /home/henry/learning/git/token/test_py/.env - it doesn't exist.
+dotenv.read_dotenv()
+connect to node by http: http://127.0.0.1:8090
+set_fund_account gas used: 30109
+send_ether gas used: 21000
+start token_test 8.1
+transfer_by_date with 1 dates gas used: 105215
+transfer_by_date with 1 dates gas used: 90215
+transfer_by_date with 1 dates gas used: 163791
+transfer_by_date with 1 dates gas used: 128859
+transfer_by_date with 1 dates gas used: 129356
+transfer gas used: 78260
+start token_test 8.2.1
+transfer_by_date with 1 dates gas used: 100118
+transfer_by_date with 2 dates gas used: 116502
+transfer_by_date with 2 dates gas used: 175078
+transfer_by_date with 2 dates gas used: 183887
+transfer gas used: 63196
+start token_test 8.2.2
+transfer_by_date with 1 dates gas used: 100118
+transfer_by_date with 2 dates gas used: 81405
+transfer_by_date with 1 dates gas used: 100118
+transfer_by_date with 2 dates gas used: 126076
+transfer_by_date with 1 dates gas used: 100118
+transfer_by_date with 2 dates gas used: 170250
+start token_test 8.2.3
+transfer_by_date with 1 dates gas used: 100118
+transfer_by_date with 2 dates gas used: 6000000
+transfer_by_date with 2 dates gas used: 6000000
+transfer_by_date with 2 dates gas used: 6000000
+.
+----------------------------------------------------------------------
+Ran 1 test in 650.056s
+
+OK
+/home/henry/learning/git/token/test_py/settings.py:3: UserWarning: Not reading /home/henry/learning/git/token/test_py/.env - it doesn't exist.
+dotenv.read_dotenv()
+connect to node by http: http://127.0.0.1:8090
+set_fund_account gas used: 30109
+send_ether gas used: 21000
+start token_test 1.1.1 普通账户向0地址转账
+transfer gas used: 98357
+transfer gas used: 6000000
+start token_test 1.1.2 冻结账户向0地址转账
+froze gas used: 45923
+transfer gas used: 82084
+unfroze gas used: 15897
+start token_test 1.2.1 当余额为0时转账0个token
+transfer gas used: 82909
+start token_test 1.2.2 当余额大于0时转账0个token
+transfer gas used: 98357
+transfer gas used: 82909
+start token_test 1.3.1 余额为0时，转账大于余额
+transfer gas used: 83357
+transfer gas used: 6000000
+start token_test 1.3.2 余额大于0时，转账大于余额
+transfer gas used: 98357
+transfer gas used: 6000000
+start token_test 1.3.3 转账2^256-1个token
+transfer gas used: 6000000
+start token_test 1.4 转账部分余额
+transfer gas used: 83293
+start token_test 1.5 转账所有余额
+transfer gas used: 68293
+start token_test 1.6.1 当关闭赎回开关时，向赎回地址转账
+close_buy_sell gas used: 28253
+withdraw gas used: 30081
+send_ether gas used: 21040
+transfer gas used: 98357
+transfer gas used: 6000000
+start token_test 1.6.2 当打开赎回开关时，向赎回地址转账0个token
+open_buy_sell gas used: 28488
+transfer gas used: 6000000
+start token_test 1.6.3 当打开赎回开关时，向赎回地址转账大于0个token
+transfer gas used: 109233
+start token_test 1.6.4 当打开赎回开关时，向赎回地址转账，转账赎回的金额大于合约预存金额
+transfer gas used: 6000000
+start token_test 1.7.1 向冻结账户转账0个token
+froze gas used: 45923
+transfer gas used: 82909
+start token_test 1.7.2 向冻结账户转账大于0个token
+transfer gas used: 83357
+.
+----------------------------------------------------------------------
+Ran 1 test in 864.429s
+
+OK
