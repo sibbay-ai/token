@@ -1,0 +1,3 @@
+./build/contracts/
+./test_py/__pycache__
+./node_modules/
