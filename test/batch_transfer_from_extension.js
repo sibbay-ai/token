@@ -3,7 +3,7 @@ var SibbayHealthToken = artifacts.require("./SibbayHealthToken.sol");
 const { increaseTime } = require("./utils/increaseTime.js");
 const { latestTime } = require("./utils/latestTime.js");
 
-contract("SibbayHealthToken", accounts => {
+contract("SibbayHealthToken-batch-transfer-from-extension", accounts => {
     const [owner, fundAccount, spender, acc1, acc2, acc3] = accounts;
     const MAGNITUDE = 10 ** 18;
     const DAY = 3600 * 24;

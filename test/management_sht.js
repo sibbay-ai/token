@@ -1,7 +1,7 @@
 
 var SibbayHealthToken = artifacts.require("./SibbayHealthToken.sol");
 
-contract("SibbayHealthToken", accounts => {
+contract("SibbayHealthToken-management-sht", accounts => {
 
     const [owner, acc1, acc2, acc3] = accounts;
     const MAGNITUDE = 10 ** 18;
