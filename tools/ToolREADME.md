@@ -25,6 +25,6 @@ ETH_KEYSTORE_FILE = "/home/henry/tmp/UTC--2018-08-19T06-31-16.012953394Z--09de6b
 # 要部署的合约编译得到的json文件
 # 目前该脚本不支持部署合约传入参数
 ETH_CONTRACT_SHT_FILE = "../build/contracts/SibbayHealthToken.json"
-
-
 ```
+运行脚本  
+$ python deploy_contract.py
