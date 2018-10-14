@@ -81,6 +81,16 @@ contract SibbayHealthToken is StandardToken, Management {
   bool public buySellFlag;
 
   /**
+   * 需求：owner 每年释放的金额不得超过年初余额的10%
+   * curYear:  当前年初时间
+   * YEAR:  一年365天的时间
+   * vault: owner限制额度
+   * */
+  uint256 public curYear;
+  uint256 constant internal YEAR = 365 * 24 * 3600;
+  uint256 public vault;
+
+  /**
    * 合约构造函数
    * 初始化合约的总供应量
    */
@@ -100,6 +110,13 @@ contract SibbayHealthToken is StandardToken, Management {
     buyPrice = 0;
     fundAccount = address(0);
     buySellFlag = false;
+
+    /**
+     * 初始化owner限制额度
+     * 2018/01/01 00:00:00
+     * */
+    vault = totalSupply_.mul(10).div(100);
+    curYear = 1514736000;
   }
 
   /**
@@ -134,6 +151,27 @@ contract SibbayHealthToken is StandardToken, Management {
   {
     require(!buySellFlag);
     _;
+  }
+
+  /**
+   * 刷新owner限制余额vault
+   * */
+  function refreshVault(address _who, uint256 _value) internal
+  {
+      // 只对owner操作
+      if (_who != owner)
+        return ;
+      // 如果是新的一年, 则计算vault为当前余额的10%
+      if (now >= (curYear + YEAR))
+      {
+        vault = balanceOf(owner).mul(10).div(100);
+        curYear = curYear.add(YEAR);
+      }
+
+      // vault 必须大于等于 _value
+      require(vault >= _value);
+      vault = vault.sub(_value);
+      return ;
   }
 
   /**
@@ -293,11 +331,15 @@ contract SibbayHealthToken is StandardToken, Management {
       // 普通用户转账，不能给地址0转账，冻结账户不能转账
       require(_to != address(0));
     }
+
     /**
      * 获取到期的锁定期余额
      * */
     refreshlockedBalances(msg.sender, true);
     refreshlockedBalances(_to, true);
+
+    // 刷新vault余额
+    refreshVault(msg.sender, _value);
 
     // 修改可用账户余额
     transferAvailableBalances(msg.sender, _to, _value);
@@ -340,6 +382,9 @@ contract SibbayHealthToken is StandardToken, Management {
 
     // 修改代理额度
     allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_value);
+
+    // 刷新vault余额
+    refreshVault(_from, _value);
 
     // 修改可用账户余额
     transferAvailableBalances(_from, _to, _value);
@@ -428,6 +473,9 @@ contract SibbayHealthToken is StandardToken, Management {
     }
     require(total <= balances[msg.sender]);
 
+    // 刷新vault余额
+    refreshVault(msg.sender, total);
+
     // 一一 转账
     for (i = 0; i < _receivers.length; i ++)
     {
@@ -481,6 +529,9 @@ contract SibbayHealthToken is StandardToken, Management {
 
     // 修改代理额度
     allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(total);
+
+    // 刷新vault余额
+    refreshVault(_from, total);
 
     // 一一 转账
     for (i = 0; i < _receivers.length; i ++)
@@ -537,6 +588,9 @@ contract SibbayHealthToken is StandardToken, Management {
       total = total.add(_values[i]);
     }
     require(total <= balances[msg.sender]);
+
+    // 刷新vault余额
+    refreshVault(msg.sender, total);
 
     // 转账
     for(i = 0; i < _values.length; i ++)
@@ -596,6 +650,9 @@ contract SibbayHealthToken is StandardToken, Management {
 
     // 修改代理额度
     allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(total);
+
+    // 刷新vault余额
+    refreshVault(_from, total);
 
     // 转账
     for(i = 0; i < _values.length; i ++)
