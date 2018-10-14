@@ -10,6 +10,7 @@ contract("SibbayHealthToken-vault-of-owner", accounts => {
     const MAGNITUDE = 10 ** 18;
     const DAY = 3600 * 24;
     const YEAR = 3600 * 24 * 365;
+    const VAULT_FLOOR_VALUE = 10 ** 25;
     // sell price 0.001 ether
     let sellPrice = 10 ** 15;
     // buy price 0.1 ether
@@ -314,6 +315,25 @@ contract("SibbayHealthToken-vault-of-owner", accounts => {
         } catch (err) {
             assert.ok(/revert/.test(err.message));
         }
+    })
+
+    it("the last vault should be balance", async() => {
+        // get balance of owner
+        let balance = await sht.balanceOf.call(owner);
+
+        while(balance > VAULT_FLOOR_VALUE)
+        {
+            await sht.transfer(acc1, balance * 0.09, {from: owner});
+            balance = await sht.balanceOf.call(owner);
+
+            // increase time
+            await increaseTime(YEAR);
+            time = time + YEAR;
+        }
+
+        await sht.transfer(acc1, balance, {from: owner});
+        assert.equal(await sht.balanceOf.call(owner), 0);
+        assert.equal(await sht.balanceOf.call(acc1), 1e27);
     })
 
 })

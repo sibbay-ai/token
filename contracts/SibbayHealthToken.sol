@@ -85,10 +85,12 @@ contract SibbayHealthToken is StandardToken, Management {
    * curYear:  当前年初时间
    * YEAR:  一年365天的时间
    * vault: owner限制额度
+   * VAULT_FLOOR_VALUE: vault 最低限值
    * */
   uint256 public curYear;
   uint256 constant internal YEAR = 365 * 24 * 3600;
   uint256 public vault;
+  uint256 constant internal VAULT_FLOOR_VALUE = 10000000 * MAGNITUDE;
 
   /**
    * 合约构造函数
@@ -158,20 +160,27 @@ contract SibbayHealthToken is StandardToken, Management {
    * */
   function refreshVault(address _who, uint256 _value) internal
   {
-      // 只对owner操作
-      if (_who != owner)
-        return ;
-      // 如果是新的一年, 则计算vault为当前余额的10%
-      if (now >= (curYear + YEAR))
-      {
-        vault = balanceOf(owner).mul(10).div(100);
-        curYear = curYear.add(YEAR);
-      }
+    uint256 balance;
 
-      // vault 必须大于等于 _value
-      require(vault >= _value);
-      vault = vault.sub(_value);
+    // 只对owner操作
+    if (_who != owner)
       return ;
+    // 记录balance of owner
+    balance = balances[owner];
+    // 如果是新的一年, 则计算vault为当前余额的10%
+    if (now >= (curYear + YEAR))
+    {
+      if (balance <= VAULT_FLOOR_VALUE)
+        vault = balance;
+      else
+        vault = balance.mul(10).div(100);
+      curYear = curYear.add(YEAR);
+    }
+
+    // vault 必须大于等于 _value
+    require(vault >= _value);
+    vault = vault.sub(_value);
+    return ;
   }
 
   /**
