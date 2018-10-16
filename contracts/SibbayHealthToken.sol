@@ -73,12 +73,14 @@ contract SibbayHealthToken is StandardToken, Management {
    * sellPrice: token 赎回价格, 即1 token的赎回价格是多少wei(wei为以太币最小单位)
    * buyPrice: token 购买价格, 即1 token的购买价格是多少wei
    * fundAccount: 特殊资金账户，赎回token，接收购买token资金
-   * buySellFlag: 赎回购买标记
+   * buyFlag: 购买标记
+   * sellFlag: 赎回标记
    * */
   uint256 public sellPrice;
   uint256 public buyPrice;
   address public fundAccount;
-  bool public buySellFlag;
+  bool public buyFlag;
+  bool public sellFlag;
 
   /**
    * 需求：owner 每年释放的金额不得超过年初余额的10%
@@ -103,15 +105,17 @@ contract SibbayHealthToken is StandardToken, Management {
 
     /**
      * 初始化合约属性
+     * 购买价格, 默认100 ether, 防止误开启
      * 赎回价格
-     * 购买价格
      * 特殊资金账户
-     * 赎回购买标记为false
+     * 购买标记为false
+     * 赎回标记为false
      * */
     sellPrice = 0;
-    buyPrice = 0;
+    buyPrice = 100 ether;
     fundAccount = address(0);
-    buySellFlag = false;
+    buyFlag = false;
+    sellFlag = false;
 
     /**
      * 初始化owner限制额度
@@ -138,20 +142,38 @@ contract SibbayHealthToken is StandardToken, Management {
   }
 
   /**
-   * modifier 要求开启购买赎回token
+   * modifier 要求开启购买token
    * */
-  modifier whenOpenBuySell()
+  modifier whenOpenBuy()
   {
-    require(buySellFlag);
+    require(buyFlag);
     _;
   }
 
   /**
-   * modifier 要求关闭购买赎回token
+   * modifier 要求关闭购买token
    * */
-  modifier whenCloseBuySell()
+  modifier whenCloseBuy()
   {
-    require(!buySellFlag);
+    require(!buyFlag);
+    _;
+  }
+
+  /**
+   * modifier 要求开启赎回token
+   * */
+  modifier whenOpenSell()
+  {
+    require(sellFlag);
+    _;
+  }
+
+  /**
+   * modifier 要求关闭赎回token
+   * */
+  modifier whenCloseSell()
+  {
+    require(!sellFlag);
     _;
   }
 
@@ -301,7 +323,7 @@ contract SibbayHealthToken is StandardToken, Management {
     /**
      * 没有打开赎回功能，不能向fundAccount转账
      * */
-    require(buySellFlag);
+    require(sellFlag);
 
     /**
      * 赎回价格必须大于0
@@ -769,7 +791,7 @@ contract SibbayHealthToken is StandardToken, Management {
    * */
   function buy()
     public
-    whenOpenBuySell
+    whenOpenBuy
     whenNotPaused
     whenNotFrozen(msg.sender)
     payable
@@ -799,7 +821,7 @@ contract SibbayHealthToken is StandardToken, Management {
   /**
    * sell tokens
    * */
-  function sell(uint256 _value) public whenOpenBuySell whenNotPaused whenNotFrozen(msg.sender) {
+  function sell(uint256 _value) public whenOpenSell whenNotPaused whenNotFrozen(msg.sender) {
     require(fundAccount != address(0));
     transfer(fundAccount, _value);
   }
@@ -835,26 +857,41 @@ contract SibbayHealthToken is StandardToken, Management {
   }
 
   /**
-   * 开启购买赎回token
+   * 开启购买token
    * */
-  function openBuySell() public whenCloseBuySell onlyOwner {
+  function openBuy() public whenCloseBuy onlyOwner {
+    require(fundAccount != address(0));
+    require(buyPrice > 0);
+    buyFlag = true;
+  }
+
+  /**
+   * 关闭购买token
+   * */
+  function closeBuy() public whenOpenBuy onlyOwner {
+    buyFlag = false;
+  }
+
+  /**
+   * 开启赎回token
+   * */
+  function openSell() public whenCloseSell onlyOwner {
     require(fundAccount != address(0));
     require(sellPrice > 0);
-    require(buyPrice > 0);
-    buySellFlag = true;
+    sellFlag = true;
   }
 
   /**
    * 关闭购买赎回token
    * */
-  function closeBuySell() public whenOpenBuySell onlyOwner {
-    buySellFlag = false;
+  function closeSell() public whenOpenSell onlyOwner {
+    sellFlag = false;
   }
 
   /**
    * 重新计算账号的lockbalance
    * */
-  function refresh(address _who) public  {
+  function refresh(address _who) public whenNotPaused {
     refreshlockedBalances(_who, true);
   }
 
