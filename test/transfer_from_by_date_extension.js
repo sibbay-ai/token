@@ -55,8 +55,10 @@ contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
         await sht.transfer(fundAccount, 100*MAGNITUDE, {from: owner});
         await sht.setFundAccount(fundAccount, {from: owner});
         await sht.sendTransaction({from: owner, value: 1 * MAGNITUDE});
-        await sht.openBuySell({from: owner});
-        assert.equal(await sht.buySellFlag.call(), true);
+        await sht.openBuy({from: owner});
+        assert.equal(await sht.buyFlag.call(), true);
+        await sht.openSell({from: owner});
+        assert.equal(await sht.sellFlag.call(), true);
 
         // transfer by date to fund account
         try {
