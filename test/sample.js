@@ -104,6 +104,15 @@ contract("sample of beginning to test", accounts => {
      * 同上，添加其它case
      */
     it("sample case 2", async() => {
+        /*
+         * 事件验证
+         */
+        var { logs } = await sht.transfer(acc1, 100 * MAGNITUDE, {from: owner});
+        //logger.info("logs is", logs);
+        assert.equal(logs.length, 1);
+        assert.equal(logs[0].event, "Transfer");
+        assert.equal(logs[0].args.from, owner);
+        assert.equal(logs[0].args.to, acc1);
+        assert.equal(logs[0].args.value, 100 * MAGNITUDE);
     });
-
 })
