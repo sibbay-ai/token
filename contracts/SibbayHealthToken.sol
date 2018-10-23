@@ -22,23 +22,28 @@ contract SibbayHealthToken is StandardToken, Management {
 
   uint256 public constant INITIAL_SUPPLY = 1000000000 * MAGNITUDE;
 
-  // 回传以太币事件, 也属于赎回事件
-  event TransferEther(
-    address indexed from,
-    address indexed to,
-    uint256 tokenValue,
-    uint256 etherValue);
   // 设置赎回价格事件
   event SetSellPrice(address indexed admin, uint256 price);
   // 设置购买价格事件
   event SetBuyPrice(address indexed admin, uint256 price);
-  // 购买事件
-  event Buy(address indexed who, uint256 etherValue, uint256 tokenValue);
   // 设置特殊资金账户事件
   event SetFundAccount(address indexed fund);
   // 锁定期转账事件
   event TransferByDate(address indexed from, address indexed to, uint256[] values, uint256[] dates);
   event TransferFromByDate(address indexed spender, address indexed from, address indexed to, uint256[] values, uint256[] dates);
+  // 开启/关闭购买事件
+  event OpenBuy(address indexed who);
+  event CloseBuy(address indexed who);
+  // 开启/关闭赎回事件
+  event OpenSell(address indexed who);
+  event CloseSell(address indexed who);
+  // 购买/赎回事件
+  event Buy(address indexed who, uint256 etherValue, uint256 tokenValue);
+  event Sell(address indexed from, address indexed to, uint256 tokenValue, uint256 etherValue);
+  // withdraw 事件
+  event Withdraw(address indexed who, uint256 etherValue);
+  // refresh 事件
+  event Refresh(address indexed from, address indexed who);
 
   /**
    * 将锁定期的map做成一个list
@@ -139,6 +144,7 @@ contract SibbayHealthToken is StandardToken, Management {
   function withdraw() public onlyOwner {
     uint256 value = address(this).balance;
     owner.transfer(value);
+    emit Withdraw(msg.sender, value);
   }
 
   /**
@@ -339,7 +345,7 @@ contract SibbayHealthToken is StandardToken, Management {
     if (evalue > 0)
     {
       _from.transfer(evalue);
-      emit TransferEther(_from, _to, _value, evalue);
+      emit Sell(_from, _to, _value, evalue);
     }
   }
 
@@ -863,6 +869,7 @@ contract SibbayHealthToken is StandardToken, Management {
     require(fundAccount != address(0));
     require(buyPrice > 0);
     buyFlag = true;
+    emit OpenBuy(msg.sender);
   }
 
   /**
@@ -870,6 +877,7 @@ contract SibbayHealthToken is StandardToken, Management {
    * */
   function closeBuy() public whenOpenBuy onlyOwner {
     buyFlag = false;
+    emit CloseBuy(msg.sender);
   }
 
   /**
@@ -879,6 +887,7 @@ contract SibbayHealthToken is StandardToken, Management {
     require(fundAccount != address(0));
     require(sellPrice > 0);
     sellFlag = true;
+    emit OpenSell(msg.sender);
   }
 
   /**
@@ -886,6 +895,7 @@ contract SibbayHealthToken is StandardToken, Management {
    * */
   function closeSell() public whenOpenSell onlyOwner {
     sellFlag = false;
+    emit CloseSell(msg.sender);
   }
 
   /**
@@ -893,6 +903,7 @@ contract SibbayHealthToken is StandardToken, Management {
    * */
   function refresh(address _who) public whenNotPaused {
     refreshlockedBalances(_who, true);
+    emit Refresh(msg.sender, _who);
   }
 
   /**
