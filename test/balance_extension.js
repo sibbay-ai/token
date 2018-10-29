@@ -15,7 +15,7 @@ contract("SibbayHealthToken-balance-extension", accounts => {
     let time;
 
     beforeEach(async() => {
-        sht = await SibbayHealthToken.new();
+        sht = await SibbayHealthToken.new(fundAccount);
         time = await latestTime();
     });
 

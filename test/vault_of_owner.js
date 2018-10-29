@@ -25,7 +25,7 @@ contract("SibbayHealthToken-vault-of-owner", accounts => {
     logger.level = 'info';
 
     beforeEach(async() => {
-        sht = await SibbayHealthToken.new();
+        sht = await SibbayHealthToken.new(fundAccount);
         time = await latestTime();
     });
 

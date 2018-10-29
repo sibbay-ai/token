@@ -12,7 +12,7 @@ contract("SibbayHealthToken-buy-sell-extension", accounts => {
     let sht;
 
     beforeEach(async() => {
-        sht = await SibbayHealthToken.new();
+        sht = await SibbayHealthToken.new(fundAccount);
     });
 
     it("set sell price should be successful", async() => {
@@ -25,15 +25,9 @@ contract("SibbayHealthToken-buy-sell-extension", accounts => {
         assert.equal(await sht.buyPrice.call(), buyPrice);
     })
 
-    it("set fund account should be successful", async() => {
-        await sht.setFundAccount(fundAccount, {from: owner});
-        assert.equal(await sht.fundAccount.call(), fundAccount);
-    })
-
     it("open buy/sell falg should be successful", async() => {
         await sht.setSellPrice(sellPrice, {from: owner});
         await sht.setBuyPrice(buyPrice, {from: owner});
-        await sht.setFundAccount(fundAccount, {from: owner});
 
         // buy flag
         await sht.openBuy({from: owner});
@@ -47,7 +41,6 @@ contract("SibbayHealthToken-buy-sell-extension", accounts => {
     it("close buy/sell falg should be successful", async() => {
         await sht.setSellPrice(sellPrice, {from: owner});
         await sht.setBuyPrice(buyPrice, {from: owner});
-        await sht.setFundAccount(fundAccount, {from: owner});
         
         // buy flag
         await sht.openBuy({from: owner});
@@ -65,8 +58,7 @@ contract("SibbayHealthToken-buy-sell-extension", accounts => {
     it("buy tokens should be successful", async() => {
         await sht.setSellPrice(sellPrice, {from: owner});
         await sht.setBuyPrice(buyPrice, {from: owner});
-        await sht.transfer(fundAccount, 100*MAGNITUDE, {from: owner});
-        await sht.setFundAccount(fundAccount, {from: owner});
+        await sht.addTokenToFund(100*MAGNITUDE, {from: owner});
         await sht.openBuy({from: owner});
         assert.equal(await sht.buyFlag.call(), true);
 
@@ -76,8 +68,7 @@ contract("SibbayHealthToken-buy-sell-extension", accounts => {
 
     it("buy tokens should be successful-2", async() => {
         await sht.setBuyPrice(buyPrice, {from: owner});
-        await sht.transfer(fundAccount, 100*MAGNITUDE, {from: owner});
-        await sht.setFundAccount(fundAccount, {from: owner});
+        await sht.addTokenToFund(100*MAGNITUDE, {from: owner});
         await sht.openBuy({from: owner});
         assert.equal(await sht.buyFlag.call(), true);
 
@@ -88,8 +79,7 @@ contract("SibbayHealthToken-buy-sell-extension", accounts => {
     it("buy tokens without value should be failed", async() => {
         await sht.setSellPrice(sellPrice, {from: owner});
         await sht.setBuyPrice(buyPrice, {from: owner});
-        await sht.transfer(fundAccount, 100*MAGNITUDE, {from: owner});
-        await sht.setFundAccount(fundAccount, {from: owner});
+        await sht.addTokenToFund(100*MAGNITUDE, {from: owner});
         await sht.openBuy({from: owner});
         assert.equal(await sht.buyFlag.call(), true);
 
@@ -104,8 +94,7 @@ contract("SibbayHealthToken-buy-sell-extension", accounts => {
     it("sell tokens should be successful", async() => {
         await sht.setSellPrice(sellPrice, {from: owner});
         await sht.setBuyPrice(buyPrice, {from: owner});
-        await sht.transfer(fundAccount, 100*MAGNITUDE, {from: owner});
-        await sht.setFundAccount(fundAccount, {from: owner});
+        await sht.addTokenToFund(100*MAGNITUDE, {from: owner});
         await sht.openBuy({from: owner});
         assert.equal(await sht.buyFlag.call(), true);
         await sht.openSell({from: owner});
@@ -122,7 +111,6 @@ contract("SibbayHealthToken-buy-sell-extension", accounts => {
 
     it("sell tokens should be successful-2", async() => {
         await sht.setSellPrice(sellPrice, {from: owner});
-        await sht.setFundAccount(fundAccount, {from: owner});
         await sht.openSell({from: owner});
         assert.equal(await sht.sellFlag.call(), true);
 

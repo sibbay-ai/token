@@ -21,7 +21,7 @@ contract("SibbayHealthToken event test", accounts => {
     logger.level = 'info';
 
     beforeEach(async() => {
-        sht = await SibbayHealthToken.new();
+        sht = await SibbayHealthToken.new(fundAccount);
         time = await latestTime();
     });
 
@@ -177,14 +177,6 @@ contract("SibbayHealthToken event test", accounts => {
         assert.equal(logs[0].args.price, buyPrice);
     });
 
-    it("event SetFundAccount should be triggerred", async() => {
-        var { logs } = await sht.setFundAccount(fundAccount, {from: owner});
-        // assert logs
-        assert.equal(logs.length, 1);
-        assert.equal(logs[0].event, "SetFundAccount");
-        assert.equal(logs[0].args.fund, fundAccount);
-    });
-
     it("event TransferByDate should be triggerred", async() => {
         var { logs } = await sht.transferByDate(acc1, [100 * MAGNITUDE], [time + DAY], {from: owner});
         // assert logs
@@ -246,8 +238,7 @@ contract("SibbayHealthToken event test", accounts => {
 
     it("event OpenBuy should be triggerred", async() => {
         await sht.setBuyPrice(buyPrice, {from: owner});
-        await sht.transfer(fundAccount, 100*MAGNITUDE, {from: owner});
-        await sht.setFundAccount(fundAccount, {from: owner});
+        await sht.addTokenToFund(100*MAGNITUDE, {from: owner});
         var { logs } = await sht.openBuy({from: owner});
         // assert logs
         assert.equal(logs.length, 1);
@@ -257,8 +248,7 @@ contract("SibbayHealthToken event test", accounts => {
 
     it("event CloseBuy should be triggerred", async() => {
         await sht.setBuyPrice(buyPrice, {from: owner});
-        await sht.transfer(fundAccount, 100*MAGNITUDE, {from: owner});
-        await sht.setFundAccount(fundAccount, {from: owner});
+        await sht.addTokenToFund(100*MAGNITUDE, {from: owner});
         await sht.openBuy({from: owner});
         var { logs } = await sht.closeBuy({from: owner});
         // assert logs
@@ -269,7 +259,6 @@ contract("SibbayHealthToken event test", accounts => {
 
     it("event OpenSell should be triggerred", async() => {
         await sht.setSellPrice(sellPrice, {from: owner});
-        await sht.setFundAccount(fundAccount, {from: owner});
         var { logs } = await sht.openSell({from: owner});
         // assert logs
         assert.equal(logs.length, 1);
@@ -279,7 +268,6 @@ contract("SibbayHealthToken event test", accounts => {
 
     it("event CloseSell should be triggerred", async() => {
         await sht.setSellPrice(sellPrice, {from: owner});
-        await sht.setFundAccount(fundAccount, {from: owner});
         await sht.openSell({from: owner});
         var { logs } = await sht.closeSell({from: owner});
         // assert logs
@@ -290,8 +278,7 @@ contract("SibbayHealthToken event test", accounts => {
 
     it("event Buy should be triggerred", async() => {
         await sht.setBuyPrice(buyPrice, {from: owner});
-        await sht.transfer(fundAccount, 100*MAGNITUDE, {from: owner});
-        await sht.setFundAccount(fundAccount, {from: owner});
+        await sht.addTokenToFund(100*MAGNITUDE, {from: owner});
         await sht.openBuy({from: owner});
         var { logs } = await sht.buy({from: acc1, value: 10 * MAGNITUDE});
         // assert logs
@@ -309,7 +296,6 @@ contract("SibbayHealthToken event test", accounts => {
 
     it("event Sell should be triggerred", async() => {
         await sht.setSellPrice(sellPrice, {from: owner});
-        await sht.setFundAccount(fundAccount, {from: owner});
         await sht.openSell({from: owner});
         await sht.transfer(acc1, 1000 * MAGNITUDE, {from: owner});
         await sht.sendTransaction({from: owner, value: 1 * MAGNITUDE});
@@ -335,6 +321,19 @@ contract("SibbayHealthToken event test", accounts => {
         assert.equal(logs[0].event, "Withdraw");
         assert.equal(logs[0].args.who, owner);
         assert.equal(logs[0].args.etherValue, 1 * MAGNITUDE);
+    });
+
+    it("event AddTokenToFund should be triggerred", async() => {
+        var { logs } = await sht.addTokenToFund(100*MAGNITUDE, {from: owner});
+        // assert logs
+        assert.equal(logs.length, 2);
+        assert.equal(logs[0].event, "Transfer");
+        assert.equal(logs[0].args.from, owner);
+        assert.equal(logs[0].args.to, fundAccount);
+        assert.equal(logs[0].args.value, 100 * MAGNITUDE);
+        assert.equal(logs[1].event, "AddTokenToFund");
+        assert.equal(logs[1].args.who, owner);
+        assert.equal(logs[1].args.value, 100 * MAGNITUDE);
     });
 
     it("event Refresh should be triggerred", async() => {
