@@ -62,14 +62,21 @@ class EtherNode():
         with open(build_file, 'r') as fp:
             # load json file
             fj = json.load(fp)
-            # sign transaction
-            raw_tx = acc_owner.signTransaction({
+            # get bytecode, deployedBytecode, abi
+            bc = fj['bytecode']
+            dbc = fj["deployedBytecode"]
+            abi = fj["abi"]
+            # get contract
+            shtc = self.w3.eth.contract(abi=abi, bytecode=bc, bytecode_runtime=dbc)
+            # build transaction
+            shtx = shtc.constructor(self.w3.toChecksumAddress(cfg.FUND_ACCOUNT)).buildTransaction({
                 "from": acc_owner.address,
-                "data": fj["bytecode"],
                 "gas": cfg.ETH_TX_GAS,
                 "gasPrice": cfg.ETH_TX_GAS_PRICE,
                 "nonce": self.get_nonce(acc_owner.address)
                 })
+            # sign transaction
+            raw_tx = acc_owner.signTransaction(shtx)
             # send raw transaction
             tx_hash = self.w3.eth.sendRawTransaction(raw_tx["rawTransaction"])
             print("tx hash:", str(self.w3.toHex(tx_hash)))

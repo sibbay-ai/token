@@ -2,6 +2,7 @@
 var SibbayHealthToken = artifacts.require("./SibbayHealthToken.sol");
 const { increaseTime } = require("./utils/increaseTime.js");
 const { latestTime } = require("./utils/latestTime.js");
+var log4js = require('log4js');
 
 contract("SibbayHealthToken-transfer-extension", accounts => {
 
@@ -15,16 +16,19 @@ contract("SibbayHealthToken-transfer-extension", accounts => {
     let sht;
     let time;
 
+    // logger
+    var logger = log4js.getLogger();
+    logger.level = 'info';
+
     beforeEach(async() => {
-        sht = await SibbayHealthToken.new();
+        sht = await SibbayHealthToken.new(fundAccount);
         time = await latestTime();
     });
 
     it("transfer 100 tokens to fund account and get eth should be successful", async() => {
         await sht.setSellPrice(sellPrice, {from: owner});
         await sht.setBuyPrice(buyPrice, {from: owner});
-        await sht.transfer(fundAccount, 100*MAGNITUDE, {from: owner});
-        await sht.setFundAccount(fundAccount, {from: owner});
+        await sht.addTokenToFund(100*MAGNITUDE, {from: owner});
         await sht.sendTransaction({from: owner, value: 1 * MAGNITUDE});
         await sht.openBuy({from: owner});
         assert.equal(await sht.buyFlag.call(), true);
@@ -64,8 +68,7 @@ contract("SibbayHealthToken-transfer-extension", accounts => {
         // set fund and open buy/sell flag
         await sht.setSellPrice(sellPrice, {from: owner});
         await sht.setBuyPrice(buyPrice, {from: owner});
-        await sht.transfer(fundAccount, 100*MAGNITUDE, {from: owner});
-        await sht.setFundAccount(fundAccount, {from: owner});
+        await sht.addTokenToFund(100*MAGNITUDE, {from: owner});
         await sht.sendTransaction({from: owner, value: 1 * MAGNITUDE});
         await sht.openBuy({from: owner});
         assert.equal(await sht.buyFlag.call(), true);

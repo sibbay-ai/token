@@ -16,15 +16,14 @@ contract("SibbayHealthToken-transfer-from-extension", accounts => {
     let time;
 
     beforeEach(async() => {
-        sht = await SibbayHealthToken.new();
+        sht = await SibbayHealthToken.new(fundAccount);
         time = await latestTime();
     });
 
     it("transfer from 100 tokens to fund account and get eth should be failed", async() => {
         await sht.setSellPrice(sellPrice, {from: owner});
         await sht.setBuyPrice(buyPrice, {from: owner});
-        await sht.transfer(fundAccount, 100*MAGNITUDE, {from: owner});
-        await sht.setFundAccount(fundAccount, {from: owner});
+        await sht.addTokenToFund(100*MAGNITUDE, {from: owner});
         await sht.sendTransaction({from: owner, value: 1 * MAGNITUDE});
         await sht.openBuy({from: owner});
         assert.equal(await sht.buyFlag.call(), true);
@@ -81,8 +80,7 @@ contract("SibbayHealthToken-transfer-from-extension", accounts => {
         // set fund and open buy/sell flag
         await sht.setSellPrice(sellPrice, {from: owner});
         await sht.setBuyPrice(buyPrice, {from: owner});
-        await sht.transfer(fundAccount, 100*MAGNITUDE, {from: owner});
-        await sht.setFundAccount(fundAccount, {from: owner});
+        await sht.addTokenToFund(100*MAGNITUDE, {from: owner});
         await sht.sendTransaction({from: owner, value: 1 * MAGNITUDE});
         await sht.openBuy({from: owner});
         assert.equal(await sht.buyFlag.call(), true);

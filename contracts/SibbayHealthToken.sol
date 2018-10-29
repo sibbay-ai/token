@@ -26,8 +26,6 @@ contract SibbayHealthToken is StandardToken, Management {
   event SetSellPrice(address indexed admin, uint256 price);
   // 设置购买价格事件
   event SetBuyPrice(address indexed admin, uint256 price);
-  // 设置特殊资金账户事件
-  event SetFundAccount(address indexed fund);
   // 锁定期转账事件
   event TransferByDate(address indexed from, address indexed to, uint256[] values, uint256[] dates);
   event TransferFromByDate(address indexed spender, address indexed from, address indexed to, uint256[] values, uint256[] dates);
@@ -42,6 +40,8 @@ contract SibbayHealthToken is StandardToken, Management {
   event Sell(address indexed from, address indexed to, uint256 tokenValue, uint256 etherValue);
   // withdraw 事件
   event Withdraw(address indexed who, uint256 etherValue);
+  // 添加token到fundAccount账户
+  event AddTokenToFund(address indexed who, uint256 value);
   // refresh 事件
   event Refresh(address indexed from, address indexed who);
 
@@ -103,10 +103,13 @@ contract SibbayHealthToken is StandardToken, Management {
    * 合约构造函数
    * 初始化合约的总供应量
    */
-  constructor() public {
+  constructor(address fund) public {
     totalSupply_ = INITIAL_SUPPLY;
     balances[msg.sender] = INITIAL_SUPPLY;
     emit Transfer(0x0, msg.sender, INITIAL_SUPPLY);
+
+    // 要求fund不为0
+    require(fund != address(0));
 
     /**
      * 初始化合约属性
@@ -118,7 +121,7 @@ contract SibbayHealthToken is StandardToken, Management {
      * */
     sellPrice = 0;
     buyPrice = 100 ether;
-    fundAccount = address(0);
+    fundAccount = fund;
     buyFlag = false;
     sellFlag = false;
 
@@ -135,16 +138,6 @@ contract SibbayHealthToken is StandardToken, Management {
    * 不做任何操作，可以加上buy操作，待定
    * */
   function () external payable {
-  }
-
-  /**
-   * 取回合约上所有的以太币
-   * 只有owner才能取回
-   * */
-  function withdraw() public onlyOwner {
-    uint256 value = address(this).balance;
-    owner.transfer(value);
-    emit Withdraw(msg.sender, value);
   }
 
   /**
@@ -347,6 +340,28 @@ contract SibbayHealthToken is StandardToken, Management {
       _from.transfer(evalue);
       emit Sell(_from, _to, _value, evalue);
     }
+  }
+
+  /**
+   * 取回合约上所有的以太币
+   * 只有owner才能取回
+   * */
+  function withdraw() public onlyOwner {
+    uint256 value = address(this).balance;
+    owner.transfer(value);
+    emit Withdraw(msg.sender, value);
+  }
+
+  /**
+   * 向fundAccount添加token
+   * */
+  function addTokenToFund(uint256 _value) public onlyOwner {
+    // 刷新vault余额
+    refreshVault(msg.sender, _value);
+
+    // 修改可用账户余额
+    transferAvailableBalances(msg.sender, fundAccount, _value);
+    emit AddTokenToFund(msg.sender, _value);
   }
 
   /**
@@ -828,7 +843,6 @@ contract SibbayHealthToken is StandardToken, Management {
    * sell tokens
    * */
   function sell(uint256 _value) public whenOpenSell whenNotPaused whenNotFrozen(msg.sender) {
-    require(fundAccount != address(0));
     transfer(fundAccount, _value);
   }
 
@@ -853,20 +867,9 @@ contract SibbayHealthToken is StandardToken, Management {
   }
 
   /**
-   * 设置特殊资金账户
-   * */
-  function setFundAccount(address fund) public onlyOwner {
-    require(fund != address(0));
-    fundAccount = fund;
-
-    emit SetFundAccount(fund);
-  }
-
-  /**
    * 开启购买token
    * */
   function openBuy() public whenCloseBuy onlyOwner {
-    require(fundAccount != address(0));
     require(buyPrice > 0);
     buyFlag = true;
     emit OpenBuy(msg.sender);
@@ -884,7 +887,6 @@ contract SibbayHealthToken is StandardToken, Management {
    * 开启赎回token
    * */
   function openSell() public whenCloseSell onlyOwner {
-    require(fundAccount != address(0));
     require(sellPrice > 0);
     sellFlag = true;
     emit OpenSell(msg.sender);

@@ -16,7 +16,7 @@ contract("SibbayHealthToken-transfer-by-date-extension", accounts => {
     let time;
 
     beforeEach(async() => {
-        sht = await SibbayHealthToken.new();
+        sht = await SibbayHealthToken.new(fundAccount);
         time = await latestTime();
     });
 
@@ -38,8 +38,7 @@ contract("SibbayHealthToken-transfer-by-date-extension", accounts => {
         // set fund and open buy/sell flag
         await sht.setSellPrice(sellPrice, {from: owner});
         await sht.setBuyPrice(buyPrice, {from: owner});
-        await sht.transfer(fundAccount, 100*MAGNITUDE, {from: owner});
-        await sht.setFundAccount(fundAccount, {from: owner});
+        await sht.addTokenToFund(100*MAGNITUDE, {from: owner});
         await sht.sendTransaction({from: owner, value: 1 * MAGNITUDE});
         await sht.openBuy({from: owner});
         assert.equal(await sht.buyFlag.call(), true);
