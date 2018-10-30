@@ -11,8 +11,6 @@ accounts = config.accounts[:]
 class TestApprove(SHToken):
     def test_approve(self):
 
-        # 赎回地址账户
-        fund_account = self.create_account(config.password)
         # 回收token账户
         collect_account = self.create_account(config.password)
         # 测试账户, test_account_1 代理， test_account_2 被代理账户

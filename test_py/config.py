@@ -3,6 +3,7 @@ import settings as sts
 # 所有测试密码均为123456
 accounts = ["0x0000000000000000000000000000000000000000"]
 password = "123456"
+fund_account = "0x28b7a7fd5e876e5e2ac50dbb66860d80b2e2db3a"
 
 # gas, gas price
 gas = 6000000

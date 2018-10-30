@@ -10,8 +10,6 @@ accounts = config.accounts[:]
 
 class TestTransferFrom_2(SHToken):
     def test_transfer_from_2(self):
-        # 赎回地址账户
-        fund_account = self.create_account(config.password)
         # 回收token账户
         collect_account = self.create_account(config.password)
         # 0 地址账号
@@ -21,8 +19,6 @@ class TestTransferFrom_2(SHToken):
         test_account_2 = self.create_account(config.password)
         test_account_3 = self.create_account(config.password)
 
-        # 设置fund account
-        self.set_fund_account(sts.SIBBAY_SHT_OWNER, fund_account, sts.SIBBAY_SHT_PASSWORD)
         # 向 test_account_1 test_account_2 分别发送 1 ether
         self.send_ether(sts.SIBBAY_SHT_OWNER, test_account_1, Web3.toWei(1, "ether"), sts.SIBBAY_SHT_PASSWORD)
         self.send_ether(sts.SIBBAY_SHT_OWNER, test_account_2, Web3.toWei(1, "ether"), sts.SIBBAY_SHT_PASSWORD)
@@ -75,7 +71,7 @@ class TestTransferFrom_2(SHToken):
 
         print("start token_test 2.2-1.6")
         # 关闭赎回开关
-        self.close_buy_sell(sts.SIBBAY_SHT_OWNER, sts.SIBBAY_SHT_PASSWORD)
+        self.close_sell(sts.SIBBAY_SHT_OWNER, sts.SIBBAY_SHT_PASSWORD)
         #设置赎回价格
         self.set_sell_price(sts.SIBBAY_SHT_OWNER, Web3.toWei(0.001, "ether"), sts.SIBBAY_SHT_PASSWORD)
         #设置购买价格
@@ -89,12 +85,12 @@ class TestTransferFrom_2(SHToken):
         # 设置代理
         self.approve(test_account_2, test_account_1, 110*config.magnitude, config.password, 110*config.magnitude)
         # 赎回10个token
-        self.transfer_from(test_account_1, test_account_2, fund_account, 10*config.magnitude, config.password, 0)
+        self.transfer_from(test_account_1, test_account_2, config.fund_account, 10*config.magnitude, config.password, 0)
         # 打开赎回开关，并分别赎回0个，10个，100个token
-        self.open_buy_sell(sts.SIBBAY_SHT_OWNER, sts.SIBBAY_SHT_PASSWORD)
-        self.transfer_from(test_account_1, test_account_2, fund_account, 0, config.password, 0)
-        self.transfer_from(test_account_1, test_account_2, fund_account, 10*config.magnitude, config.password, 0)
-        self.transfer_from(test_account_1, test_account_2, fund_account, 100*config.magnitude, config.password, 0)
+        self.open_sell(sts.SIBBAY_SHT_OWNER, sts.SIBBAY_SHT_PASSWORD)
+        self.transfer_from(test_account_1, test_account_2, config.fund_account, 0, config.password, 0)
+        self.transfer_from(test_account_1, test_account_2, config.fund_account, 10*config.magnitude, config.password, 0)
+        self.transfer_from(test_account_1, test_account_2, config.fund_account, 100*config.magnitude, config.password, 0)
 
         print("start token_test 2.2-1.7")
         # 冻结账户test_account_3, 并向其转账0个token，100个token

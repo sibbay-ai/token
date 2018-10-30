@@ -11,8 +11,6 @@ accounts = config.accounts[:]
 class TestBatchTransfer(SHToken):
     def test_batch_transfer(self):
 
-        # 赎回地址账户
-        fund_account = self.create_account(config.password)
         # 回收token账户
         collect_account = self.create_account(config.password)
         # 测试账户
@@ -20,8 +18,6 @@ class TestBatchTransfer(SHToken):
         # 0 地址账号
         zero_account = accounts[0]
 
-        # 设置fund account
-        self.set_fund_account(sts.SIBBAY_SHT_OWNER, fund_account, sts.SIBBAY_SHT_PASSWORD)
         # 向test_account发送 1 ether
         self.send_ether(sts.SIBBAY_SHT_OWNER, test_account, Web3.toWei(1, "ether"), sts.SIBBAY_SHT_PASSWORD)
         # 6.1-1.1
@@ -72,7 +68,7 @@ class TestBatchTransfer(SHToken):
         # 6.1-1.6
         print("start token_test 6.1-1.6")
         # 关闭赎回开关
-        self.close_buy_sell(sts.SIBBAY_SHT_OWNER, sts.SIBBAY_SHT_PASSWORD)
+        self.close_sell(sts.SIBBAY_SHT_OWNER, sts.SIBBAY_SHT_PASSWORD)
         #设置赎回价格
         self.set_sell_price(sts.SIBBAY_SHT_OWNER, Web3.toWei(0.001, "ether"), sts.SIBBAY_SHT_PASSWORD)
         #设置购买价格
@@ -84,12 +80,12 @@ class TestBatchTransfer(SHToken):
         # 由账户owner向账户test_account发送110个token
         self.batch_transfer(sts.SIBBAY_SHT_OWNER, [test_account], [110*config.magnitude], sts.SIBBAY_SHT_PASSWORD, [110*config.magnitude])
         # 赎回10个token
-        self.batch_transfer(test_account, [fund_account], [10*config.magnitude], config.password, [0])
+        self.batch_transfer(test_account, [config.fund_account], [10*config.magnitude], config.password, [0])
         # 打开赎回开关，并分别赎回0个，10个，100个token
-        self.open_buy_sell(sts.SIBBAY_SHT_OWNER, sts.SIBBAY_SHT_PASSWORD)
-        self.batch_transfer(test_account, [fund_account], [0], config.password, [0])
-        self.batch_transfer(test_account, [fund_account], [10*config.magnitude], config.password, [0])
-        self.batch_transfer(test_account, [fund_account], [100*config.magnitude], config.password, [0])
+        self.open_sell(sts.SIBBAY_SHT_OWNER, sts.SIBBAY_SHT_PASSWORD)
+        self.batch_transfer(test_account, [config.fund_account], [0], config.password, [0])
+        self.batch_transfer(test_account, [config.fund_account], [10*config.magnitude], config.password, [0])
+        self.batch_transfer(test_account, [config.fund_account], [100*config.magnitude], config.password, [0])
         # 6.1-1.7
         print("start token_test 6.1-1.7")
         # 冻结账户test_account, 并向其转账0个token，100个token
