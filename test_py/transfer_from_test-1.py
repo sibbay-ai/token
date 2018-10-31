@@ -10,8 +10,6 @@ accounts = config.accounts[:]
 
 class TestTransferFrom_1(SHToken):
     def test_transfer_from_1(self):
-        # 赎回地址账户
-        fund_account = self.create_account(config.password)
         # 回收token账户
         collect_account = self.create_account(config.password)
         # 0 地址账号
@@ -21,8 +19,6 @@ class TestTransferFrom_1(SHToken):
         test_account_2 = self.create_account(config.password)
         test_account_3 = self.create_account(config.password)
 
-        # 设置fund account
-        self.set_fund_account(sts.SIBBAY_SHT_OWNER, fund_account, sts.SIBBAY_SHT_PASSWORD)
         # 解冻账户 test_account_1 test_account_2, 以防该账户已被冻结
         self.unfroze(sts.SIBBAY_SHT_OWNER, test_account_1, sts.SIBBAY_SHT_PASSWORD)
         self.unfroze(sts.SIBBAY_SHT_OWNER, test_account_2, sts.SIBBAY_SHT_PASSWORD)
@@ -82,7 +78,7 @@ class TestTransferFrom_1(SHToken):
 
         print("start token_test 2.1 - 1.6.1 代理余额为0，当关闭赎回开关时，向赎回地址转账")
         # 关闭赎回开关
-        self.close_buy_sell(sts.SIBBAY_SHT_OWNER, sts.SIBBAY_SHT_PASSWORD)
+        self.close_sell(sts.SIBBAY_SHT_OWNER, sts.SIBBAY_SHT_PASSWORD)
         #设置赎回价格
         self.set_sell_price(sts.SIBBAY_SHT_OWNER, Web3.toWei(0.001, "ether"), sts.SIBBAY_SHT_PASSWORD)
         #设置购买价格
@@ -94,18 +90,18 @@ class TestTransferFrom_1(SHToken):
 
         self.balance_of(test_account_2, 100*config.magnitude)
         # 赎回10个token
-        self.transfer_from(test_account_1, test_account_2, fund_account, 10*config.magnitude, config.password, 0)
+        self.transfer_from(test_account_1, test_account_2, config.fund_account, 10*config.magnitude, config.password, 0)
 
         print("start token_test 2.1 - 1.6.2 代理余额为0，当打开赎回开关时，向赎回地址转账0个token")
         # 打开赎回开关，并分别赎回0个，10个，100个token
-        self.open_buy_sell(sts.SIBBAY_SHT_OWNER, sts.SIBBAY_SHT_PASSWORD)
-        self.transfer_from(test_account_1, test_account_2, fund_account, 0, config.password, 0)
+        self.open_sell(sts.SIBBAY_SHT_OWNER, sts.SIBBAY_SHT_PASSWORD)
+        self.transfer_from(test_account_1, test_account_2, config.fund_account, 0, config.password, 0)
 
         print("start token_test 2.1 - 1.6.3 代理余额为0，当打开赎回开关时，向赎回地址转账大于0个token")
-        self.transfer_from(test_account_1, test_account_2, fund_account, 10*config.magnitude, config.password, 0)
+        self.transfer_from(test_account_1, test_account_2, config.fund_account, 10*config.magnitude, config.password, 0)
 
         print("start token_test 2.1 - 1.6.4 代理余额为0，当打开赎回开关时，向赎回地址转账，转账赎回的金额大于合约预存金额")
-        self.transfer_from(test_account_1, test_account_2, fund_account, 110*config.magnitude, config.password, 0)
+        self.transfer_from(test_account_1, test_account_2, config.fund_account, 110*config.magnitude, config.password, 0)
 
         print("start token_test 2.1 - 1.7.1 代理余额为0，向冻结账户转账0个token")
         # 冻结账户 test_account_3, 并向其转账 0 个token

@@ -34,6 +34,7 @@ python test/<file_name>.py
 智能合约的操作都是需要挖矿确认的，所以需要比较久的时间    
   
 4. 可以通过如下命令运行所有单元测试  
+注意，需要配置setting.py文件和config.py文件
 
 ```  
 bash test.sh  
