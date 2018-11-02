@@ -21,9 +21,9 @@ contract("SibbayHealthToken-batch-transfer-extension", accounts => {
 
     it("batch transfer should be successful", async() => {
         await sht.batchTransfer([acc1, acc2, acc3], [100 * MAGNITUDE, 100 * MAGNITUDE, 100 * MAGNITUDE], {from: owner});
-        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
-        assert.equal(await sht.balanceOf.call(acc2), 100 * MAGNITUDE);
-        assert.equal(await sht.balanceOf.call(acc3), 100 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc2), 100 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc3), 100 * MAGNITUDE);
     })
 
     it("batch transfer to fund acount should be failed", async() => {
@@ -57,8 +57,8 @@ contract("SibbayHealthToken-batch-transfer-extension", accounts => {
     it("batch transfer exceeds avaliables without expired locked tokens should be failed", async() => {
         // transfer now + day
         await sht.transferByDate(acc1, [100 * MAGNITUDE], [time + DAY], {from: owner});
-        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 100 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 100 * MAGNITUDE);
@@ -80,8 +80,8 @@ contract("SibbayHealthToken-batch-transfer-extension", accounts => {
     it("batch transfer exceeds avaliables without enough expired locked tokens should be failed", async() => {
         // transfer now + day
         await sht.transferByDate(acc1, [100 * MAGNITUDE], [time + DAY], {from: owner});
-        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 100 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 100 * MAGNITUDE);
@@ -107,8 +107,8 @@ contract("SibbayHealthToken-batch-transfer-extension", accounts => {
     it("batch transfer exceeds avaliables with enough expired locked tokens should be successful", async() => {
         // transfer now + day
         await sht.transferByDate(acc1, [100 * MAGNITUDE], [time + DAY], {from: owner});
-        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 100 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 100 * MAGNITUDE);
@@ -126,8 +126,8 @@ contract("SibbayHealthToken-batch-transfer-extension", accounts => {
         await sht.batchTransfer([acc2, acc3], [50 * MAGNITUDE, 50 * MAGNITUDE], {from: acc1});
 
         // acc1
+        assert.equal(await sht.totalBalanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 0 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 0 * MAGNITUDE);
@@ -135,13 +135,13 @@ contract("SibbayHealthToken-batch-transfer-extension", accounts => {
         assert.equal(res[2], 0);
 
         // acc2
+        assert.equal(await sht.totalBalanceOf.call(acc2), 50 * MAGNITUDE);
         assert.equal(await sht.balanceOf.call(acc2), 50 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc2), 50 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc2), 0 * MAGNITUDE);
 
         // acc3
+        assert.equal(await sht.totalBalanceOf.call(acc3), 50 * MAGNITUDE);
         assert.equal(await sht.balanceOf.call(acc3), 50 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc3), 50 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc3), 0 * MAGNITUDE);
     })
 })

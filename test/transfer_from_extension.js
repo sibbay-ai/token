@@ -31,7 +31,7 @@ contract("SibbayHealthToken-transfer-from-extension", accounts => {
         assert.equal(await sht.sellFlag.call(), true);
 
         await sht.transfer(acc1, 100 * MAGNITUDE, {from: owner});
-        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 100 * MAGNITUDE);
 
         // approve
         await sht.approve(spender, 100 * MAGNITUDE, {from: acc1});
@@ -61,7 +61,7 @@ contract("SibbayHealthToken-transfer-from-extension", accounts => {
     it("frozen account transfers from 100 tokens to normal account should be failed", async() => {
         // transfer
         await sht.transfer(acc1, 100 * MAGNITUDE, {from: owner});
-        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 100 * MAGNITUDE);
 
         // approve
         await sht.approve(spender, 100 * MAGNITUDE, {from: acc1});
@@ -88,7 +88,7 @@ contract("SibbayHealthToken-transfer-from-extension", accounts => {
         assert.equal(await sht.sellFlag.call(), true);
 
         await sht.transfer(acc1, 100 * MAGNITUDE, {from: owner});
-        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 100 * MAGNITUDE);
 
         // approve
         await sht.approve(spender, 100 * MAGNITUDE, {from: acc1});
@@ -129,8 +129,8 @@ contract("SibbayHealthToken-transfer-from-extension", accounts => {
         assert.equal(await sht.allowance.call(owner, spender), 0 * MAGNITUDE);
 
         // acc1
-        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 100 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 100 * MAGNITUDE);
@@ -165,8 +165,8 @@ contract("SibbayHealthToken-transfer-from-extension", accounts => {
         assert.equal(await sht.allowance.call(owner, spender), 0 * MAGNITUDE);
 
         // acc1
-        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 100 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 100 * MAGNITUDE);
@@ -205,8 +205,8 @@ contract("SibbayHealthToken-transfer-from-extension", accounts => {
         assert.equal(await sht.allowance.call(owner, spender), 0 * MAGNITUDE);
 
         // acc1
-        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 100 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 100 * MAGNITUDE);
@@ -231,7 +231,7 @@ contract("SibbayHealthToken-transfer-from-extension", accounts => {
         assert.equal(await sht.allowance.call(acc1, spender), 0 * MAGNITUDE);
 
         // acc1, acc2
-        assert.equal(await sht.balanceOf.call(acc1), 0);
-        assert.equal(await sht.balanceOf.call(acc2), 100 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 0);
+        assert.equal(await sht.totalBalanceOf.call(acc2), 100 * MAGNITUDE);
     })
 })

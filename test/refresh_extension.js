@@ -21,8 +21,8 @@ contract("SibbayHealthToken-refresh-extension", accounts => {
 
     it("refresh should be successful", async() => {
         await sht.transferByDate(acc1, [100 * MAGNITUDE, 100 * MAGNITUDE], [time + DAY, time + 2*DAY], {from: owner});
-        assert.equal(await sht.balanceOf.call(acc1), 200 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 200 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 200 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 200 * MAGNITUDE);
@@ -53,8 +53,8 @@ contract("SibbayHealthToken-refresh-extension", accounts => {
 
     it("refresh should be failedi when paused", async() => {
         await sht.transferByDate(acc1, [100 * MAGNITUDE, 100 * MAGNITUDE], [time + DAY, time + 2*DAY], {from: owner});
-        assert.equal(await sht.balanceOf.call(acc1), 200 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 200 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 200 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 200 * MAGNITUDE);
