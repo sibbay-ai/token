@@ -112,6 +112,9 @@ contract SibbayHealthToken is StandardToken, Management {
     owner = _owner;
     fundAccount = _fund;
 
+    // 初始化owner是管理员
+    adminList[owner] = true;
+
     // 初始化发行量
     totalSupply_ = INITIAL_SUPPLY;
     balances[owner] = INITIAL_SUPPLY;

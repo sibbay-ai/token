@@ -6,7 +6,7 @@ var log4js = require('log4js');
 
 contract("SibbayHealthToken-vault-of-owner", accounts => {
 
-    const [owner, fundAccount, spender, acc1, acc2, acc3] = accounts;
+    const [sender, owner, fundAccount, spender, acc1, acc2, acc3] = accounts;
     const MAGNITUDE = 10 ** 18;
     const DAY = 3600 * 24;
     const YEAR = 3600 * 24 * 365;

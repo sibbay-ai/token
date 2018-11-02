@@ -42,10 +42,8 @@ contract Management is Ownable {
 
   /**
    * 构造函数
-   * 初始化owner是管理员
    * */
   constructor() public {
-    adminList[owner] = true;
   }
 
   /**

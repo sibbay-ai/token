@@ -3,7 +3,7 @@ var SibbayHealthToken = artifacts.require("./SibbayHealthToken.sol");
 
 contract("SibbayHealthToken-buy-sell-extension", accounts => {
 
-    const [owner, fundAccount, acc1, acc2, acc3] = accounts;
+    const [sender, owner, fundAccount, acc1, acc2, acc3] = accounts;
     const MAGNITUDE = 10 ** 18;
     // sell price 0.001 ether
     let sellPrice = 10 ** 15;
