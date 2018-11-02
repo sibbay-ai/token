@@ -32,8 +32,8 @@ contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
         assert.equal(await sht.allowance.call(owner, spender), 0);
 
         // acc1
-        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 100 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 100 * MAGNITUDE);
@@ -105,8 +105,8 @@ contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
         assert.equal(await sht.allowance.call(owner, spender), 100 * MAGNITUDE);
 
         // acc1
+        assert.equal(await sht.totalBalanceOf.call(acc1), 0);
         assert.equal(await sht.balanceOf.call(acc1), 0);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 0);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 0);
@@ -125,8 +125,8 @@ contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
         assert.equal(await sht.allowance.call(owner, spender), 0 * MAGNITUDE);
 
         // acc1
+        assert.equal(await sht.totalBalanceOf.call(acc1), 100 * MAGNITUDE);
         assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 100 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 0 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 0);
@@ -145,8 +145,8 @@ contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
         assert.equal(await sht.allowance.call(owner, spender), 0 * MAGNITUDE);
 
         // acc1
-        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 100 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 100 * MAGNITUDE);
@@ -168,8 +168,8 @@ contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
         assert.equal(await sht.allowance.call(owner, spender), 100 * MAGNITUDE);
 
         // acc1
-        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 100 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 100 * MAGNITUDE);
@@ -186,8 +186,8 @@ contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
         assert.equal(await sht.allowance.call(owner, spender), 0 * MAGNITUDE);
 
         // acc1
-        assert.equal(await sht.balanceOf.call(acc1), 200 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 200 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 200 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 200 * MAGNITUDE);
@@ -209,8 +209,8 @@ contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
         // spender
         assert.equal(await sht.allowance.call(owner, spender), 100 * MAGNITUDE);
 
-        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 100 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 100 * MAGNITUDE);
@@ -227,8 +227,8 @@ contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
         assert.equal(await sht.allowance.call(owner, spender), 0 * MAGNITUDE);
 
         // acc1
-        assert.equal(await sht.balanceOf.call(acc1), 200 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 200 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 200 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 200 * MAGNITUDE);
@@ -254,8 +254,8 @@ contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
         assert.equal(await sht.allowance.call(owner, spender), 100 * MAGNITUDE);
 
         // acc1
-        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 100 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 100 * MAGNITUDE);
@@ -272,8 +272,8 @@ contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
         assert.equal(await sht.allowance.call(owner, spender), 0 * MAGNITUDE);
 
         // acc1
-        assert.equal(await sht.balanceOf.call(acc1), 200 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 200 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 200 * MAGNITUDE);
         res = await sht.accounts.call(acc1);
         assert.equal(res[0], 200 * MAGNITUDE);
@@ -299,8 +299,8 @@ contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
         assert.equal(await sht.allowance.call(owner, spender), 200 * MAGNITUDE);
 
         // acc1
-        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 100 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 100 * MAGNITUDE);
@@ -317,8 +317,8 @@ contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
         assert.equal(await sht.allowance.call(owner, spender), 100 * MAGNITUDE);
 
         // acc1
-        assert.equal(await sht.balanceOf.call(acc1), 200 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 200 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 200 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 200 * MAGNITUDE);
@@ -338,8 +338,8 @@ contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
         assert.equal(await sht.allowance.call(owner, spender), 0 * MAGNITUDE);
 
         // acc1
-        assert.equal(await sht.balanceOf.call(acc1), 300 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 300 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 300 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 300 * MAGNITUDE);
@@ -368,8 +368,8 @@ contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
         assert.equal(await sht.allowance.call(owner, spender), 0 * MAGNITUDE);
 
         // acc1
-        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 100 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 100 * MAGNITUDE);
@@ -404,8 +404,8 @@ contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
         assert.equal(await sht.allowance.call(owner, spender), 0 * MAGNITUDE);
 
         // acc1
-        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 100 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 100 * MAGNITUDE);
@@ -444,8 +444,8 @@ contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
         assert.equal(await sht.allowance.call(owner, spender), 0 * MAGNITUDE);
 
         // acc1
-        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 100 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 100 * MAGNITUDE);
@@ -467,8 +467,8 @@ contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
         await sht.transferFromByDate(acc1, acc2, [100 * MAGNITUDE], [time + DAY], {from: spender});
 
         // acc1
+        assert.equal(await sht.totalBalanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 0 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 0 * MAGNITUDE);
@@ -476,8 +476,8 @@ contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
         assert.equal(res[2], 0);
 
         // acc2
-        assert.equal(await sht.balanceOf.call(acc2), 100 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc2), 0 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc2), 100 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc2), 0 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc2), 100 * MAGNITUDE);
         res = await sht.accounts.call(acc2);
         assert.equal(res[0], 100 * MAGNITUDE);
@@ -502,8 +502,8 @@ contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
         assert.equal(await sht.allowance.call(owner, spender), 0 * MAGNITUDE);
 
         // acc1
-        assert.equal(await sht.balanceOf.call(acc1), 200 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 200 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 100 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 100 * MAGNITUDE);
@@ -527,8 +527,8 @@ contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
         assert.equal(await sht.allowance.call(owner, spender), 0 * MAGNITUDE);
 
         // acc1
-        assert.equal(await sht.balanceOf.call(acc1), 200 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 200 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 100 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 100 * MAGNITUDE);
@@ -552,8 +552,8 @@ contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
         assert.equal(await sht.allowance.call(owner, spender), 0 * MAGNITUDE);
 
         // acc1
-        assert.equal(await sht.balanceOf.call(acc1), 200 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.totalBalanceOf.call(acc1), 200 * MAGNITUDE);
+        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
         assert.equal(await sht.lockedBalanceOf.call(acc1), 100 * MAGNITUDE);
         var res = await sht.accounts.call(acc1);
         assert.equal(res[0], 100 * MAGNITUDE);

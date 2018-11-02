@@ -909,10 +909,17 @@ contract SibbayHealthToken is StandardToken, Management {
   }
 
   /**
-   * 获取可用余额
+   * 查询账户总余额
    * */
-  function availableBalanceOf(address _who) public view returns (uint256) {
-    return (balances[_who] + refreshlockedBalances(_who, false));
+  function totalBalanceOf(address _owner) public view returns (uint256) {
+    return balances[_owner] + accounts[_owner].lockedBalances;
+  }
+
+  /**
+   * 查询账户可用余额
+   * */
+  function balanceOf(address _owner) public view returns (uint256) {
+    return (balances[_owner] + refreshlockedBalances(_owner, false));
   }
 
   /**
@@ -928,13 +935,6 @@ contract SibbayHealthToken is StandardToken, Management {
    * */
   function lockedBalanceOfByDate(address _who, uint256 date) public view returns (uint256, uint256) {
     return (accounts[_who].lockedElement[date].value, accounts[_who].lockedElement[date].next);
-  }
-
-  /**
-   * 查询账户总余额
-   * */
-  function balanceOf(address _owner) public view returns (uint256) {
-    return balances[_owner] + accounts[_owner].lockedBalances;
   }
 
 }

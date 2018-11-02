@@ -242,9 +242,9 @@ class SHToken(unittest.TestCase):
         _from = Web3.toChecksumAddress(_from)
         _to = Web3.toChecksumAddress(_to)
         # 记录账户_from的余额
-        balance_old_from = self.sht.functions.balanceOf(_from).call()
+        balance_old_from = self.sht.functions.totalBalanceOf(_from).call()
         # 记录余额
-        balance_old = self.sht.functions.balanceOf(_to).call()
+        balance_old = self.sht.functions.totalBalanceOf(_to).call()
 
         # 解锁_from账户，并批量发送
         self.w3.personal.unlockAccount(_from, _pwd)
@@ -255,10 +255,10 @@ class SHToken(unittest.TestCase):
         print("transfer_by_date with", str(len(_dates)), "dates gas used:", ret["gasUsed"])
 
         # 查看账户_from的余额,并验证
-        balance_new_from = self.sht.functions.balanceOf(_from).call()
+        balance_new_from = self.sht.functions.totalBalanceOf(_from).call()
         self.assertEqual(balance_old_from - balance_new_from, _expect)
         # 查询余额，并验证
-        balance_new = self.sht.functions.balanceOf(_to).call()
+        balance_new = self.sht.functions.totalBalanceOf(_to).call()
         self.assertEqual(balance_new - balance_old, _expect)
 
     def transfer_from_by_date(self, _spender, _from, _to, _values, _dates, _pwd, _expect):
@@ -266,9 +266,9 @@ class SHToken(unittest.TestCase):
         _from = Web3.toChecksumAddress(_from)
         _to = Web3.toChecksumAddress(_to)
         # 记录账户_from的余额,并验证
-        balance_old_from = self.sht.functions.balanceOf(_from).call()
+        balance_old_from = self.sht.functions.totalBalanceOf(_from).call()
         # 记录余额
-        balance_old = self.sht.functions.balanceOf(_to).call()
+        balance_old = self.sht.functions.totalBalanceOf(_to).call()
 
         # 解锁_from账户，并批量发送
         self.w3.personal.unlockAccount(_spender, _pwd)
@@ -279,10 +279,10 @@ class SHToken(unittest.TestCase):
         print("transfer_from_by_date with", str(len(_dates)), "dates gas used:", ret["gasUsed"])
 
         # 查看账户_from的余额,并验证
-        balance_new_from = self.sht.functions.balanceOf(_from).call()
+        balance_new_from = self.sht.functions.totalBalanceOf(_from).call()
         self.assertEqual(balance_old_from - balance_new_from, _expect)
         # 查询余额，并验证
-        balance_new = self.sht.functions.balanceOf(_to).call()
+        balance_new = self.sht.functions.totalBalanceOf(_to).call()
         self.assertEqual(balance_new - balance_old, _expect)
 
     def add_token_to_fund(self, _owner, _values, _pwd, _expect):
@@ -325,7 +325,7 @@ class SHToken(unittest.TestCase):
     def clear_all_ava_sht(self, _who, _collect, _pwd):
         _who = Web3.toChecksumAddress(_who)
         # 获取账户余额
-        balance = self.sht.functions.getAvailableBalances(_who).call()
+        balance = self.sht.functions.balanceOf(_who).call()
 
         # 将所有余额转账到回收账户
         if balance > 0:
