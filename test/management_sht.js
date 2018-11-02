@@ -8,7 +8,7 @@ contract("SibbayHealthToken-management-sht", accounts => {
     let sht;
 
     beforeEach(async() => {
-        sht = await SibbayHealthToken.new(fundAccount);
+        sht = await SibbayHealthToken.new(owner, fundAccount);
     });
 
     it("add administrator should be successful", async() => {

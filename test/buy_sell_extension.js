@@ -12,7 +12,7 @@ contract("SibbayHealthToken-buy-sell-extension", accounts => {
     let sht;
 
     beforeEach(async() => {
-        sht = await SibbayHealthToken.new(fundAccount);
+        sht = await SibbayHealthToken.new(owner, fundAccount);
     });
 
     it("set sell price should be successful", async() => {

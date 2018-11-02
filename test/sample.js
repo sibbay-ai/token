@@ -51,7 +51,7 @@ contract("sample of beginning to test", accounts => {
      * 2. 获取最新块的时间
      */
     beforeEach(async() => {
-        sht = await SibbayHealthToken.new(fundAccount);
+        sht = await SibbayHealthToken.new(owner, fundAccount);
         time = await latestTime();
     });
 

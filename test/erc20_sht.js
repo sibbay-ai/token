@@ -8,7 +8,7 @@ contract("SibbayHealthToken-erc20-sht", accounts => {
     let sht;
 
     beforeEach(async() => {
-        sht = await SibbayHealthToken.new(fundAccount);
+        sht = await SibbayHealthToken.new(owner, fundAccount);
     });
 
     it("should have name Sibbay Health Token", async() => {

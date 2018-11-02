@@ -103,13 +103,19 @@ contract SibbayHealthToken is StandardToken, Management {
    * 合约构造函数
    * 初始化合约的总供应量
    */
-  constructor(address fund) public {
-    totalSupply_ = INITIAL_SUPPLY;
-    balances[msg.sender] = INITIAL_SUPPLY;
-    emit Transfer(0x0, msg.sender, INITIAL_SUPPLY);
+  constructor(address _owner, address _fund) public {
+    // 要求_owner, _fund不为0
+    require(_owner != address(0));
+    require(_fund != address(0));
 
-    // 要求fund不为0
-    require(fund != address(0));
+    // 设置owner, fund
+    owner = _owner;
+    fundAccount = _fund;
+
+    // 初始化发行量
+    totalSupply_ = INITIAL_SUPPLY;
+    balances[owner] = INITIAL_SUPPLY;
+    emit Transfer(0x0, owner, INITIAL_SUPPLY);
 
     /**
      * 初始化合约属性
@@ -121,7 +127,6 @@ contract SibbayHealthToken is StandardToken, Management {
      * */
     sellPrice = 0;
     buyPrice = 100 ether;
-    fundAccount = fund;
     buyFlag = false;
     sellFlag = false;
 

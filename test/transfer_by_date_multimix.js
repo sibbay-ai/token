@@ -18,7 +18,7 @@ contract("SibbayHealthToken", accounts => {
     let time;
 
     beforeEach(async() => {
-        sht = await SibbayHealthToken.new(fundAccount);
+        sht = await SibbayHealthToken.new(owner, fundAccount);
         time = await latestTime();
     });
 
