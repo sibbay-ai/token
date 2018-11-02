@@ -7,7 +7,7 @@ contract("SibbayHealthToken", accounts => {
 
     var logger = log4js.getLogger();
     logger.level = 'info';
-    const [owner, fundAccount, acc1, acc2, acc3, acc4] = accounts;
+    const [sender, owner, fundAccount, acc1, acc2, acc3, acc4] = accounts;
     const MAGNITUDE = 10 ** 18;
     const DAY = 3600 * 24;
     // sell price 0.001 ether
@@ -18,7 +18,7 @@ contract("SibbayHealthToken", accounts => {
     let time;
 
     beforeEach(async() => {
-        sht = await SibbayHealthToken.new(fundAccount);
+        sht = await SibbayHealthToken.new(owner, fundAccount);
         time = await latestTime();
     });
 

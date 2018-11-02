@@ -5,7 +5,7 @@ const { latestTime } = require("./utils/latestTime.js");
 
 contract("SibbayHealthToken-transfer-by-date-extension", accounts => {
 
-    const [owner, fundAccount, acc1, acc2, acc3] = accounts;
+    const [sender, owner, fundAccount, acc1, acc2, acc3] = accounts;
     const MAGNITUDE = 10 ** 18;
     const DAY = 3600 * 24;
     // sell price 0.001 ether
@@ -16,7 +16,7 @@ contract("SibbayHealthToken-transfer-by-date-extension", accounts => {
     let time;
 
     beforeEach(async() => {
-        sht = await SibbayHealthToken.new(fundAccount);
+        sht = await SibbayHealthToken.new(owner, fundAccount);
         time = await latestTime();
     });
 

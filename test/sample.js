@@ -29,7 +29,7 @@ contract("sample of beginning to test", accounts => {
      * 2. 小数点位数，方便计算，也可以用1e18简单表示
      * 3. 一天的秒数
      */
-    const [owner, fundAccount, spender, acc1, acc2, acc3] = accounts;
+    const [sender, owner, fundAccount, spender, acc1, acc2, acc3] = accounts;
     const MAGNITUDE = 10 ** 18;
     const DAY = 3600 * 24;
 
@@ -51,7 +51,7 @@ contract("sample of beginning to test", accounts => {
      * 2. 获取最新块的时间
      */
     beforeEach(async() => {
-        sht = await SibbayHealthToken.new(fundAccount);
+        sht = await SibbayHealthToken.new(owner, fundAccount);
         time = await latestTime();
     });
 

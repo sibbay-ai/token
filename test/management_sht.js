@@ -3,12 +3,12 @@ var SibbayHealthToken = artifacts.require("./SibbayHealthToken.sol");
 
 contract("SibbayHealthToken-management-sht", accounts => {
 
-    const [owner, fundAccount, acc1, acc2, acc3] = accounts;
+    const [sender, owner, fundAccount, acc1, acc2, acc3] = accounts;
     const MAGNITUDE = 10 ** 18;
     let sht;
 
     beforeEach(async() => {
-        sht = await SibbayHealthToken.new(fundAccount);
+        sht = await SibbayHealthToken.new(owner, fundAccount);
     });
 
     it("add administrator should be successful", async() => {

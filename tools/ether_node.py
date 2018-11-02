@@ -69,7 +69,7 @@ class EtherNode():
             # get contract
             shtc = self.w3.eth.contract(abi=abi, bytecode=bc, bytecode_runtime=dbc)
             # build transaction
-            shtx = shtc.constructor(self.w3.toChecksumAddress(cfg.FUND_ACCOUNT)).buildTransaction({
+            shtx = shtc.constructor(self.w3.toChecksumAddress(cfg.OWNER_ACCOUNT), self.w3.toChecksumAddress(cfg.FUND_ACCOUNT)).buildTransaction({
                 "from": acc_owner.address,
                 "gas": cfg.ETH_TX_GAS,
                 "gasPrice": cfg.ETH_TX_GAS_PRICE,
