@@ -363,7 +363,12 @@ contract SibbayHealthToken is StandardToken, Management {
   /**
    * 从from账户向fundAccount添加token
    * */
-  function addTokenToFund(address _from, uint256 _value) public {
+  function addTokenToFund(address _from, uint256 _value) 
+    whenNotPaused
+    whenNotFrozen(msg.sender)
+    whenNotFrozen(_from)
+    public
+  {
     if (_from != msg.sender)
     {
       // 检查代理额度
