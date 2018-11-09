@@ -238,7 +238,7 @@ contract("SibbayHealthToken event test", accounts => {
 
     it("event OpenBuy should be triggerred", async() => {
         await sht.setBuyPrice(buyPrice, {from: owner});
-        await sht.addTokenToFund(100*MAGNITUDE, {from: owner});
+        await sht.addTokenToFund(owner, 100*MAGNITUDE, {from: owner});
         var { logs } = await sht.openBuy({from: owner});
         // assert logs
         assert.equal(logs.length, 1);
@@ -248,7 +248,7 @@ contract("SibbayHealthToken event test", accounts => {
 
     it("event CloseBuy should be triggerred", async() => {
         await sht.setBuyPrice(buyPrice, {from: owner});
-        await sht.addTokenToFund(100*MAGNITUDE, {from: owner});
+        await sht.addTokenToFund(owner, 100*MAGNITUDE, {from: owner});
         await sht.openBuy({from: owner});
         var { logs } = await sht.closeBuy({from: owner});
         // assert logs
@@ -278,7 +278,7 @@ contract("SibbayHealthToken event test", accounts => {
 
     it("event Buy should be triggerred", async() => {
         await sht.setBuyPrice(buyPrice, {from: owner});
-        await sht.addTokenToFund(100*MAGNITUDE, {from: owner});
+        await sht.addTokenToFund(owner, 100*MAGNITUDE, {from: owner});
         await sht.openBuy({from: owner});
         var { logs } = await sht.buy({from: acc1, value: 10 * MAGNITUDE});
         // assert logs
@@ -324,7 +324,7 @@ contract("SibbayHealthToken event test", accounts => {
     });
 
     it("event AddTokenToFund should be triggerred", async() => {
-        var { logs } = await sht.addTokenToFund(100*MAGNITUDE, {from: owner});
+        var { logs } = await sht.addTokenToFund(owner, 100*MAGNITUDE, {from: owner});
         // assert logs
         assert.equal(logs.length, 2);
         assert.equal(logs[0].event, "Transfer");
@@ -333,6 +333,7 @@ contract("SibbayHealthToken event test", accounts => {
         assert.equal(logs[0].args.value, 100 * MAGNITUDE);
         assert.equal(logs[1].event, "AddTokenToFund");
         assert.equal(logs[1].args.who, owner);
+        assert.equal(logs[1].args.from, owner);
         assert.equal(logs[1].args.value, 100 * MAGNITUDE);
     });
 

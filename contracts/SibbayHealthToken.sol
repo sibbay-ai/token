@@ -41,7 +41,7 @@ contract SibbayHealthToken is StandardToken, Management {
   // withdraw 事件
   event Withdraw(address indexed who, uint256 etherValue);
   // 添加token到fundAccount账户
-  event AddTokenToFund(address indexed who, uint256 value);
+  event AddTokenToFund(address indexed who, address indexed from, uint256 value);
   // refresh 事件
   event Refresh(address indexed from, address indexed who);
 
@@ -361,15 +361,29 @@ contract SibbayHealthToken is StandardToken, Management {
   }
 
   /**
-   * 向fundAccount添加token
+   * 从from账户向fundAccount添加token
    * */
-  function addTokenToFund(uint256 _value) public onlyOwner {
+  function addTokenToFund(address _from, uint256 _value) 
+    whenNotPaused
+    whenNotFrozen(msg.sender)
+    whenNotFrozen(_from)
+    public
+  {
+    if (_from != msg.sender)
+    {
+      // 检查代理额度
+      require(_value <= allowed[_from][msg.sender]);
+
+      // 修改代理额度
+      allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_value);
+    }
+
     // 刷新vault余额
-    refreshVault(msg.sender, _value);
+    refreshVault(_from, _value);
 
     // 修改可用账户余额
-    transferAvailableBalances(msg.sender, fundAccount, _value);
-    emit AddTokenToFund(msg.sender, _value);
+    transferAvailableBalances(_from, fundAccount, _value);
+    emit AddTokenToFund(msg.sender, _from, _value);
   }
 
   /**
@@ -917,17 +931,17 @@ contract SibbayHealthToken is StandardToken, Management {
   }
 
   /**
-   * 查询账户总余额
+   * 查询账户可用余额
    * */
-  function totalBalanceOf(address _owner) public view returns (uint256) {
-    return balances[_owner] + accounts[_owner].lockedBalances;
+  function availableBalanceOf(address _owner) public view returns (uint256) {
+    return (balances[_owner] + refreshlockedBalances(_owner, false));
   }
 
   /**
-   * 查询账户可用余额
+   * 查询账户总余额
    * */
   function balanceOf(address _owner) public view returns (uint256) {
-    return (balances[_owner] + refreshlockedBalances(_owner, false));
+    return balances[_owner] + accounts[_owner].lockedBalances;
   }
 
   /**

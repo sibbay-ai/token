@@ -242,14 +242,14 @@ contract("SibbayHealthToken-vault-of-owner", accounts => {
 
         // transfer 6% should be success
         await sht.transferByDate(acc1, [value], [time + DAY], {from: owner});
-        assert.equal(await sht.totalBalanceOf.call(acc1), value);
-        assert.equal(await sht.balanceOf.call(owner), balance - value);
+        assert.equal(await sht.balanceOf.call(acc1), value);
+        assert.equal(await sht.availableBalanceOf.call(owner), balance - value);
 
         // transfer +4% should be success
         let value_2 = balance * 0.04;
         await sht.transferByDate(acc1, [value_2], [time + DAY], {from: owner});
-        assert.equal(await sht.totalBalanceOf.call(acc1), value + value_2);
-        assert.equal(await sht.balanceOf.call(owner), balance - value - value_2);
+        assert.equal(await sht.balanceOf.call(acc1), value + value_2);
+        assert.equal(await sht.availableBalanceOf.call(owner), balance - value - value_2);
     })
 
     it("transfer from by date more than 10% of owner's balance should be failed", async() => {
@@ -283,14 +283,14 @@ contract("SibbayHealthToken-vault-of-owner", accounts => {
         // transfer 6% should be success
         let value = balance * 0.06;
         await sht.transferFromByDate(owner, acc1, [value], [time + DAY], {from: spender});
-        assert.equal(await sht.totalBalanceOf.call(acc1), value);
-        assert.equal(await sht.balanceOf.call(owner), balance - value);
+        assert.equal(await sht.balanceOf.call(acc1), value);
+        assert.equal(await sht.availableBalanceOf.call(owner), balance - value);
 
         // transfer +4% should be success
         let value_2 = balance * 0.04;
         await sht.transferFromByDate(owner, acc1, [value_2], [time + 2 * DAY], {from: spender});
-        assert.equal(await sht.totalBalanceOf.call(acc1), value + value_2);
-        assert.equal(await sht.balanceOf.call(owner), balance - value - value_2);
+        assert.equal(await sht.balanceOf.call(acc1), value + value_2);
+        assert.equal(await sht.availableBalanceOf.call(owner), balance - value - value_2);
     })
 
     it("transfer from by date more than 10% of owner's balance should be failed", async() => {
