@@ -13,8 +13,6 @@ contract("SibbayHealthToken-vault-of-owner", accounts => {
     const VAULT_FLOOR_VALUE = 10 ** 25;
     // sell price 0.001 ether
     let sellPrice = 10 ** 15;
-    // buy price 0.1 ether
-    let buyPrice = 10 ** 17;
     let sht;
     let time;
 

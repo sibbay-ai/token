@@ -9,8 +9,6 @@ contract("SibbayHealthToken-batch-transfer-extension", accounts => {
     const DAY = 3600 * 24;
     // sell price 0.001 ether
     let sellPrice = 10 ** 15;
-    // buy price 0.1 ether
-    let buyPrice = 10 ** 17;
     let sht;
     let time;
 
@@ -27,14 +25,10 @@ contract("SibbayHealthToken-batch-transfer-extension", accounts => {
     })
 
     it("batch transfer to fund acount should be failed", async() => {
-        // set fund and open buy/sell flag
+        // set sell price
         await sht.setSellPrice(sellPrice, {from: owner});
-        await sht.setBuyPrice(buyPrice, {from: owner});
         await sht.addTokenToFund(owner, 100*MAGNITUDE, {from: owner});
         await sht.sendTransaction({from: owner, value: 1 * MAGNITUDE});
-        await sht.openBuy({from: owner});
-        assert.equal(await sht.buyFlag.call(), true);
-        await sht.openSell({from: owner});
         assert.equal(await sht.sellFlag.call(), true);
 
         try {
