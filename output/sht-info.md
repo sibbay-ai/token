@@ -1,10 +1,10 @@
 # SHT info
 
 ## address
-0x7819b9546b1a94A69567Fe872f2A304cDD1ec29C
+0x92f2b348E814a33429F2baA6A398d04B23B7B588
 
 ## gas used
-6356849
+5622190
 
 ## abi
 ./abi.json
