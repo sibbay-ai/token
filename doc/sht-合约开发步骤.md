@@ -47,13 +47,15 @@ sht token 合约接口:
 > function batchTransferFrom(address _from, address[] _receivers, uint256[] _values) public;  
 > function transferByDate(address _receiver, uint256[] _values, uint256[] _dates) public;  
 > function transferFromByDate(address _from, address _receiver, uint256[] _values, uint256[] _dates) public;  
+> function addTokenToFund(address _from, uint256 _value);
 > function buy() public payable;  
 > function sell(uint256 _value) public;  
 > function setSellPrice(uint256 price) public;  
 > function setBuyPrice(uint256 price) public;  
-> function setFundAccount(address fund) public;  
-> function openBuySell() public;  
-> function closeBuySell() public;  
+> function openBuy() public;  
+> function closeBuy() public;  
+> function openSell() public;  
+> function closeSell() public;  
 > function availableBalancesOf(address _who) public;  
 > function lockedBalanceOf(address _who) public;  
 > function lockedBalancesOfByDate(address _who, uint256 date) public;  

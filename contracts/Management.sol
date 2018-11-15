@@ -20,10 +20,13 @@ contract Management is Ownable {
   event Unpause();
 
   /**
-   * 冻结和取消冻结事件
+   * 打开锁定期自动释放事件
+   * 关闭锁定期自动释放事件
+   * 打开强制锁定期自动释放事件
    * */
-  event Froze(address indexed admin, address indexed who);
-  event Unfroze(address indexed admin, address indexed who);
+  event OpenAutoFree(address indexed admin, address indexed who);
+  event CloseAutoFree(address indexed admin, address indexed who);
+  event OpenForceAutoFree(address indexed admin, address indexed who);
 
   /**
    * 增加和删除管理员事件
@@ -33,11 +36,13 @@ contract Management is Ownable {
 
   /**
    * 合约暂停标志, True 暂停，false 未暂停
-   * 合约冻结账户
+   * 锁定余额自动释放开关
+   * 强制锁定余额自动释放开关
    * 合约管理员
    * */
   bool public paused = false;
-  mapping(address => bool) public frozenList;
+  mapping(address => bool) public autoFreeLockBalance;          // false(default) for auto frce, true for not free
+  mapping(address => bool) public forceAutoFreeLockBalance;     // false(default) for not force free, true for froce free
   mapping(address => bool) public adminList;
 
   /**
@@ -59,22 +64,6 @@ contract Management is Ownable {
    */
   modifier whenPaused() {
     require(paused);
-    _;
-  }
-
-  /**
-   * modifier 要求账户未冻结状态
-   * */
-  modifier whenNotFrozen(address who) {
-    require(!frozenList[who]);
-    _;
-  }
-
-  /**
-   * modifier 要求账户冻结状态
-   * */
-  modifier whenFrozen(address who) {
-    require(frozenList[who]);
     _;
   }
 
@@ -111,19 +100,28 @@ contract Management is Ownable {
   }
 
   /**
-   * 冻结账户
+   * 打开锁定期自动释放开关
    * */
-  function froze(address who) whenAdministrator(msg.sender) public {
-    frozenList[who] = true;
-    emit Froze(msg.sender, who);
+  function openAutoFree(address who) whenAdministrator(msg.sender) public {
+    delete autoFreeLockBalance[who];
+    emit OpenAutoFree(msg.sender, who);
   }
 
   /**
-   * 取消冻结账户
+   * 关闭锁定期自动释放开关
    * */
-  function unfroze(address who) whenAdministrator(msg.sender) public {
-    delete frozenList[who];
-    emit Unfroze(msg.sender, who);
+  function closeAutoFree(address who) whenAdministrator(msg.sender) public {
+    autoFreeLockBalance[who] = true;
+    emit CloseAutoFree(msg.sender, who);
+  }
+
+  /**
+   * 打开强制锁定期自动释放开关
+   * 该开关只能打开，不能关闭
+   * */
+  function openForceAutoFree(address who) onlyOwner public {
+    forceAutoFreeLockBalance[who] = true;
+    emit OpenForceAutoFree(msg.sender, who);
   }
 
   /**

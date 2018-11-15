@@ -11,8 +11,6 @@ contract("SibbayHealthToken add token to fund test", accounts => {
     const DAY = 3600 * 24;
     // sell price 0.001 ether
     let sellPrice = 10 ** 15;
-    // buy price 0.1 ether
-    let buyPrice = 10 ** 17;
     let sht;
     let time;
 
