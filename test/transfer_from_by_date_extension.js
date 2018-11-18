@@ -5,18 +5,16 @@ const { latestTime } = require("./utils/latestTime.js");
 
 contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
 
-    const [owner, fundAccount, spender, acc1, acc2, acc3] = accounts;
+    const [sender, owner, fundAccount, spender, acc1, acc2, acc3] = accounts;
     const MAGNITUDE = 10 ** 18;
     const DAY = 3600 * 24;
     // sell price 0.001 ether
     let sellPrice = 10 ** 15;
-    // buy price 0.1 ether
-    let buyPrice = 10 ** 17;
     let sht;
     let time;
 
     beforeEach(async() => {
-        sht = await SibbayHealthToken.new();
+        sht = await SibbayHealthToken.new(owner, fundAccount);
         time = await latestTime();
     });
 
@@ -49,14 +47,11 @@ contract("SibbayHealthToken-transfer-from-by-date-extension", accounts => {
         await sht.approve(spender, 100 * MAGNITUDE, {from: owner});
         assert.equal(await sht.allowance.call(owner, spender), 100 * MAGNITUDE);
 
-        // set fund and open buy/sell flag
+        // set sell price
         await sht.setSellPrice(sellPrice, {from: owner});
-        await sht.setBuyPrice(buyPrice, {from: owner});
-        await sht.transfer(fundAccount, 100*MAGNITUDE, {from: owner});
-        await sht.setFundAccount(fundAccount, {from: owner});
+        await sht.addTokenToFund(owner, 100*MAGNITUDE, {from: owner});
         await sht.sendTransaction({from: owner, value: 1 * MAGNITUDE});
-        await sht.openBuySell({from: owner});
-        assert.equal(await sht.buySellFlag.call(), true);
+        assert.equal(await sht.sellFlag.call(), true);
 
         // transfer by date to fund account
         try {

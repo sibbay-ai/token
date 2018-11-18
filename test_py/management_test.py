@@ -11,8 +11,6 @@ accounts = config.accounts[:]
 class TestManagement(SHToken):
     def test_transfer(self):
 
-        # 赎回地址账户
-        fund_account = self.create_account(config.password)
         # 回收token账户
         collect_account = self.create_account(config.password)
         # 测试账户
@@ -25,11 +23,11 @@ class TestManagement(SHToken):
         # 设置fund account, 设置赎回价格, 设置购买价格, 打开赎回开关
         print("open buy sell flag")
         # 向fund account发送10 token
-        self.transfer(sts.SIBBAY_SHT_OWNER, fund_account, 10*config.magnitude, sts.SIBBAY_SHT_PASSWORD, 10*config.magnitude)
-        self.set_fund_account(sts.SIBBAY_SHT_OWNER, fund_account, sts.SIBBAY_SHT_PASSWORD)
+        self.add_token_to_fund(sts.SIBBAY_SHT_OWNER, 10*config.magnitude, sts.SIBBAY_SHT_PASSWORD, 10*config.magnitude)
         self.set_sell_price(sts.SIBBAY_SHT_OWNER, Web3.toWei(0.001, "ether"), sts.SIBBAY_SHT_PASSWORD)
         self.set_buy_price(sts.SIBBAY_SHT_OWNER, Web3.toWei(0.1, "ether"), sts.SIBBAY_SHT_PASSWORD)
-        self.open_buy_sell(sts.SIBBAY_SHT_OWNER, sts.SIBBAY_SHT_PASSWORD)
+        self.open_sell(sts.SIBBAY_SHT_OWNER, sts.SIBBAY_SHT_PASSWORD)
+        self.open_buy(sts.SIBBAY_SHT_OWNER, sts.SIBBAY_SHT_PASSWORD)
 
         print("pause and unpause contract")
         # 暂停合约
@@ -57,13 +55,13 @@ class TestManagement(SHToken):
 
         print("buy and sell tokens")
         # 向账户test_account_1发送 1 ether, 并购买token, 然后赎回token
-        self.send_ether(sts.SIBBAY_SHT_OWNER, test_account_1, Web3.toWei(1, "ether"), sts.SIBBAY_SHT_PASSWORD)
+        self.send_ether(sts.SIBBAY_SHT_OWNER, test_account_1, Web3.toWei(2, "ether"), sts.SIBBAY_SHT_PASSWORD)
         self.buy(test_account_1, Web3.toWei(1, "ether"), config.password, 10*config.magnitude)
         self.sell(test_account_1, 10*config.magnitude, config.password, 10*config.magnitude)
 
         print("close buy sell flag")
         # 关闭赎回开关
-        self.close_buy_sell(sts.SIBBAY_SHT_OWNER, sts.SIBBAY_SHT_PASSWORD)
+        self.close_sell(sts.SIBBAY_SHT_OWNER, sts.SIBBAY_SHT_PASSWORD)
         # 取回合约ether
         self.withdraw(sts.SIBBAY_SHT_OWNER, sts.SIBBAY_SHT_ADDRESS)
 

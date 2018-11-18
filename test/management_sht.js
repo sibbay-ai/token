@@ -3,12 +3,12 @@ var SibbayHealthToken = artifacts.require("./SibbayHealthToken.sol");
 
 contract("SibbayHealthToken-management-sht", accounts => {
 
-    const [owner, acc1, acc2, acc3] = accounts;
+    const [sender, owner, fundAccount, acc1, acc2, acc3] = accounts;
     const MAGNITUDE = 10 ** 18;
     let sht;
 
     beforeEach(async() => {
-        sht = await SibbayHealthToken.new();
+        sht = await SibbayHealthToken.new(owner, fundAccount);
     });
 
     it("add administrator should be successful", async() => {
@@ -35,15 +35,19 @@ contract("SibbayHealthToken-management-sht", accounts => {
         assert.equal(await sht.paused.call(), false);
     })
 
-    it("froze account should be successful", async() => {
-        await sht.froze(acc1, {from: owner});
-        assert.equal(await sht.frozenList.call(acc1), true);
+    it("open autoFreeLockBalance be successful", async() => {
+        await sht.openAutoFree(acc1, {from: owner});
+        assert.equal(await sht.autoFreeLockBalance.call(acc1), false);
     })
 
-    it("unfroze account should be successful", async() => {
-        await sht.froze(acc1, {from: owner});
-        assert.equal(await sht.frozenList.call(acc1), true);
-        await sht.unfroze(acc1, {from: owner});
-        assert.equal(await sht.frozenList.call(acc1), false);
+    it("close autoFreeLockBalance be successful", async() => {
+        await sht.closeAutoFree(acc1, {from: owner});
+        assert.equal(await sht.autoFreeLockBalance.call(acc1), true);
     })
+
+    it("open froceAutoFreeLockBalance be successful", async() => {
+        await sht.openForceAutoFree(acc1, {from: owner});
+        assert.equal(await sht.forceAutoFreeLockBalance.call(acc1), true);
+    })
+
 })

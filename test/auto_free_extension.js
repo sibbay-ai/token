@@ -4,7 +4,7 @@ const { increaseTime } = require("./utils/increaseTime.js");
 const { latestTime } = require("./utils/latestTime.js");
 var log4js = require('log4js');
 
-contract("SibbayHealthToken-transfer-extension", accounts => {
+contract("SibbayHealthToken-auto-free-extension", accounts => {
 
     const [sender, owner, fundAccount, acc1, acc2, acc3] = accounts;
     const MAGNITUDE = 10 ** 18;
@@ -23,53 +23,7 @@ contract("SibbayHealthToken-transfer-extension", accounts => {
         time = await latestTime();
     });
 
-    it("transfer 100 tokens to fund account and get eth should be successful", async() => {
-        await sht.setSellPrice(sellPrice, {from: owner});
-        await sht.addTokenToFund(owner, 100*MAGNITUDE, {from: owner});
-        await sht.sendTransaction({from: owner, value: 1 * MAGNITUDE});
-        assert.equal(await sht.sellFlag.call(), true);
-
-        await sht.transfer(acc1, 100 * MAGNITUDE, {from: owner});
-        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
-
-        await sht.transfer(fundAccount, 100 * MAGNITUDE, {from: acc1});
-        assert.equal(await sht.balanceOf.call(acc1), 0 * MAGNITUDE);
-    })
-
-    it("transfer 100 tokens to 0 account should be failed", async() => {
-        try{
-            await sht.transfer(0x0, 100 *MAGNITUDE, {from: owner});
-            assert.fail();
-        } catch (err) {
-            assert.ok(/revert/.test(err.message));
-        }
-    })
-
-    it("transfer 100 tokens exceeds avaliables without expired locked tokens should be failed", async() => {
-        // transfer now + day
-        await sht.transferByDate(acc1, [100 * MAGNITUDE], [time + DAY], {from: owner});
-        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
-        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
-        assert.equal(await sht.lockedBalanceOf.call(acc1), 100 * MAGNITUDE);
-        var res = await sht.accounts.call(acc1);
-        assert.equal(res[0], 100 * MAGNITUDE);
-        assert.equal(res[1], time + DAY);
-        assert.equal(res[2], time + DAY);
-        var res2 = await sht.lockedBalanceOfByDate(acc1, res[1]);
-        assert.equal(res2[0], 100 * MAGNITUDE);
-        assert.equal(res2[1], 0);
-
-        // tranfer bydate to acc2
-        try {
-            await sht.transfer(acc2, 100 * MAGNITUDE, {from: acc1});
-            assert.fail();
-        } catch (err){
-            assert.ok(/revert/.test(err.message));
-        }
-    })
-
-    it("transfer 100 tokens exceeds avaliables without enough expired locked tokens should be failed", async() => {
-        // transfer now + day
+    it("auto free is normal", async() => {
         await sht.transferByDate(acc1, [100 * MAGNITUDE], [time + DAY], {from: owner});
         assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
         assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
@@ -86,17 +40,20 @@ contract("SibbayHealthToken-transfer-extension", accounts => {
         await increaseTime(DAY);
         time = time + DAY;
 
-        // tranfer bydate to acc2
-        try {
-            await sht.transfer(acc2, 200 * MAGNITUDE, {from: acc1});
-            assert.fail();
-        } catch (err){
-            assert.ok(/revert/.test(err.message));
-        }
+        // refresh
+        await sht.refresh(acc1, {from: owner});
+
+        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.availableBalanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.lockedBalanceOf.call(acc1), 0 * MAGNITUDE);
+        var res = await sht.accounts.call(acc1);
+        assert.equal(res[0], 0);
+        assert.equal(res[1], 0);
+        assert.equal(res[2], 0);
+
     })
 
-    it("transfer 100 tokens exceeds avaliables with enough expired locked tokens should be successful", async() => {
-        // transfer now + day
+    it("can't free lock balance when auto free is closed", async() => {
         await sht.transferByDate(acc1, [100 * MAGNITUDE], [time + DAY], {from: owner});
         assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
         assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
@@ -109,14 +66,61 @@ contract("SibbayHealthToken-transfer-extension", accounts => {
         assert.equal(res2[0], 100 * MAGNITUDE);
         assert.equal(res2[1], 0);
 
+        // close auto free
+        await sht.closeAutoFree(acc1, {from: owner});
+        assert.equal(await sht.autoFreeLockBalance.call(acc1), true);
+
         // increase time
         await increaseTime(DAY);
-        time = time + DAY;
 
-        await sht.transfer(acc2, 100 * MAGNITUDE, {from: acc1});
+        // refresh
+        await sht.refresh(acc1, {from: owner});
+        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.lockedBalanceOf.call(acc1), 100 * MAGNITUDE);
+        var res = await sht.accounts.call(acc1);
+        assert.equal(res[0], 100 * MAGNITUDE);
+        assert.equal(res[1], time + DAY);
+        assert.equal(res[2], time + DAY);
+        var res2 = await sht.lockedBalanceOfByDate(acc1, res[1]);
+        assert.equal(res2[0], 100 * MAGNITUDE);
+        assert.equal(res2[1], 0);
 
-        assert.equal(await sht.balanceOf.call(acc1), 0);
-        assert.equal(await sht.balanceOf.call(acc2), 100 * MAGNITUDE);
+    })
+
+    it("free lock balance when force auto free is opened", async() => {
+        await sht.transferByDate(acc1, [100 * MAGNITUDE], [time + DAY], {from: owner});
+        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.availableBalanceOf.call(acc1), 0 * MAGNITUDE);
+        assert.equal(await sht.lockedBalanceOf.call(acc1), 100 * MAGNITUDE);
+        var res = await sht.accounts.call(acc1);
+        assert.equal(res[0], 100 * MAGNITUDE);
+        assert.equal(res[1], time + DAY);
+        assert.equal(res[2], time + DAY);
+        var res2 = await sht.lockedBalanceOfByDate(acc1, res[1]);
+        assert.equal(res2[0], 100 * MAGNITUDE);
+        assert.equal(res2[1], 0);
+
+        // close auto free
+        await sht.closeAutoFree(acc1, {from: owner});
+        assert.equal(await sht.autoFreeLockBalance.call(acc1), true);
+
+        // open force auto free
+        await sht.openForceAutoFree(acc1, {from: owner});
+        assert.equal(await sht.forceAutoFreeLockBalance.call(acc1), true);
+
+        // increase time
+        await increaseTime(DAY);
+
+        // refresh
+        await sht.refresh(acc1, {from: owner});
+        assert.equal(await sht.balanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.availableBalanceOf.call(acc1), 100 * MAGNITUDE);
+        assert.equal(await sht.lockedBalanceOf.call(acc1), 0 * MAGNITUDE);
+        var res = await sht.accounts.call(acc1);
+        assert.equal(res[0], 0);
+        assert.equal(res[1], 0);
+        assert.equal(res[2], 0);
     })
 
 })

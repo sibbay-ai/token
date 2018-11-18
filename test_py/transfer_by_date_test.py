@@ -13,8 +13,6 @@ accounts = config.accounts[:]
 class TestTransferByDate(SHToken):
     def test_transferByDate(self):
 
-        # 赎回地址账户
-        fund_account = self.create_account(config.password)
         # 回收token账户
         collect_account = self.create_account(config.password)
         # 测试账户
@@ -22,10 +20,9 @@ class TestTransferByDate(SHToken):
         test_account_2 = self.create_account(config.password)
 
         # 设置fund account, 设置赎回价格, 设置购买价格, 打开赎回开关
-        self.set_fund_account(sts.SIBBAY_SHT_OWNER, fund_account, sts.SIBBAY_SHT_PASSWORD)
         self.set_sell_price(sts.SIBBAY_SHT_OWNER, Web3.toWei(0.001, "ether"), sts.SIBBAY_SHT_PASSWORD)
         self.set_buy_price(sts.SIBBAY_SHT_OWNER, Web3.toWei(0.1, "ether"), sts.SIBBAY_SHT_PASSWORD)
-        self.open_buy_sell(sts.SIBBAY_SHT_OWNER, sts.SIBBAY_SHT_PASSWORD)
+        self.open_sell(sts.SIBBAY_SHT_OWNER, sts.SIBBAY_SHT_PASSWORD)
 
         # 向test_account_1发送 1 ether
         self.send_ether(sts.SIBBAY_SHT_OWNER, test_account_1, Web3.toWei(1, "ether"), sts.SIBBAY_SHT_PASSWORD)

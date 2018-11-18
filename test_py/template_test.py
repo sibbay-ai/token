@@ -60,8 +60,10 @@ class TestTransfer(SHToken):
         # unfroze
         # set_sell_price
         # set_buy_price
-        # open_buy_sell
-        # close_buy_sell
+        # open_sell
+        # close_sell
+        # open_buy
+        # close_buy
         # buy
         # sell
         # pause

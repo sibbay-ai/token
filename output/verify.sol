@@ -1,13 +1,358 @@
 pragma solidity ^0.4.24;
+// produced by the Solididy File Flattener (c) David Appleton 2018
+// contact : dave@akomba.com
+// released under Apache 2.0 licence
+// input  /home/henry/learning/git/smartContract/truffle/022-sht/contracts-bak/SibbayHealthToken.sol
+// flattened :  Saturday, 17-Nov-18 06:24:45 UTC
+contract Ownable {
+  address public owner;
 
 
-import "./StandardToken.sol";
-import "./Management.sol";
+  event OwnershipRenounced(address indexed previousOwner);
+  event OwnershipTransferred(
+    address indexed previousOwner,
+    address indexed newOwner
+  );
 
 
-/**
- * @title SibbayHealthToken
- */
+  /**
+   * @dev The Ownable constructor sets the original `owner` of the contract to the sender
+   * account.
+   */
+  constructor() public {
+    owner = msg.sender;
+  }
+
+  /**
+   * @dev Throws if called by any account other than the owner.
+   */
+  modifier onlyOwner() {
+    require(msg.sender == owner);
+    _;
+  }
+
+  /**
+   * @dev Allows the current owner to transfer control of the contract to a newOwner.
+   * @param newOwner The address to transfer ownership to.
+   */
+  function transferOwnership(address newOwner) public onlyOwner {
+    require(newOwner != address(0));
+    emit OwnershipTransferred(owner, newOwner);
+    owner = newOwner;
+  }
+
+  /**
+   * @dev Allows the current owner to relinquish control of the contract.
+   */
+  function renounceOwnership() public onlyOwner {
+    emit OwnershipRenounced(owner);
+    owner = address(0);
+  }
+}
+
+contract ERC20Basic {
+  function totalSupply() public view returns (uint256);
+  function balanceOf(address who) public view returns (uint256);
+  function transfer(address to, uint256 value) public returns (bool);
+  event Transfer(address indexed from, address indexed to, uint256 value);
+}
+
+library SafeMath {
+
+  /**
+  * @dev Multiplies two numbers, throws on overflow.
+  */
+  function mul(uint256 a, uint256 b) internal pure returns (uint256 c) {
+    if (a == 0) {
+      return 0;
+    }
+    c = a * b;
+    assert(c / a == b);
+    return c;
+  }
+
+  /**
+  * @dev Integer division of two numbers, truncating the quotient.
+  */
+  function div(uint256 a, uint256 b) internal pure returns (uint256) {
+    // assert(b > 0); // Solidity automatically throws when dividing by 0
+    // uint256 c = a / b;
+    // assert(a == b * c + a % b); // There is no case in which this doesn't hold
+    return a / b;
+  }
+
+  /**
+  * @dev Subtracts two numbers, throws on overflow (i.e. if subtrahend is greater than minuend).
+  */
+  function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+    assert(b <= a);
+    return a - b;
+  }
+
+  /**
+  * @dev Adds two numbers, throws on overflow.
+  */
+  function add(uint256 a, uint256 b) internal pure returns (uint256 c) {
+    c = a + b;
+    assert(c >= a);
+    return c;
+  }
+}
+
+contract Management is Ownable {
+
+  /**
+   * 暂停和取消暂停事件
+   * */
+  event Pause();
+  event Unpause();
+
+  /**
+   * 打开锁定期自动释放事件
+   * 关闭锁定期自动释放事件
+   * 打开强制锁定期自动释放事件
+   * */
+  event OpenAutoFree(address indexed admin, address indexed who);
+  event CloseAutoFree(address indexed admin, address indexed who);
+  event OpenForceAutoFree(address indexed admin, address indexed who);
+
+  /**
+   * 增加和删除管理员事件
+   * */
+  event AddAdministrator(address indexed admin);
+  event DelAdministrator(address indexed admin);
+
+  /**
+   * 合约暂停标志, True 暂停，false 未暂停
+   * 锁定余额自动释放开关
+   * 强制锁定余额自动释放开关
+   * 合约管理员
+   * */
+  bool public paused = false;
+  mapping(address => bool) public autoFreeLockBalance;          // false(default) for auto frce, true for not free
+  mapping(address => bool) public forceAutoFreeLockBalance;     // false(default) for not force free, true for froce free
+  mapping(address => bool) public adminList;
+
+  /**
+   * 构造函数
+   * */
+  constructor() public {
+  }
+
+  /**
+   * modifier 要求合约正在运行状态
+   */
+  modifier whenNotPaused() {
+    require(!paused);
+    _;
+  }
+
+  /**
+   * modifier 要求合约暂停状态
+   */
+  modifier whenPaused() {
+    require(paused);
+    _;
+  }
+
+  /**
+   * 要求是管理员
+   * */
+  modifier whenAdministrator(address who) {
+    require(adminList[who]);
+    _;
+  }
+
+  /**
+   * 要求不是管理员
+   * */
+  modifier whenNotAdministrator(address who) {
+    require(!adminList[who]);
+    _;
+  }
+
+  /**
+   * * 暂停合约
+   */
+  function pause() onlyOwner whenNotPaused public {
+    paused = true;
+    emit Pause();
+  }
+
+  /**
+   * 取消暂停合约
+   */
+  function unpause() onlyOwner whenPaused public {
+    paused = false;
+    emit Unpause();
+  }
+
+  /**
+   * 打开锁定期自动释放开关
+   * */
+  function openAutoFree(address who) whenAdministrator(msg.sender) public {
+    delete autoFreeLockBalance[who];
+    emit OpenAutoFree(msg.sender, who);
+  }
+
+  /**
+   * 关闭锁定期自动释放开关
+   * */
+  function closeAutoFree(address who) whenAdministrator(msg.sender) public {
+    autoFreeLockBalance[who] = true;
+    emit CloseAutoFree(msg.sender, who);
+  }
+
+  /**
+   * 打开强制锁定期自动释放开关
+   * 该开关只能打开，不能关闭
+   * */
+  function openForceAutoFree(address who) onlyOwner public {
+    forceAutoFreeLockBalance[who] = true;
+    emit OpenForceAutoFree(msg.sender, who);
+  }
+
+  /**
+   * 添加管理员
+   * */
+  function addAdministrator(address who) onlyOwner public {
+    adminList[who] = true;
+    emit AddAdministrator(who);
+  }
+
+  /**
+   * 删除管理员
+   * */
+  function delAdministrator(address who) onlyOwner public {
+    delete adminList[who];
+    emit DelAdministrator(who);
+  }
+}
+
+contract BasicToken is ERC20Basic {
+  using SafeMath for uint256;
+
+  /**
+   * 账户总余额
+   * */
+  mapping(address => uint256) balances;
+
+  /**
+   * 总供应量
+   * */
+  uint256 totalSupply_;
+
+  /**
+   * 获取总供应量
+   * */
+  function totalSupply() public view returns (uint256) {
+    return totalSupply_;
+  }
+
+}
+
+contract ERC20 is ERC20Basic {
+  function allowance(address owner, address spender)
+    public view returns (uint256);
+
+  function transferFrom(address from, address to, uint256 value)
+    public returns (bool);
+
+  function approve(address spender, uint256 value) public returns (bool);
+  event Approval(
+    address indexed owner,
+    address indexed spender,
+    uint256 value
+  );
+}
+
+contract StandardToken is ERC20, BasicToken {
+
+  // 记录代理账户
+  // 第一个address是token的所有者，即被代理账户
+  // 第二个address是token的使用者，即代理账户
+  mapping (address => mapping (address => uint256)) internal allowed;
+
+  // 代理转账事件
+  // spender: 代理
+  // from: token所有者
+  // to: token接收账户
+  // value: token的转账数量
+  event TransferFrom(address indexed spender,
+                     address indexed from,
+                     address indexed to,
+                     uint256 value);
+
+
+  /**
+   * 设置代理
+   * _spender 代理账户
+   * _value 代理额度
+   */
+  function approve(address _spender, uint256 _value) public returns (bool) {
+    allowed[msg.sender][_spender] = _value;
+    emit Approval(msg.sender, _spender, _value);
+    return true;
+  }
+
+  /**
+   * 查询代理额度
+   * _owner token拥有者账户
+   * _spender 代理账户
+   */
+  function allowance(
+    address _owner,
+    address _spender
+   )
+    public
+    view
+    returns (uint256)
+  {
+    return allowed[_owner][_spender];
+  }
+
+  /**
+   * 提高代理额度
+   * _spender 代理账户
+   * _addValue 需要提高的代理额度
+   */
+  function increaseApproval(
+    address _spender,
+    uint _addedValue
+  )
+    public
+    returns (bool)
+  {
+    allowed[msg.sender][_spender] = (
+      allowed[msg.sender][_spender].add(_addedValue));
+    emit Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
+    return true;
+  }
+
+  /**
+   * 降低代理额度
+   * _spender 代理账户
+   * _subtractedValue 降低的代理额度
+   */
+  function decreaseApproval(
+    address _spender,
+    uint _subtractedValue
+  )
+    public
+    returns (bool)
+  {
+    uint oldValue = allowed[msg.sender][_spender];
+    if (_subtractedValue > oldValue) {
+      allowed[msg.sender][_spender] = 0;
+    } else {
+      allowed[msg.sender][_spender] = oldValue.sub(_subtractedValue);
+    }
+    emit Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
+    return true;
+  }
+
+}
+
 contract SibbayHealthToken is StandardToken, Management {
 
   string public constant name = "Sibbay Health Token"; // solium-disable-line uppercase
@@ -846,3 +1191,4 @@ contract SibbayHealthToken is StandardToken, Management {
   }
 
 }
+

@@ -4,18 +4,16 @@ const { increaseTime } = require("./utils/increaseTime.js");
 const { latestTime } = require("./utils/latestTime.js");
 
 contract("SibbayHealthToken-balance-extension", accounts => {
-    const [owner, fundAccount, spender, acc1, acc2, acc3] = accounts;
+    const [sender, owner, fundAccount, spender, acc1, acc2, acc3] = accounts;
     const MAGNITUDE = 10 ** 18;
     const DAY = 3600 * 24;
     // sell price 0.001 ether
     let sellPrice = 10 ** 15;
-    // buy price 0.1 ether
-    let buyPrice = 10 ** 17;
     let sht;
     let time;
 
     beforeEach(async() => {
-        sht = await SibbayHealthToken.new();
+        sht = await SibbayHealthToken.new(owner, fundAccount);
         time = await latestTime();
     });
 

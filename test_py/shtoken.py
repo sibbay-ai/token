@@ -242,9 +242,9 @@ class SHToken(unittest.TestCase):
         _from = Web3.toChecksumAddress(_from)
         _to = Web3.toChecksumAddress(_to)
         # 记录账户_from的余额
-        balance_old_from = self.sht.functions.balanceOf(_from).call()
+        balance_old_from = self.sht.functions.totalBalanceOf(_from).call()
         # 记录余额
-        balance_old = self.sht.functions.balanceOf(_to).call()
+        balance_old = self.sht.functions.totalBalanceOf(_to).call()
 
         # 解锁_from账户，并批量发送
         self.w3.personal.unlockAccount(_from, _pwd)
@@ -255,10 +255,10 @@ class SHToken(unittest.TestCase):
         print("transfer_by_date with", str(len(_dates)), "dates gas used:", ret["gasUsed"])
 
         # 查看账户_from的余额,并验证
-        balance_new_from = self.sht.functions.balanceOf(_from).call()
+        balance_new_from = self.sht.functions.totalBalanceOf(_from).call()
         self.assertEqual(balance_old_from - balance_new_from, _expect)
         # 查询余额，并验证
-        balance_new = self.sht.functions.balanceOf(_to).call()
+        balance_new = self.sht.functions.totalBalanceOf(_to).call()
         self.assertEqual(balance_new - balance_old, _expect)
 
     def transfer_from_by_date(self, _spender, _from, _to, _values, _dates, _pwd, _expect):
@@ -266,9 +266,9 @@ class SHToken(unittest.TestCase):
         _from = Web3.toChecksumAddress(_from)
         _to = Web3.toChecksumAddress(_to)
         # 记录账户_from的余额,并验证
-        balance_old_from = self.sht.functions.balanceOf(_from).call()
+        balance_old_from = self.sht.functions.totalBalanceOf(_from).call()
         # 记录余额
-        balance_old = self.sht.functions.balanceOf(_to).call()
+        balance_old = self.sht.functions.totalBalanceOf(_to).call()
 
         # 解锁_from账户，并批量发送
         self.w3.personal.unlockAccount(_spender, _pwd)
@@ -279,31 +279,34 @@ class SHToken(unittest.TestCase):
         print("transfer_from_by_date with", str(len(_dates)), "dates gas used:", ret["gasUsed"])
 
         # 查看账户_from的余额,并验证
-        balance_new_from = self.sht.functions.balanceOf(_from).call()
+        balance_new_from = self.sht.functions.totalBalanceOf(_from).call()
         self.assertEqual(balance_old_from - balance_new_from, _expect)
         # 查询余额，并验证
-        balance_new = self.sht.functions.balanceOf(_to).call()
+        balance_new = self.sht.functions.totalBalanceOf(_to).call()
         self.assertEqual(balance_new - balance_old, _expect)
 
-    def set_fund_account(self, _owner, _fund, _pwd):
+    def add_token_to_fund(self, _owner, _values, _pwd, _expect):
         _owner = Web3.toChecksumAddress(_owner)
-        _fund = Web3.toChecksumAddress(_fund)
-        # 查看fund account
-        ret = self.sht.functions.fundAccount().call()
-        if ret == _fund:
-            return
+        # 记录 _owner 余额
+        balance_old = self.sht.functions.balanceOf(_owner).call()
+        # 记录 fundAccount 余额
+        fund_account = self.sht.functions.fundAccount().call()
+        fund_account_balance_old = self.sht.functions.balanceOf(fund_account).call()
 
-        # 解锁owner账户，并设置fund account
+        # 解锁 _owner 账户，并释放token到fund
         self.w3.personal.unlockAccount(_owner, _pwd)
-        tx_hash = self.sht.functions.setFundAccount(_fund).transact({"from": _owner, "gas": config.gas, "gasPrice": config.gas_price})
+        tx_hash = self.sht.functions.addTokenToFund(_values).transact({"from": _owner, "gas": config.gas, "gasPrice": config.gas_price})
 
         # 等待确认
         ret = self.wait_tx_confirm(tx_hash)
-        print("set_fund_account gas used:", ret["gasUsed"])
+        print("add_token_to_fund value", str(_values), "gas used:", ret["gasUsed"])
 
-        # 验证fund account
-        ret = self.sht.functions.fundAccount().call()
-        self.assertEqual(ret, _fund)
+        # 查看账户_from的余额,并验证
+        balance_new = self.sht.functions.balanceOf(_owner).call()
+        self.assertEqual(balance_old - balance_new, _expect)
+        # 查询余额，并验证
+        fund_account_balance_new = self.sht.functions.balanceOf(fund_account).call()
+        self.assertEqual(fund_account_balance_new - fund_account_balance_old , _expect)
 
     # 清空账户余额
     # _who 将要清空的账户
@@ -322,7 +325,7 @@ class SHToken(unittest.TestCase):
     def clear_all_ava_sht(self, _who, _collect, _pwd):
         _who = Web3.toChecksumAddress(_who)
         # 获取账户余额
-        balance = self.sht.functions.getAvailableBalances(_who).call()
+        balance = self.sht.functions.balanceOf(_who).call()
 
         # 将所有余额转账到回收账户
         if balance > 0:
@@ -409,40 +412,76 @@ class SHToken(unittest.TestCase):
         ret = self.sht.functions.buyPrice().call()
         self.assertEqual(ret, _price)
 
-    def open_buy_sell(self, _owner, _pwd):
+    def open_buy(self, _owner, _pwd):
         _owner = Web3.toChecksumAddress(_owner)
         # 查看状态
-        ret = self.sht.functions.buySellFlag().call()
+        ret = self.sht.functions.buyFlag().call()
         if ret == True:
             return
 
         # 解锁owner账户，并打开购买和赎回开关
         self.w3.personal.unlockAccount(_owner, _pwd)
-        tx_hash = self.sht.functions.openBuySell().transact({"from": _owner, "gas": config.gas, "gasPrice": config.gas_price})
+        tx_hash = self.sht.functions.openBuy().transact({"from": _owner, "gas": config.gas, "gasPrice": config.gas_price})
 
         # 等待确认
         ret = self.wait_tx_confirm(tx_hash)
         print("open_buy_sell gas used:", ret["gasUsed"])
 
-        ret = self.sht.functions.buySellFlag().call()
+        ret = self.sht.functions.buyFlag().call()
         self.assertEqual(ret, True)
 
-    def close_buy_sell(self, _owner, _pwd):
+    def close_buy(self, _owner, _pwd):
         _owner = Web3.toChecksumAddress(_owner)
         # 查看状态
-        ret = self.sht.functions.buySellFlag().call()
+        ret = self.sht.functions.buyFlag().call()
         if ret == False:
             return
 
         # 解锁owner账户，并打开购买和赎回开关
         self.w3.personal.unlockAccount(_owner, _pwd)
-        tx_hash = self.sht.functions.closeBuySell().transact({"from": _owner, "gas": config.gas, "gasPrice": config.gas_price})
+        tx_hash = self.sht.functions.closeBuy().transact({"from": _owner, "gas": config.gas, "gasPrice": config.gas_price})
 
         # 等待确认
         ret = self.wait_tx_confirm(tx_hash)
         print("close_buy_sell gas used:", ret["gasUsed"])
 
-        ret = self.sht.functions.buySellFlag().call()
+        ret = self.sht.functions.buyFlag().call()
+        self.assertEqual(ret, False)
+
+    def open_sell(self, _owner, _pwd):
+        _owner = Web3.toChecksumAddress(_owner)
+        # 查看状态
+        ret = self.sht.functions.sellFlag().call()
+        if ret == True:
+            return
+
+        # 解锁owner账户，并打开购买和赎回开关
+        self.w3.personal.unlockAccount(_owner, _pwd)
+        tx_hash = self.sht.functions.openSell().transact({"from": _owner, "gas": config.gas, "gasPrice": config.gas_price})
+
+        # 等待确认
+        ret = self.wait_tx_confirm(tx_hash)
+        print("open_buy_sell gas used:", ret["gasUsed"])
+
+        ret = self.sht.functions.sellFlag().call()
+        self.assertEqual(ret, True)
+
+    def close_sell(self, _owner, _pwd):
+        _owner = Web3.toChecksumAddress(_owner)
+        # 查看状态
+        ret = self.sht.functions.sellFlag().call()
+        if ret == False:
+            return
+
+        # 解锁owner账户，并打开购买和赎回开关
+        self.w3.personal.unlockAccount(_owner, _pwd)
+        tx_hash = self.sht.functions.closeSell().transact({"from": _owner, "gas": config.gas, "gasPrice": config.gas_price})
+
+        # 等待确认
+        ret = self.wait_tx_confirm(tx_hash)
+        print("close_buy_sell gas used:", ret["gasUsed"])
+
+        ret = self.sht.functions.sellFlag().call()
         self.assertEqual(ret, False)
 
     # _value: ether value
@@ -454,8 +493,8 @@ class SHToken(unittest.TestCase):
 
         # 记录 fundAccount eth 余额
         fund_account = self.sht.functions.fundAccount().call()
-        fund_account_eth_balance_old = self.w3.eth.getBalance(Web3.toChecksumAddress(fund_account))
-        fund_account_balance_old = self.sht.functions.balanceOf(Web3.toChecksumAddress(fund_account)).call()
+        fund_account_eth_balance_old = self.w3.eth.getBalance(fund_account)
+        fund_account_balance_old = self.sht.functions.balanceOf(fund_account).call()
 
         # 解锁_who账户，并购买_value 以太币的token
         self.w3.personal.unlockAccount(_who, _pwd)
@@ -473,11 +512,11 @@ class SHToken(unittest.TestCase):
         self.assertEqual(who_eth_balance_old - who_eth_balance_new, ret["gasUsed"] * config.gas_price + Web3.toWei(1, "ether"))
 
         # fundAccount 增加的 eth 是否正确
-        fund_account_eth_balance_new = self.w3.eth.getBalance( Web3.toChecksumAddress(fund_account))
+        fund_account_eth_balance_new = self.w3.eth.getBalance( fund_account)
         self.assertEqual(fund_account_eth_balance_new - fund_account_eth_balance_old, Web3.toWei(1, "ether"))
 
         # fundAccount 减少的 token
-        fund_account_balance_new = self.sht.functions.balanceOf(Web3.toChecksumAddress(fund_account)).call()
+        fund_account_balance_new = self.sht.functions.balanceOf(fund_account).call()
         self.assertEqual(fund_account_balance_old - fund_account_balance_new, _expect)
 
     def sell(self, _who, _value, _pwd, _expect):
@@ -488,7 +527,7 @@ class SHToken(unittest.TestCase):
 
         # 记录 fundAccount token 余额
         fund_account = self.sht.functions.fundAccount().call()
-        fund_account_balance_old = self.sht.functions.balanceOf(Web3.toChecksumAddress(fund_account)).call()
+        fund_account_balance_old = self.sht.functions.balanceOf(fund_account).call()
 
         # 记录 合约 eth 余额
         eth_sht_account_balance_old = self.w3.eth.getBalance(Web3.toChecksumAddress(sts.SIBBAY_SHT_ADDRESS))
@@ -510,7 +549,7 @@ class SHToken(unittest.TestCase):
         self.assertEqual(eth_balance_new - eth_balance_old + ret["gasUsed"] * config.gas_price, int(_expect * sell_price / config.magnitude))
 
         # 记录 fundAccount 余额
-        fund_account_balance_new = self.sht.functions.balanceOf(Web3.toChecksumAddress(fund_account)).call()
+        fund_account_balance_new = self.sht.functions.balanceOf(fund_account).call()
         # 记录 合约 eth 余额
         eth_sht_account_balance_new = self.w3.eth.getBalance(Web3.toChecksumAddress(sts.SIBBAY_SHT_ADDRESS))
 
