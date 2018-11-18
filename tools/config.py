@@ -9,7 +9,7 @@ ETH_WAIT_INTERNAL = 5
 # transaction config
 # gas: 7000000, gasPrice: 1 wei, 1000000000
 ETH_TX_GAS = 7000000
-ETH_TX_GAS_PRICE = 8000000000
+ETH_TX_GAS_PRICE = 4000000000
 
 # keystore file
 ETH_KEYSTORE_FILE = "/home/henry/myEtherum/chain/keystore/UTC--2018-10-19T08-53-41.743071688Z--ee21ebb177539f247d4c9cc6255facf2af21e6b4"
